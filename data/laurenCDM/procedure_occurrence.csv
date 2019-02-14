@@ -1,0 +1,5 @@
+procedure_occurrence_id,person_id,procedure_concept_id,procedure_date,procedure_datetime,procedure_type_concept_id,modifier_concept_id,quantity,provider_id,visit_occurrence_id,visit_detail_id,procedure_source_value,procedure_source_concept_id,modifier_source_value
+1,1,4146053,2013-01-07,2013-01-07,38000275,0,,,3,0,35025007,4146053,
+2,1,4127451,2013-01-14,2013-01-14,38000275,0,,,2,0,304435002,4127451,
+3,1,4305208,2013-01-21,2013-01-21,38000275,0,,,1,0,418332004,4305208,
+4,1,4030028,2013-01-21,2013-01-21,38000275,0,,,1,0,107784002,4030028,

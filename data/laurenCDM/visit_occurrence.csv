@@ -1,0 +1,7 @@
+visit_occurrence_id,person_id,visit_concept_id,visit_start_date,visit_start_datetime,visit_end_date,visit_end_datetime,visit_type_concept_id,provider_id,care_site_id,visit_source_value,visit_source_concept_id,admitting_source_concept_id,admitting_source_value,discharge_to_concept_id,discharge_to_source_value,preceding_visit_occurrence_id
+5,1,9202,2010-01-06,2010-01-06,2010-01-06,2010-01-06,44818517,,,70,0,0,,0,,
+4,1,9202,2011-01-06,2011-01-06,2011-01-06,2011-01-06,44818517,,,80,0,0,,0,,5
+6,1,9202,2012-01-06,2012-01-06,2012-01-06,2012-01-06,44818517,,,90,0,0,,0,,4
+3,1,9202,2013-01-07,2013-01-07,2013-01-07,2013-01-07,44818517,,,100,0,0,,0,,6
+2,1,9202,2013-01-14,2013-01-14,2013-01-14,2013-01-14,44818517,,,101,0,0,,0,,3
+1,1,9201,2013-01-17,2013-01-17,2013-01-24,2013-01-24,44818517,,,102,0,0,,0,,2
