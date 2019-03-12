@@ -191,7 +191,7 @@ INSERT INTO raw_lauren.encounters (id,start,stop,patient,provider,encounterclass
 VALUES (70,'2010/01/06','2010/01/06',1,'340f836c-8b1f-45e7-91f8-498de5fbb320','outpatient',185347001,'Encounter for problem','129.16',82423001,'Chronic pain');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2010/01/06',NULL,1,70,194696,'Dysmenorrhea');
+VALUES('2010/01/06',NULL,1,70,266599000,'Dysmenorrhea');
 
 INSERT INTO raw_lauren.medications (start,stop,patient,encounter,code,description,cost,dispenses,totalcost,reasoncode,reasondescription)
 VALUES('2010/01/06',NULL,1,70,313782,'Acetaminophen 325 MG Oral Tablet','6.62','1','6.62',82423001,'Chronic pain');
@@ -202,7 +202,7 @@ INSERT INTO raw_lauren.encounters (id,start,stop,patient,provider,encounterclass
 VALUES (80,'2011/01/06','2011/01/06',1,'340f836c-8b1f-45e7-91f8-498de5fbb320','outpatient',185347001,'Encounter for problem','129.16',82423001,'Chronic pain');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2011/01/06',NULL,1,80,194696,'Dysmenorrhea');
+VALUES('2011/01/06',NULL,1,80,266599000,'Dysmenorrhea');
 
 INSERT INTO raw_lauren.medications (start,stop,patient,encounter,code,description,cost,dispenses,totalcost,reasoncode,reasondescription)
 VALUES('2011/01/06',NULL,1,80,313782,'Acetaminophen 325 MG Oral Tablet','6.62','1','6.62',82423001,'Chronic pain');
@@ -213,7 +213,7 @@ INSERT INTO raw_lauren.encounters (id,start,stop,patient,provider,encounterclass
 VALUES (90,'2012/01/06','2012/01/06',1,'340f836c-8b1f-45e7-91f8-498de5fbb320','outpatient',185347001,'Encounter for problem','129.16',82423001,'Chronic pain');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2012/01/06',NULL,1,90,194696,'Dysmenorrhea');
+VALUES('2012/01/06',NULL,1,90,266599000,'Dysmenorrhea');
 
 INSERT INTO raw_lauren.medications (start,stop,patient,encounter,code,description,cost,dispenses,totalcost,reasoncode,reasondescription)
 VALUES('2012/01/06',NULL,1,90,313782,'Acetaminophen 325 MG Oral Tablet','6.62','1','6.62',82423001,'Chronic pain');
@@ -289,4 +289,4 @@ INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
 VALUES('2013/01/21',NULL,1,102,129103003,'Endometriosis');
 
 INSERT INTO raw_lauren.procedures(date,patient,encounter,code,description,cost,reasoncode,reasondescription)
-VALUES('2013/01/21',1,102,4270918,'Destruction of intra-abdominal endometriomas','516.65',NULL, NULL);
+VALUES('2013/01/21',1,102,63831004,'Destruction of intra-abdominal endometriomas','516.65',NULL, NULL);
