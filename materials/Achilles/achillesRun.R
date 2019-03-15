@@ -35,6 +35,13 @@ Achilles::achilles(connectionDetails = connectionDetails,
                    outputFolder = outputFolder
                    )
 
+Achilles::createConceptHierarchy(connectionDetails = connectionDetails,
+                                 resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
+                                 vocabDatabaseSchema = "cdm_synthea",
+                                 scratchDatabaseSchema = "#",
+                                 outputFolder = outputFolder
+                                 )
+
 # Achilles::exportToJson(connectionDetails = connectionDetails,
 #                        cdmDatabaseSchema = "cdm_synthea",
 #                        resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
@@ -42,6 +49,9 @@ Achilles::achilles(connectionDetails = connectionDetails,
 #                        vocabDatabaseSchema = "cdm_synthea",
 #                        compressIntoOneFile = FALSE)
 # gets hung on drug ea
+
+
+
 
 Achilles::exportConditionToJson(connectionDetails = connectionDetails,
                        cdmDatabaseSchema = "cdm_synthea",
@@ -73,11 +83,17 @@ Achilles::exportDataDensityToJson(connectionDetails = connectionDetails,
                             outputPath = "C:/syntheaAchilles/data",
                             vocabDatabaseSchema = "cdm_synthea")
 
-Achilles::exportDrugToJson(connectionDetails = connectionDetails,
+Achilles::exportHeelToJson(connectionDetails = connectionDetails,
                             cdmDatabaseSchema = "cdm_synthea",
                             resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
                             outputPath = "C:/syntheaAchilles/data",
                             vocabDatabaseSchema = "cdm_synthea")
+
+Achilles::exportMeasurementToJson(connectionDetails = connectionDetails,
+                           cdmDatabaseSchema = "cdm_synthea",
+                           resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
+                           outputPath = "C:/syntheaAchilles/data",
+                           vocabDatabaseSchema = "cdm_synthea")
 
 
 Achilles::exportDashboardToJson(connectionDetails = connectionDetails,
