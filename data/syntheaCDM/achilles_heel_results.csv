@@ -1,0 +1,16 @@
+\N	NOTIFICATION: 99+ percent of persons have exactly one observation period	43	\N
+410	ERROR: 410-Number of condition occurrence records outside valid observation period; count (n=102) should not be > 0	1	102
+920	WARNING: 920-Number of drug era records  by drug era start month; theres a 100% change in monthly count of events	22	\N
+710	ERROR: 710-Number of drug exposure records outside valid observation period; count (n=107) should not be > 0	1	107
+909	ERROR: 909-Number of drug eras outside valid observation period; count (n=55) should not be > 0	1	55
+712	ERROR: 712-Number of drug exposure records with invalid provider_id; count (n=21607) should not be > 0	1	21607
+1009	ERROR: 1009-Number of condition eras outside valid observation period; count (n=102) should not be > 0	1	102
+\N	NOTIFICATION: percentage of non-numerical measurement records exceeds general population threshold 	28	100
+\N	NOTIFICATION: [GeneralPopulationOnly] Not all deciles represented at first observation	33	\N
+812	ERROR: 812-Number of observation records with invalid provider_id; count (n=1444) should not be > 0	1	1444
+5	WARNING: 5-Number of persons by ethnicity; data with unmapped concepts	6	\N
+715	WARNING: 715-Distribution of days_supply by drug_concept_id (count = 30); max value should not be > 180	24	30
+810	ERROR: 810-Number of observation records outside valid observation period; count (n=32) should not be > 0	1	32
+4	WARNING: 4-Number of persons by race; data with unmapped concepts	6	\N
+610	ERROR: 610-Number of procedure occurrence records outside valid observation period; count (n=11) should not be > 0	1	11
+720	WARNING: 720-Number of drug exposure records  by drug exposure start month; theres a 100% change in monthly count of events	22	\N
