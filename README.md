@@ -1,10 +1,15 @@
 # Tutorial-ETL
 Materials necessary for the "OMOP Common Data Model Extract, Transform & Load Tutorial".  The goal of this tutorial is to learn about best practices and OHDSI tools developed to help with designing an extract, transform, & load process to take your database from raw observational data to the OMOP Common Data Model.  Pre-requisite course would be the OMOP CDM & Vocabulary Tutorial or working experience with the OMOP CDM and OMOP Vocabulary.
 
+## Pre-Reads
+* [Lauren's Story (Endometriosis UK)](https://www.endometriosis-uk.org/laurens-story)
+* [Synthea Data Dictionary](https://github.com/synthetichealth/synthea/wiki/CSV-File-Data-Dictionary)
+* [ETL Best Practices Wiki](http://www.ohdsi.org/web/wiki/doku.php?id=documentation:etl_best_practices) (OPTIONAL)
+
 ## Materials for Students
 * [PowerPoint](https://github.com/OHDSI/Tutorial-ETL/blob/master/materials/OMOP%20Common%20Data%20Model%20Extract%2C%20Transform%20%26%20Load.pptx)
 * [Synthea ETL Document](https://ohdsi.github.io/ETL-Synthea/)
-* [ETL Best Practices Wiki](http://www.ohdsi.org/web/wiki/doku.php?id=documentation:etl_best_practices)
+
 
 ## Tutorial Materials
 * [Synthea ETL](https://github.com/OHDSI/ETL-Synthea)
