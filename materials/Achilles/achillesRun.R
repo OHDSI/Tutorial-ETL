@@ -42,62 +42,9 @@ Achilles::createConceptHierarchy(connectionDetails = connectionDetails,
                                  outputFolder = outputFolder
                                  )
 
-# Achilles::exportToJson(connectionDetails = connectionDetails,
-#                        cdmDatabaseSchema = "cdm_synthea",
-#                        resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-#                        outputPath = "C:/syntheaAchilles/data",
-#                        vocabDatabaseSchema = "cdm_synthea",
-#                        compressIntoOneFile = FALSE)
-# gets hung on drug ea
-
-
-
-
-Achilles::exportConditionToJson(connectionDetails = connectionDetails,
-                       cdmDatabaseSchema = "cdm_synthea",
-                       resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                       outputPath = "C:/syntheaAchilles/data",
-                       vocabDatabaseSchema = "cdm_synthea")
-
-Achilles::exportConditionEraToJson(connectionDetails = connectionDetails,
-                                cdmDatabaseSchema = "cdm_synthea",
-                                resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                                outputPath = "C:/syntheaAchilles/data",
-                                vocabDatabaseSchema = "cdm_synthea")
-
-Achilles::exportPersonToJson(connectionDetails = connectionDetails,
-                                cdmDatabaseSchema = "cdm_synthea",
-                                resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                                outputPath = "C:/syntheaAchilles/data",
-                                vocabDatabaseSchema = "cdm_synthea")
-
-Achilles::exportVisitToJson(connectionDetails = connectionDetails,
-                             cdmDatabaseSchema = "cdm_synthea",
-                             resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                             outputPath = "C:/syntheaAchilles/data",
-                             vocabDatabaseSchema = "cdm_synthea")
-
-Achilles::exportDataDensityToJson(connectionDetails = connectionDetails,
-                            cdmDatabaseSchema = "cdm_synthea",
-                            resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                            outputPath = "C:/syntheaAchilles/data",
-                            vocabDatabaseSchema = "cdm_synthea")
-
-Achilles::exportHeelToJson(connectionDetails = connectionDetails,
-                            cdmDatabaseSchema = "cdm_synthea",
-                            resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                            outputPath = "C:/syntheaAchilles/data",
-                            vocabDatabaseSchema = "cdm_synthea")
-
-Achilles::exportMeasurementToJson(connectionDetails = connectionDetails,
-                           cdmDatabaseSchema = "cdm_synthea",
-                           resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                           outputPath = "C:/syntheaAchilles/data",
-                           vocabDatabaseSchema = "cdm_synthea")
-
-
-Achilles::exportDashboardToJson(connectionDetails = connectionDetails,
-                                   cdmDatabaseSchema = "cdm_synthea",
-                                   resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                                   outputPath = "C:/syntheaAchilles/data",
-                                   vocabDatabaseSchema = "cdm_synthea")
+Achilles::exportToJson(connectionDetails = connectionDetails,
+                        cdmDatabaseSchema = "cdm_synthea",
+                        resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
+                        outputPath = "C:/syntheaAchilles/data",
+                        vocabDatabaseSchema = "cdm_synthea",
+                        compressIntoOneFile = FALSE)
