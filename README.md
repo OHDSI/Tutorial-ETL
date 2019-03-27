@@ -10,7 +10,6 @@ Materials necessary for the "OMOP Common Data Model Extract, Transform & Load Tu
 * [PowerPoint](https://github.com/OHDSI/Tutorial-ETL/blob/master/materials/OMOP%20Common%20Data%20Model%20Extract%2C%20Transform%20%26%20Load.pptx)
 * [Synthea ETL Document](https://ohdsi.github.io/ETL-Synthea/)
 
-
 ## Tutorial Materials
 * [Synthea ETL](https://github.com/OHDSI/ETL-Synthea)
 
