@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Person
-nav_order: 2
+nav_order: 1
+parent: CDM Synthea v1
 description: "Person mapping from patients.csv"
 
 ---

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Condition_occurrence
-nav_order: 5
+nav_order: 4
+parent: CDM Synthea v1
 description: "Condition_occurrence mapping from conditions.csv"
 ---
 

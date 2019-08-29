@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Measurement
-nav_order: 9
+nav_order: 8
+parent: CDM Synthea v1
 description: "Measurement mapping from procedures.csv and observations.csv"
 
 ---

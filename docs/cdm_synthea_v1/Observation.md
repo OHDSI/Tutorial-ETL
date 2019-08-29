@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Observation
-nav_order: 8
+nav_order: 7
+parent: CDM Synthea v1
 description: "Observation mapping from allergies.csv and conditions.csv"
 
 ---

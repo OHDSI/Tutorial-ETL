@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Drug_exposure
-nav_order: 6
+nav_order: 5
+parent: CDM Synthea v1
 description: "Drug_exposure mapping from conditions.csv, medications.csv, and immunizations.csv"
 ---
 

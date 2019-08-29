@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Procedure_occurrence
-nav_order: 7
+nav_order: 6
+parent: CDM Synthea v1
 description: "Procedure_occurrence mapping from procedures.csv"
 
 ---
