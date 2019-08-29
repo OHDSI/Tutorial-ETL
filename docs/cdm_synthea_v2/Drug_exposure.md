@@ -16,7 +16,7 @@ description: "Drug_exposure mapping from conditions.csv, medications.csv, and im
 | --- | --- | --- | --- |
 | drug_exposure_id |  |  |  |
 | person_id | patient | Map by mapping person.person_source_value to patient.  Find person.person_id by mapping encouters.patient to person.person_source_value. |  |
-| drug_concept_id | code | Use code to lookup target_concept_id in CTE_TARGET_VOCAB_MAP:    select ctvm.target_concept_id    from medications m     join cte_target_vocab_map ctvm       on ctvm.source_code               = m.code     and ctvm.target_domain_id        = 'Drug'     and ctvm.target_vocabulary_id  = 'RxNorm' |  |
+| drug_concept_id | code | Use code to lookup target_concept_id in SOURCE_TO_STANDARD_MAP:    select v.target_concept_id    from medications m     join source_to_standard_vocab_map v       on v.source_code               = m.code     and v.target_domain_id        = 'Drug'     and v.target_standard_concept  = 'S' and **v.source_vocabulary_id in ('NDC','Synthea_drugs')** |  |
 | drug_exposure_start_date | start |  |  |
 | drug_exposure_start_datetime | start |  |  |
 | drug_exposure_end_date | stop |  |  |
@@ -34,7 +34,7 @@ description: "Drug_exposure mapping from conditions.csv, medications.csv, and im
 | visit_occurrence_id | encounter | Lookup visit_occurrence_id using encounter, joining to temp table defined in AllVisitTable.sql. |  |
 | visit_detail_id |  |  |  |
 | drug_source_value | code |  |  |
-| drug_source_concept_id | code | Use code to lookup target_concept_id in CTE_SOURCE_VOCAB_MAP:    select csvm.source_concept_id    from medications m     join cte_source_vocab_map csvm      on cvm.source_code                = m.code     and cvm.source_vocabulary_id = 'RxNorm' |  |
+| drug_source_concept_id | code | Use code to lookup target_concept_id in SOURCE_TO_SOURCE_MAP:    select v.source_concept_id    from medications m     join source_to_source_vocab_map v      on v.source_code                = m.code     and **v.source_vocabulary_id in ('NDC','Synthea_drugs')** |  |
 | route_source_value |  |  |  |
 | dose_unit_source_value |  |  |  |
 
