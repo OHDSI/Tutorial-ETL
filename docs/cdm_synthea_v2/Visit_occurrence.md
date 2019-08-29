@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Visit_occurrence
-nav_order: 4
+nav_order: 3
+parent: CDM Synthea v2
 description: "Visit_occurrence mapping from encounters.csv"
 
 ---

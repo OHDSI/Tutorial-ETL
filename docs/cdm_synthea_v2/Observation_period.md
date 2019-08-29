@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Observation_period
-nav_order: 3
+nav_order: 2
+parent: CDM Synthea v2
 description: "Observation_period mapping from encounters.csv"
 
 ---
