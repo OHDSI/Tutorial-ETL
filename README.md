@@ -4,26 +4,28 @@ Materials necessary for the "OMOP Common Data Model Extract, Transform & Load Tu
 ## Pre-Reads
 * [Lauren's Story (Endometriosis UK)](https://www.endometriosis-uk.org/laurens-story)
 * [Synthea Data Dictionary](https://github.com/synthetichealth/synthea/wiki/CSV-File-Data-Dictionary)
-* [ETL Best Practices Wiki](http://www.ohdsi.org/web/wiki/doku.php?id=documentation:etl_best_practices) (OPTIONAL)
+* [ETL - Book of OHDSI](https://ohdsi.github.io/TheBookOfOhdsi/ExtractTransformLoad.html) (OPTIONAL)
 
 ## Materials for Students
 * [PowerPoint](https://github.com/OHDSI/Tutorial-ETL/blob/master/materials/OMOP%20Common%20Data%20Model%20Extract%2C%20Transform%20%26%20Load.pptx)
-* [Synthea ETL Document](https://ohdsi.github.io/ETL-Synthea/)
+* [Synthea ETL Document (for tutorial)](https://ohdsi.github.io/Tutorial-ETL/)
 
 ## Tutorial Materials
 * [Synthea ETL](https://github.com/OHDSI/ETL-Synthea)
+* [Synthea ETL Document (official)](https://ohdsi.github.io/ETL-Synthea/)
 
 ## AWS Setup
 * [OHDSI-In-a-Box](https://github.com/OHDSI/OHDSI-in-a-Box)
 * OHDSI Tools Required
 	* [White Rabbit / Rabbit in a Hat](https://github.com/OHDSI/WhiteRabbit)
 	* [USAGI](https://github.com/OHDSI/Usagi)
-		* With indexes prebuilt ([documentation](http://www.ohdsi.org/web/wiki/doku.php?id=documentation:software:usagi))
+		* With indexes prebuilt ([documentation](https://ohdsi.github.io/TheBookOfOhdsi/ExtractTransformLoad.html#usagi))
 	* Data
 		* OMOP Vocabulary
 		* Raw Synthea Data
-		* CDM Synthea Data
-		* Raw Lauren Data (SQL generates data)
+		* CDM Synthea Data V1
+		* CDM Synthea Data V2
+		* Raw Lauren Data (empty, SQL generates data)
 		* CDM Lauren Data
 * R Studio, R, OHDSI R Packages
 	* [DB Connector](https://github.com/OHDSI/DatabaseConnector)
