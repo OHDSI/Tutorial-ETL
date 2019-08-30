@@ -191,7 +191,7 @@ INSERT INTO raw_lauren.encounters (id,start,stop,patient,provider,encounterclass
 VALUES (70,'2010/01/06','2010/01/06',1,'340f836c-8b1f-45e7-91f8-498de5fbb320','outpatient',185347001,'Encounter for problem','129.16',82423001,'Chronic pain');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2010/01/06',NULL,1,70,266599000,'Dysmenorrhea');
+VALUES('2010/01/06',NULL,1,70,'N94.6','Dysmenorrhea');
 
 INSERT INTO raw_lauren.medications (start,stop,patient,encounter,code,description,cost,dispenses,totalcost,reasoncode,reasondescription)
 VALUES('2010/01/06',NULL,1,70,313782,'Acetaminophen 325 MG Oral Tablet','6.62','1','6.62',82423001,'Chronic pain');
@@ -202,7 +202,7 @@ INSERT INTO raw_lauren.encounters (id,start,stop,patient,provider,encounterclass
 VALUES (80,'2011/01/06','2011/01/06',1,'340f836c-8b1f-45e7-91f8-498de5fbb320','outpatient',185347001,'Encounter for problem','129.16',82423001,'Chronic pain');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2011/01/06',NULL,1,80,266599000,'Dysmenorrhea');
+VALUES('2011/01/06',NULL,1,80,'N94.6','Dysmenorrhea');
 
 INSERT INTO raw_lauren.medications (start,stop,patient,encounter,code,description,cost,dispenses,totalcost,reasoncode,reasondescription)
 VALUES('2011/01/06',NULL,1,80,313782,'Acetaminophen 325 MG Oral Tablet','6.62','1','6.62',82423001,'Chronic pain');
@@ -213,7 +213,7 @@ INSERT INTO raw_lauren.encounters (id,start,stop,patient,provider,encounterclass
 VALUES (90,'2012/01/06','2012/01/06',1,'340f836c-8b1f-45e7-91f8-498de5fbb320','outpatient',185347001,'Encounter for problem','129.16',82423001,'Chronic pain');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2012/01/06',NULL,1,90,266599000,'Dysmenorrhea');
+VALUES('2012/01/06',NULL,1,90,'N94.6','Dysmenorrhea');
 
 INSERT INTO raw_lauren.medications (start,stop,patient,encounter,code,description,cost,dispenses,totalcost,reasoncode,reasondescription)
 VALUES('2012/01/06',NULL,1,90,313782,'Acetaminophen 325 MG Oral Tablet','6.62','1','6.62',82423001,'Chronic pain');
@@ -242,7 +242,7 @@ INSERT INTO raw_lauren.procedures(date,patient,encounter,code,description,cost,r
 VALUES('2013/01/14',1,101,304435002,'Ultrasound treatment to pelvis','516.65',NULL, NULL);
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2013/01/14',NULL,1,101,12238591000119108,'Cyst of left ovary');
+VALUES('2013/01/14',NULL,1,101,'N83.02','Cyst of left ovary');
 
 /***************************************************************
 However, before I had my scan, I awoke one morning in severe pain. 
@@ -254,16 +254,16 @@ INSERT INTO raw_lauren.encounters (id,start,stop,patient,provider,encounterclass
 VALUES (102,'2013/01/17','2013/01/24',1,'df04de94-b6d1-4704-8837-71be7337a336','inpatient',32485007,'Hospital admission','129.16',NULL,NULL);
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2013/01/17',NULL,1,102,237067000,'Chronic pelvic pain of female');
+VALUES('2013/01/17',NULL,1,102,'R10.2','Chronic pelvic pain of female');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2013/01/18',NULL,1,102,386661006,'Fever');
+VALUES('2013/01/18',NULL,1,102,'R50.81','Fever');
 
 INSERT INTO raw_lauren.observations(date,patient,encounter,code,description,value,units,type)
 VALUES('2013/01/18',1,102,'8331-1','Oral temperature','39.4','Cel','numeric');
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2013/01/18',NULL,1,102,271835004,'Abdominal distension, gaseous');
+VALUES('2013/01/18',NULL,1,102,'R14.0','Abdominal distension, gaseous');
 
 /***************************************************************
 However, I still waited for three days before eventually being 
@@ -274,7 +274,7 @@ INSERT INTO raw_lauren.procedures(date,patient,encounter,code,description,cost,r
 VALUES('2013/01/21',1,102,418332004,'CT of neck, thorax, abdomen and pelvis','516.65',NULL, NULL);
 
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2013/01/21',NULL,1,102,389026000,'Ascites');
+VALUES('2013/01/21',NULL,1,102,'R18','Ascites');
 
 INSERT INTO raw_lauren.procedures(date,patient,encounter,code,description,cost,reasoncode,reasondescription)
 VALUES('2013/01/21',1,102,107784002,'Surgical procedure on lower extremity','516.65',NULL, NULL);
@@ -286,7 +286,7 @@ fluid to it. This fluid had become infected and was causing my
 high fever and pain.
 ****************************************************************/
 INSERT INTO raw_lauren.conditions(start,stop,patient,encounter,code,description)
-VALUES('2013/01/21',NULL,1,102,129103003,'Endometriosis');
+VALUES('2013/01/21',NULL,1,102,'N80','Endometriosis');
 
 INSERT INTO raw_lauren.procedures(date,patient,encounter,code,description,cost,reasoncode,reasondescription)
 VALUES('2013/01/21',1,102,63831004,'Destruction of intra-abdominal endometriomas','516.65',NULL, NULL);
