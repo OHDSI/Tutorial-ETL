@@ -4,18 +4,19 @@ library(Achilles)
 library(DatabaseConnector)
 
 connectionDetails <- DatabaseConnector::createConnectionDetails(
-  dbms="postgresql",
-  server="pgsql03.cqnqzwtn5s1q.us-east-1.rds.amazonaws.com/etl",
-  user=Sys.getenv("postgresOhdsiUser"),
-  password= Sys.getenv("postgresOhdsiPw"),
-  port=5432
+	dbms="postgresql",
+	server="localhost/ETL",
+	user="postgres",
+	password= "ohdsi",
+	port=5432
 )
 
-outputFolder <- "C:/syntheaAchilles"
+
+outputFolder <- "C:/ohdsi/achilles/output/cdm_synthea_v2"
 
 Achilles::validateSchema(connectionDetails = connectionDetails,
-                         cdmDatabaseSchema = "cdm_synthea",
-                         resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
+                         cdmDatabaseSchema = "cdm_synthea_v2",
+                         resultsDatabaseSchema = "cdm_synthea_v2_results",
                          cdmVersion = 5.3,
                          runCostAnalysis = FALSE,
                          outputFolder = outputFolder,
@@ -23,10 +24,10 @@ Achilles::validateSchema(connectionDetails = connectionDetails,
 ##throws an error - logged an issue on the github
 
 Achilles::achilles(connectionDetails = connectionDetails,
-                   cdmDatabaseSchema = "cdm_synthea",
-                   resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                   vocabDatabaseSchema = "cdm_synthea",
-                   sourceName = "synthea",
+                   cdmDatabaseSchema = "cdm_synthea_v2",
+                   resultsDatabaseSchema = "cdm_synthea_v2_results",
+                   vocabDatabaseSchema = "cdm_synthea_v2",
+                   sourceName = "cdm_synthea_v2",
                    createTable = TRUE,
                    smallCellCount = 5,
                    cdmVersion = 5.3,
@@ -35,16 +36,16 @@ Achilles::achilles(connectionDetails = connectionDetails,
                    outputFolder = outputFolder
                    )
 
-Achilles::createConceptHierarchy(connectionDetails = connectionDetails,
-                                 resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                                 vocabDatabaseSchema = "cdm_synthea",
-                                 scratchDatabaseSchema = "#",
-                                 outputFolder = outputFolder
-                                 )
+# Achilles::createConceptHierarchy(connectionDetails = connectionDetails,
+#                                  resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
+#                                  vocabDatabaseSchema = "cdm_synthea",
+#                                  scratchDatabaseSchema = "#",
+#                                  outputFolder = outputFolder
+#                                  )
 
 Achilles::exportToJson(connectionDetails = connectionDetails,
-                        cdmDatabaseSchema = "cdm_synthea",
-                        resultsDatabaseSchema = "cdm_synthea_ohdsi_results",
-                        outputPath = "C:/syntheaAchilles/data",
-                        vocabDatabaseSchema = "cdm_synthea",
+                        cdmDatabaseSchema = "cdm_synthea_v2",
+                        resultsDatabaseSchema = "cdm_synthea_v2_results",
+                        outputPath = "C:/ohdsi/achilles/output/cdm_synthea_v2",
+                        vocabDatabaseSchema = "cdm_synthea_v2",
                         compressIntoOneFile = FALSE)
