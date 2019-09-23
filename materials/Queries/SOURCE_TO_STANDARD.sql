@@ -8,7 +8,7 @@ WITH CTE_VOCAB_MAP AS (
              JOIN CONCEPT_RELATIONSHIP CR
                         ON C.CONCEPT_ID = CR.CONCEPT_ID_1
                         AND CR.invalid_reason IS NULL
-                        AND cr.relationship_id = 'Maps to'
+                        AND lower(cr.relationship_id) = 'maps to'
               JOIN CONCEPT C1
                         ON CR.CONCEPT_ID_2 = C1.CONCEPT_ID
                         AND C1.INVALID_REASON IS NULL
