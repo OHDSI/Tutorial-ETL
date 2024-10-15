@@ -1,9 +1,0 @@
-
-DB=$1
-NATIVE=$2
-TABLE=$3
-USERNAME=$4
-PASSWORD=$5
-DATA_DIRECTORY=$6
-
-PGOPTIONS="--search_path=$NATIVE" psql -c "\copy (SELECT * FROM $TABLE) to '$DATA_DIRECTORY/$TABLE.csv' with delimiter E'\t'" "postgresql://$USERNAME:$PASSWORD@pgsql03.cqnqzwtn5s1q.us-east-1.rds.amazonaws.com/$DB" 

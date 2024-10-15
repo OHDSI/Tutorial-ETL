@@ -1,0 +1,129 @@
+"vocabulary_id","vocabulary_name","vocabulary_reference","vocabulary_version","vocabulary_concept_id"
+ICD10CM,"International Classification of Diseases, Tenth Revision, Clinical Modification (NCHS)",https://www.cdc.gov/nchs/icd/icd-10-cm.htm,ICD10CM FY2025 code descriptions,44819098
+VA Class,VA National Drug File Class (VA),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,RxNorm 20240603,44819122
+ICD9CM,"International Classification of Diseases, Ninth Revision, Clinical Modification, Volume 1 and 2 (NCHS)",http://www.cms.gov/Medicare/Coding/ICD9ProviderDiagnosticCodes/codes.html,ICD9CM v32 master descriptions,5046
+CIM10,"International Classification of Diseases, Tenth Revision, French Edition (ATIH)",https://www.atih.sante.fr/nomenclatures-de-recueil-de-linformation/cim,CIM10 2022-10-04,32806
+SUS,"Table of Procedures, Drugs, Orthoses, Protheses and Special Materials (Brazilian Unified Health System)",IQVIA proprietary; http://sigtap.datasus.gov.br/,SUS Procedure Table 2018-02-01,32446
+CDISC,Clinical Data Interchange Standards Consortium,https://ncim.nci.nih.gov/ncimbrowser/,"2023_12D",33116
+EDI,Korean Electronic Data Interchange code system (HIRA),http://www.hira.or.kr/rd/insuadtcrtr/bbsView.do?pgmid=HIRAA030069000400&brdScnBltNo=4&brdBltNo=51354&pageIndex=1&isPopupYn=Y,EDI 2024-07-03,32736
+NDC,National Drug Code (FDA and manufacturers),"http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html, http://www.fda.gov/downloads/Drugs/DevelopmentApprovalProcess/UCM070838.zip",NDC 20240825,44819105
+SPL,Structured Product Labeling (FDA),http://www.fda.gov/Drugs/InformationOnDrugs/ucm142438.htm,NDC 20240825,44819140
+DPD,Drug Product Database (Health Canada),http://open.canada.ca/data/en/dataset/bf55e42a-63cb-4556-bfd8-44f26e5a36fe,DPD 25-JUN-17,231
+NFC,New Form Code (EphMRA),http://www.ephmra.org/New-Form-Codes-Classification,NFC 20160704,245
+Specimen Type,OMOP Specimen Type,OMOP generated,,581376
+Visit Type,OMOP Visit Type,OMOP generated,,44819150
+Drug Type,OMOP Drug Exposure Type,OMOP generated,,44819126
+Plan,OMOP Health Plan,OMOP generated,,32471
+MMI,Modernizing Medicine (MMI),MMI proprietary,,581367
+SNOMED Veterinary,SNOMED Veterinary Extension (VTSL),https://vtsl.vetmed.vt.edu/extension/,SNOMED Veterinary 20190401,32549
+Procedure Type,OMOP Procedure Occurrence Type,OMOP generated,,44819128
+OMOP Invest Drug,OMOP Investigational Drugs,"https://gsrs.ncats.nih.gov/, https://gsrs.ncats.nih.gov/#/release",OMOP Invest Drug version 2024-06-03,33051
+EphMRA ATC,Anatomical Classification of Pharmaceutical Products (EphMRA),http://www.ephmra.org/Anatomical-Classification,EphMRA ATC 2016,243
+LOINC,Logical Observation Identifiers Names and Codes (Regenstrief Institute),http://loinc.org/downloads/loinc,LOINC 2.77,44819102
+ICD9Proc,"International Classification of Diseases, Ninth Revision, Clinical Modification, Volume 3 (NCHS)",http://www.cms.gov/Medicare/Coding/ICD9ProviderDiagnosticCodes/codes.html,ICD9CM v32 master descriptions,44819099
+MDC,Major Diagnostic Categories (CMS),http://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/AcuteInpatientPPS/Acute-Inpatient-Files-for-Download.html,"2013-01-06",44819131
+APC,Ambulatory Payment Classification (CMS),http://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalOutpatientPPS/Hospital-Outpatient-Regulations-and-Notices.html,"2018-January-Addendum-A",44819132
+US Census,Census regions of the United States (USCB),https://www.census.gov/geo/maps-data/data/tiger-cart-boundary.html,US Census 2017 Release,32570
+CO-CONNECT,CO-CONNECT (University of Nottingham),https://co-connect.ac.uk/,CO-CONNECT 2023-05-31,33091
+ICD9ProcCN,"International Classification of Diseases, Ninth Revision, Chinese Edition, Procedures (CAMS)",http://chiss.org.cn/hism/wcmpub/hism1029/notice/201712/P020171225613285104950.pdf,"2017 Release",32744
+Episode,OMOP Episode,OMOP generated,Episode 20201014,32523
+Metadata,OMOP Metadata,OMOP generated,,32675
+Observation Type,OMOP Observation Type,OMOP generated,,44819129
+Condition Type,OMOP Condition Occurrence Type,OMOP generated,,44819127
+Meas Type,OMOP Measurement Type,OMOP generated,,44819152
+CCAM,Common Classification of Medical Acts (ATIH),https://www.ameli.fr/accueil-de-la-ccam/telechargement/index.php,CCAM version 64,32957
+Condition Status,OMOP Condition Status,OMOP generated,,32887
+None,OMOP Standardized Vocabularies,OMOP generated,v5.0 30-AUG-24,44819096
+Currency,International Currency Symbol (ISO 4217),http://www.iso.org/iso/home/standards/currency_codes.htm,"2008",44819153
+CO-CONNECT MIABIS,CO-CONNECT MIABIS (University of Nottingham),https://co-connect.ac.uk/,CO-CONNECT MIABIS 2023-05-31,33092
+CTD,Comparative Toxicogenomic Database (NCSU),http://ctdbase.org,CTD 2020-02-19,32735
+Obs Period Type,OMOP Observation Period Type,OMOP generated,,44819149
+Ethnicity,OMOP Ethnicity,OMOP generated,,44819134
+Race,Race and Ethnicity Code Set (USBC),http://www.cdc.gov/nchs/data/dvs/Race_Ethnicity_CodeSet.pdf,Version 1.0,44819109
+Visit,OMOP Visit,OMOP generated,Visit 20211216,44819119
+CMS Place of Service,Place of Service Codes for Professional Claims (CMS),http://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/PhysicianFeeSched/downloads//Website_POS_database.pdf,"2009-01-11",44819110
+CO-CONNECT TWINS,CO-CONNECT TWINS (University of Nottingham),https://co-connect.ac.uk/,CO-CONNECT TWINS 2023-05-31,33093
+GCN_SEQNO,Clinical Formulation ID (FDB),FDB US distribution package,"20151119 Release",44819141
+Cost Type,OMOP Cost Type,OMOP generated,,5029
+Sponsor,OMOP Sponsor,OMOP generated,,32472
+OXMIS,Oxford Medical Information System (OCHP),"Codes extracted from GPRD database, courtesy of GSK",,44819114
+Plan Stop Reason,OMOP Plan Stop Reason,OMOP generated,,32474
+Device Type,OMOP Device Type,OMOP generated,,44819151
+SOPT,Source of Payment Typology (PHDSC),https://www.nahdo.org/sopt,SOPT Version 9.2,32473
+BDPM,Public Database of Medications (Social-Sante),http://base-donnees-publique.medicaments.gouv.fr/telechargement.php,BDPM 20191006,236
+OncoTree,OncoTree (MSK),http://oncotree.mskcc.org/,OncoTree version 2021-11-02,33008
+UB04 Typ bill,UB04 Type of Bill - Institutional (USHIK),https://ushik.ahrq.gov/ViewItemDetails?&system=apcd&itemKey=196987000,,32044
+Provider,OMOP Provider,OMOP generated,,32573
+SMQ,Standardised MedDRA Queries (MSSO),http://www.meddramsso.com/secure/smq/SMQ_Spreadsheet_14_0_English_update.xlsx,Version 14.0,44819121
+Gender,OMOP Gender,OMOP generated,,44819108
+CIEL,Columbia International eHealth Laboratory (Columbia University),https://wiki.openmrs.org/display/docs/Getting+and+Using+the+MVP-CIEL+Concept+Dictionary,Openmrs 1.11.0 20150227,45905710
+OPCS4,OPCS Classification of Interventions and Procedures version 4 (NHS),http://systems.hscic.gov.uk/data/clinicalcoding/codingstandards/opcs4,"2021 Release",44819143
+ATC,WHO Anatomic Therapeutic Chemical Classification,http://www.whocc.no/atc_ddd_index/,ATC 2024-07-03,44819117
+Cohort Type,OMOP Cohort Type,OMOP generated,,44819234
+DRG,Diagnosis-related group (CMS),http://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/AcuteInpatientPPS/Acute-Inpatient-Files-for-Download.html,"2011-18-02",44819130
+Multum,Cerner Multum (Cerner),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,"2013-07-10",44819112
+Episode Type,OMOP Episode Type,OMOP generated,,32542
+Death Type,OMOP Death Type,OMOP generated,,44819135
+Note Type,OMOP Note Type,OMOP generated,,44819146
+ABMS,Provider Specialty (American Board of Medical Specialties),http://www.abms.org/member-boards/specialty-subspecialty-certificates,"2018-06-26 ABMS",45756746
+HES Specialty,Hospital Episode Statistics Specialty (NHS),http://www.datadictionary.nhs.uk/data_dictionary/attributes/m/main_specialty_code_de.asp?shownav=0,"2018-06-26 HES Specialty",44819145
+Medicare Specialty,Medicare provider/supplier specialty codes (CMS),http://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/MedicareProviderSupEnroll/Taxonomy.html,"2018-06-26 Specialty",44819138
+KDC,Korean Drug Code (HIRA),https://www.hira.or.kr/eng/,KDC 2020-07-31,32422
+Cohort,Legacy OMOP HOI or DOI cohort,OMOP generated,,44819123
+RxNorm Extension,OMOP RxNorm Extension,OMOP generated,RxNorm Extension 20240701,252
+ICD10CN,"International Classification of Diseases, Tenth Revision, Chinese Edition (CAMS)",http://www.sac.gov.cn/was5/web/search?channelid=97779&templet=gjcxjg_detail.jsp&searchword=STANDARD_CODE=%27GB/T%2014396-2016%27,"2016 Release",32740
+Cost,OMOP Cost,OMOP generated,,581457
+HemOnc,HemOnc,https://hemonc.org,HemOnc 2022-11-29,32613
+Supplier,OMOP Supplier,OMOP generated,,32574
+OSM,OpenStreetMap (OSMF),"https://www.openstreetmap.org/copyright/en, https://wambachers-osm.website/boundaries/",OSM Release 2019-02-21,32541
+UB04 Point of Origin,UB04 Claim Source Inpatient Admission Code (CMS),https://www.resdac.org/cms-data/variables/Claim-Source-Inpatient-Admission-Code,,32045
+UB04 Pt dis status,UB04 Patient Discharge Status Code (CMS),https://www.resdac.org/cms-data/variables/patient-discharge-status-code,,32047
+VANDF,Veterans Health Administration National Drug File (VA)),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,RxNorm 20240603,44819120
+ICD10PCS,ICD-10 Procedure Coding System (CMS),http://www.cms.gov/Medicare/Coding/ICD10/index.html,ICD10PCS 2024,44819125
+Korean Revenue Code,Korean Revenue Code (KNHIS),OMOP generated,,32724
+KNHIS,Korean Payer (KNHIS),OMOP generated,,32723
+Revenue Code,UB04/CMS1450 Revenue Codes (CMS),http://www.mpca.net/?page=ERC_finance,"2010 Release",44819133
+UB04 Pri Typ of Adm,UB04 Claim Inpatient Admission Type Code (CMS),https://www.resdac.org/cms-data/variables/Claim-Inpatient-Admission-Type-Code,,32046
+PCORNet,National Patient-Centered Clinical Research Network (PCORI),OMOP generated,,44819148
+Nebraska Lexicon,Nebraska Lexicon (UNMC),https://www.unmc.edu/pathology-research/bioinformatics/campbell/tdc.html,Nebraska Lexicon 20190816,32757
+NCCD,Normalized Chinese Clinical Drug knowledge base (UTHealth),https://www.ohdsi.org/wp-content/uploads/2020/07/NCCD_RxNorm_Mapping_0728.pdf,NCCD_v02_2020,32807
+NHS Ethnic Category,NHS Ethnic Category,https://www.datadictionary.nhs.uk/data_elements/ethnic_category.html#element_ethnic_category.description,"2023",33095
+NHS Place of Service,NHS Admission Source and Discharge Destination,https://www.datadictionary.nhs.uk/about/about.html,"2023",33096
+OPS,Operations and Procedures Classification (OPS),https://www.dimdi.de/dynamic/de/klassifikationen/ops/,OPS Version 2022,32956
+ICDO3,"International Classification of Diseases for Oncology, Third Edition (WHO)",https://seer.cancer.gov/icd-o-3/,ICDO3 SEER Site/Histology Released 06/2020,581426
+Cancer Modifier,Diagnostic Modifiers of Cancer (OMOP),OMOP generated,Cancer Modifier 20220909,32929
+Relationship,OMOP Relationship,OMOP generated,,44819235
+NUCC,National Uniform Claim Committee Health Care Provider Taxonomy Code Set (NUCC),http://www.nucc.org/index.php?option=com_content&view=article&id=107&Itemid=132,"2018-06-26 NUCC",44819137
+JAX,The Clinical Knowledgebase (The Jackson Laboratory),https://ckbhome.jax.org/,JAX v20200824,32916
+Domain,OMOP Domain,OMOP generated,,44819147
+GGR,Commented Drug Directory (BCFI),http://www.bcfi.be/nl/download,GGR 20210901,581450
+JMDC,Japan Medical Data Center Drug Code (JMDC),OMOP generated,JMDC 2020-04-30,32557
+ClinVar,ClinVar (NCBI),https://ftp.ncbi.nlm.nih.gov/pub/clinvar/,ClinVar v20200901,32915
+OncoKB,Oncology Knowledge Base (MSK),https://www.oncokb.org/,OncoKB v20210502,32999
+NCIt,NCI Thesaurus (National Cancer Institute),http://evs.nci.nih.gov/ftp1/NCI_Thesaurus,NCIt 20220509,32917
+RxNorm,RxNorm (NLM),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,RxNorm 20240506,44819104
+PPI,AllOfUs_PPI (Columbia),http://terminology.pmi-ops.org/CodeSystem/ppi,Codebook Version 0.4.43 + COVID + MHWB + SDOH + PFH + BHP + EHH,581404
+Language,OMOP Language,OMOP generated,Language 20221030,33069
+Read,NHS UK Read Codes Version 2 (HSCIC),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,NHS READV2 21.0.0 20160401000001 + DATAMIGRATION_25.0.0_20180403000001,44819113
+CPT4,Current Procedural Terminology version 4 (AMA),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,"2024 Release",44819100
+UK Biobank,UK Biobank (UK Biobank),https://biobank.ctsu.ox.ac.uk/showcase/schema.cgi; https://biobank.ctsu.ox.ac.uk/crystal/refer.cgi?id=141140,version 2021-03-18,32976
+NDFRT,National Drug File - Reference Terminology (VA),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,RXNORM 2018-08-12,44819103
+AMT,Australian Medicines Terminology (NEHTA),https://www.nehta.gov.au/implementation-resources/terminology-access,Clinical Terminology v20210630,238
+CDM,OMOP Common DataModel,https://github.com/OHDSI/CommonDataModel,CDM v6.0.0,32485
+NAACCR,Data Standards & Data Dictionary Volume II (NAACCR),http://datadictionary.naaccr.org/?c=10,NAACCR v18,32642
+Vocabulary,OMOP Vocabulary,OMOP generated,,44819232
+CGI,Cancer Genome Interpreter (Pompeu Fabra University),https://www.cancergenomeinterpreter.org/data/cgi_biomarkers_latest.zip,CGI20180216,32914
+CIViC,Clinical Interpretation of Variants in Cancer (civicdb.org),https://github.com/griffithlab/civic-server/blob/master/public/downloads/RankedCivicGeneCandidates.tsv,CIViC 2022-10-01,32913
+Type Concept,OMOP Type Concept,OMOP generated,Type Concept 20221030,32808
+ICD10GM,"International Classification of Diseases, Tenth Revision, German Edition",https://www.dimdi.de/dynamic/.downloads/klassifikationen/icd-10-gm,ICD10GM 2024,32928
+KCD7,"Korean Standard Classfication of Diseases and Causes of Death, 7th Revision (STATISTICS KOREA)",https://www.hira.or.kr/rd/insuadtcrtr/bbsView.do?pgmid=HIRAA030069000000&brdScnBltNo=4&brdBltNo=50760&pageIndex=1&isPopupYn=Y#none,"7th revision",32688
+ICD10,"International Classification of Diseases, Tenth Revision (WHO)",http://www.who.int/classifications/icd/icdonlineversions/en/,"2021 Release",44819124
+MeSH,Medical Subject Headings (NLM),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,"2023 Release",44819136
+dm+d,Dictionary of Medicines and Devices (NHS),https://isd.hscic.gov.uk/trud3/user/authenticated/group/0/pack/1/subpack/24/releases,DMD 2023-05-22,232
+OMOP Genomic,OMOP Genomic vocabulary of known variants involved in disease,OMOP generated,OMOP Genomic 20240216,33002
+Concept Class,OMOP Concept Class,OMOP generated,,44819233
+UCUM,Unified Code for Units of Measure (Regenstrief Institute),http://aurora.regenstrief.org/~ucum/ucum.html#section-Alphabetic-Index,Version 1.8.2,44819107
+CVX,CDC Vaccine Administered CVX (NCIRD),https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx,CVX 20240515,581400
+SNOMED,Systematic Nomenclature of Medicine - Clinical Terms (IHTSDO),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,"2024-02-01 SNOMED CT International Edition; 2024-03-01 SNOMED CT US Edition; 2024-04-10 SNOMED CT UK Edition",44819097
+OMOP Extension,OMOP Extension (OHDSI),OMOP generated,OMOP Extension 20240716,32758
+HCPCS,Healthcare Common Procedure Coding System (CMS),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,"20240701 Alpha Numeric HCPCS File",44819101

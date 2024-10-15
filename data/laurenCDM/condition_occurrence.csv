@@ -1,7 +1,0 @@
-condition_occurrence_id,person_id,condition_concept_id,condition_start_date,condition_start_datetime,condition_end_date,condition_end_datetime,condition_type_concept_id,stop_reason,provider_id,visit_occurrence_id,visit_detail_id,condition_source_value,condition_source_concept_id,condition_status_source_value,condition_status_concept_id
-1,1,760879,2013-01-14,2013-01-14,,,32020,,,2,0,12238591000119108,760879,,0
-2,1,4034006,2013-01-17,2013-01-17,,,32020,,,1,0,237067000,4034006,,0
-3,1,437663,2013-01-18,2013-01-18,,,32020,,,1,0,386661006,437663,,0
-4,1,4152351,2013-01-18,2013-01-18,,,32020,,,1,0,271835004,4152351,,0
-5,1,200528,2013-01-21,2013-01-21,,,32020,,,1,0,389026000,200528,,0
-6,1,433527,2013-01-21,2013-01-21,,,32020,,,1,0,129103003,433527,,0
