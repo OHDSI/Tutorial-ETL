@@ -1,6 +1,12 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.person,
+--   depends_on (
+--     omop.care_site,
+--     vocab.concept,
+--     omop.location,
+--     omop.provider,
+--   ),
 --   audits (
 --     person_exists,
 --     person_care_site_id_is_foreign_key,
@@ -65,7 +71,7 @@ SELECT * FROM omop.PERSON WHERE ETHNICITY_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.PERSON c
-LEFT JOIN vocab.CONCEPT p ON c.ETHNICITY_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.ETHNICITY_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.ETHNICITY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PERSON.ETHNICITY_CONCEPT_ID' belong to the 'Ethnicity' domain.
@@ -76,7 +82,7 @@ WHERE c.ETHNICITY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PERSON t
-JOIN vocab.CONCEPT c ON t.ETHNICITY_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.ETHNICITY_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Ethnicity';;
 
 -- Description: Check that concepts in 'PERSON.ETHNICITY_CONCEPT_ID' are standard and valid.
@@ -87,7 +93,7 @@ WHERE c.domain_id <> 'Ethnicity';;
         );
         SELECT t.*
 FROM omop.PERSON t
-LEFT JOIN vocab.CONCEPT c ON t.ETHNICITY_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.ETHNICITY_CONCEPT_ID = c.concept_id
 WHERE t.ETHNICITY_CONCEPT_ID IS NOT NULL
   AND t.ETHNICITY_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -108,7 +114,7 @@ SELECT * FROM omop.PERSON WHERE ETHNICITY_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.PERSON c
-LEFT JOIN vocab.CONCEPT p ON c.ETHNICITY_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.ETHNICITY_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.ETHNICITY_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'PERSON.GENDER_CONCEPT_ID'.
@@ -127,7 +133,7 @@ SELECT * FROM omop.PERSON WHERE GENDER_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.PERSON c
-LEFT JOIN vocab.CONCEPT p ON c.GENDER_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.GENDER_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.GENDER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PERSON.GENDER_CONCEPT_ID' belong to the 'Gender' domain.
@@ -138,7 +144,7 @@ WHERE c.GENDER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PERSON t
-JOIN vocab.CONCEPT c ON t.GENDER_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.GENDER_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Gender';;
 
 -- Description: Check that concepts in 'PERSON.GENDER_CONCEPT_ID' are standard and valid.
@@ -149,7 +155,7 @@ WHERE c.domain_id <> 'Gender';;
         );
         SELECT t.*
 FROM omop.PERSON t
-LEFT JOIN vocab.CONCEPT c ON t.GENDER_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.GENDER_CONCEPT_ID = c.concept_id
 WHERE t.GENDER_CONCEPT_ID IS NOT NULL
   AND t.GENDER_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -170,7 +176,7 @@ SELECT * FROM omop.PERSON WHERE GENDER_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.PERSON c
-LEFT JOIN vocab.CONCEPT p ON c.GENDER_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.GENDER_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.GENDER_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'PERSON.LOCATION_ID' pointing to 'LOCATION.LOCATION_ID'.
@@ -231,7 +237,7 @@ SELECT * FROM omop.PERSON WHERE RACE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.PERSON c
-LEFT JOIN vocab.CONCEPT p ON c.RACE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.RACE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.RACE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PERSON.RACE_CONCEPT_ID' belong to the 'Race' domain.
@@ -242,7 +248,7 @@ WHERE c.RACE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PERSON t
-JOIN vocab.CONCEPT c ON t.RACE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.RACE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Race';;
 
 -- Description: Check that concepts in 'PERSON.RACE_CONCEPT_ID' are standard and valid.
@@ -253,7 +259,7 @@ WHERE c.domain_id <> 'Race';;
         );
         SELECT t.*
 FROM omop.PERSON t
-LEFT JOIN vocab.CONCEPT c ON t.RACE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.RACE_CONCEPT_ID = c.concept_id
 WHERE t.RACE_CONCEPT_ID IS NOT NULL
   AND t.RACE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -274,7 +280,7 @@ SELECT * FROM omop.PERSON WHERE RACE_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.PERSON c
-LEFT JOIN vocab.CONCEPT p ON c.RACE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.RACE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.RACE_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'PERSON.YEAR_OF_BIRTH'.

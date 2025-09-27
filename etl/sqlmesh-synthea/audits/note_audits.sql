@@ -1,6 +1,13 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.note,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--     omop.provider,
+--     omop.visit_detail,
+--     omop.visit_occurrence,
+--   ),
 --   audits (
 --     person_completeness_note,
 --     note_encoding_concept_id_is_required,
@@ -59,7 +66,7 @@ SELECT * FROM omop.NOTE WHERE ENCODING_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.NOTE c
-LEFT JOIN vocab.CONCEPT p ON c.ENCODING_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.ENCODING_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.ENCODING_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'NOTE.ENCODING_CONCEPT_ID' are standard and valid.
@@ -70,7 +77,7 @@ WHERE c.ENCODING_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.NOTE t
-LEFT JOIN vocab.CONCEPT c ON t.ENCODING_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.ENCODING_CONCEPT_ID = c.concept_id
 WHERE t.ENCODING_CONCEPT_ID IS NOT NULL
   AND t.ENCODING_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -91,7 +98,7 @@ SELECT * FROM omop.NOTE WHERE LANGUAGE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.NOTE c
-LEFT JOIN vocab.CONCEPT p ON c.LANGUAGE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.LANGUAGE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.LANGUAGE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'NOTE.LANGUAGE_CONCEPT_ID' are standard and valid.
@@ -102,7 +109,7 @@ WHERE c.LANGUAGE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.NOTE t
-LEFT JOIN vocab.CONCEPT c ON t.LANGUAGE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.LANGUAGE_CONCEPT_ID = c.concept_id
 WHERE t.LANGUAGE_CONCEPT_ID IS NOT NULL
   AND t.LANGUAGE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -123,7 +130,7 @@ SELECT * FROM omop.NOTE WHERE NOTE_CLASS_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.NOTE c
-LEFT JOIN vocab.CONCEPT p ON c.NOTE_CLASS_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.NOTE_CLASS_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.NOTE_CLASS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'NOTE.NOTE_CLASS_CONCEPT_ID' are standard and valid.
@@ -134,7 +141,7 @@ WHERE c.NOTE_CLASS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.NOTE t
-LEFT JOIN vocab.CONCEPT c ON t.NOTE_CLASS_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.NOTE_CLASS_CONCEPT_ID = c.concept_id
 WHERE t.NOTE_CLASS_CONCEPT_ID IS NOT NULL
   AND t.NOTE_CLASS_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -177,7 +184,7 @@ WHERE t.NOTE_DATETIME < p.birth_datetime;;
         );
         SELECT c.*
 FROM omop.NOTE c
-LEFT JOIN vocab.CONCEPT p ON c.NOTE_EVENT_FIELD_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.NOTE_EVENT_FIELD_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.NOTE_EVENT_FIELD_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'NOTE.NOTE_EVENT_FIELD_CONCEPT_ID' are standard and valid.
@@ -188,7 +195,7 @@ WHERE c.NOTE_EVENT_FIELD_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.NOTE t
-LEFT JOIN vocab.CONCEPT c ON t.NOTE_EVENT_FIELD_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.NOTE_EVENT_FIELD_CONCEPT_ID = c.concept_id
 WHERE t.NOTE_EVENT_FIELD_CONCEPT_ID IS NOT NULL
   AND t.NOTE_EVENT_FIELD_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -237,7 +244,7 @@ SELECT * FROM omop.NOTE WHERE NOTE_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.NOTE c
-LEFT JOIN vocab.CONCEPT p ON c.NOTE_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.NOTE_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.NOTE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'NOTE.NOTE_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -248,7 +255,7 @@ WHERE c.NOTE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.NOTE t
-JOIN vocab.CONCEPT c ON t.NOTE_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.NOTE_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'NOTE.NOTE_TYPE_CONCEPT_ID' are standard and valid.
@@ -259,7 +266,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.NOTE t
-LEFT JOIN vocab.CONCEPT c ON t.NOTE_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.NOTE_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.NOTE_TYPE_CONCEPT_ID IS NOT NULL
   AND t.NOTE_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

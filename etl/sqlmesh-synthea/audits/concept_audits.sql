@@ -1,6 +1,11 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
---   name vocab.CONCEPT,
+--   name vocab.concept,
+--   depends_on (
+--     vocab.concept_class,
+--     vocab.domain,
+--     vocab.vocabulary,
+--   ),
 --   audits (
 --     concept_concept_class_id_is_required,
 --     concept_concept_class_id_is_foreign_key,
@@ -24,7 +29,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE CONCEPT_CLASS_ID IS NULL;
+SELECT * FROM vocab.concept WHERE CONCEPT_CLASS_ID IS NULL;
 
 -- Description: Check for orphaned foreign keys in 'CONCEPT.CONCEPT_CLASS_ID' pointing to 'CONCEPT_CLASS.CONCEPT_CLASS_ID'.
         AUDIT (
@@ -33,8 +38,8 @@ SELECT * FROM vocab.CONCEPT WHERE CONCEPT_CLASS_ID IS NULL;
           blocking FALSE
         );
         SELECT c.*
-FROM vocab.CONCEPT c
-LEFT JOIN vocab.CONCEPT_CLASS p ON c.CONCEPT_CLASS_ID = p.CONCEPT_CLASS_ID
+FROM vocab.concept c
+LEFT JOIN vocab.concept_class p ON c.CONCEPT_CLASS_ID = p.CONCEPT_CLASS_ID
 WHERE c.CONCEPT_CLASS_ID IS NOT NULL AND p.CONCEPT_CLASS_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'CONCEPT.CONCEPT_CODE'.
@@ -43,7 +48,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE CONCEPT_CODE IS NULL;
+SELECT * FROM vocab.concept WHERE CONCEPT_CODE IS NULL;
 
 -- Description: Check for NULLs in required field 'CONCEPT.CONCEPT_ID'.
 AUDIT (
@@ -51,7 +56,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE CONCEPT_ID IS NULL;
+SELECT * FROM vocab.concept WHERE CONCEPT_ID IS NULL;
 
 -- Description: Check for duplicate values in primary key field 'CONCEPT.CONCEPT_ID'.
         AUDIT (
@@ -71,7 +76,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE CONCEPT_NAME IS NULL;
+SELECT * FROM vocab.concept WHERE CONCEPT_NAME IS NULL;
 
 -- Description: Check for NULLs in required field 'CONCEPT.DOMAIN_ID'.
 AUDIT (
@@ -79,7 +84,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE DOMAIN_ID IS NULL;
+SELECT * FROM vocab.concept WHERE DOMAIN_ID IS NULL;
 
 -- Description: Check for orphaned foreign keys in 'CONCEPT.DOMAIN_ID' pointing to 'DOMAIN.DOMAIN_ID'.
         AUDIT (
@@ -88,8 +93,8 @@ SELECT * FROM vocab.CONCEPT WHERE DOMAIN_ID IS NULL;
           blocking FALSE
         );
         SELECT c.*
-FROM vocab.CONCEPT c
-LEFT JOIN vocab.DOMAIN p ON c.DOMAIN_ID = p.DOMAIN_ID
+FROM vocab.concept c
+LEFT JOIN vocab.domain p ON c.DOMAIN_ID = p.DOMAIN_ID
 WHERE c.DOMAIN_ID IS NOT NULL AND p.DOMAIN_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'CONCEPT.VALID_END_DATE'.
@@ -98,7 +103,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE VALID_END_DATE IS NULL;
+SELECT * FROM vocab.concept WHERE VALID_END_DATE IS NULL;
 
 -- Description: Check for NULLs in required field 'CONCEPT.VALID_START_DATE'.
 AUDIT (
@@ -106,7 +111,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE VALID_START_DATE IS NULL;
+SELECT * FROM vocab.concept WHERE VALID_START_DATE IS NULL;
 
 -- Description: Check that 'CONCEPT.VALID_START_DATE' occurs before 'CONCEPT.VALID_END_DATE'.
 AUDIT (
@@ -114,7 +119,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE VALID_START_DATE > VALID_END_DATE;
+SELECT * FROM vocab.concept WHERE VALID_START_DATE > VALID_END_DATE;
 
 -- Description: Check for NULLs in required field 'CONCEPT.VOCABULARY_ID'.
 AUDIT (
@@ -122,7 +127,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.CONCEPT WHERE VOCABULARY_ID IS NULL;
+SELECT * FROM vocab.concept WHERE VOCABULARY_ID IS NULL;
 
 -- Description: Check for orphaned foreign keys in 'CONCEPT.VOCABULARY_ID' pointing to 'VOCABULARY.VOCABULARY_ID'.
         AUDIT (
@@ -131,7 +136,7 @@ SELECT * FROM vocab.CONCEPT WHERE VOCABULARY_ID IS NULL;
           blocking FALSE
         );
         SELECT c.*
-FROM vocab.CONCEPT c
-LEFT JOIN vocab.VOCABULARY p ON c.VOCABULARY_ID = p.VOCABULARY_ID
+FROM vocab.concept c
+LEFT JOIN vocab.vocabulary p ON c.VOCABULARY_ID = p.VOCABULARY_ID
 WHERE c.VOCABULARY_ID IS NOT NULL AND p.VOCABULARY_ID IS NULL;;
 

@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.dose_era,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--   ),
 --   audits (
 --     person_completeness_dose_era,
 --     dose_era_dose_era_end_date_is_required,
@@ -127,7 +131,7 @@ SELECT * FROM omop.DOSE_ERA WHERE DRUG_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DOSE_ERA c
-LEFT JOIN vocab.CONCEPT p ON c.DRUG_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DRUG_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DRUG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DOSE_ERA.DRUG_CONCEPT_ID' belong to the 'Drug' domain.
@@ -138,7 +142,7 @@ WHERE c.DRUG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DOSE_ERA t
-JOIN vocab.CONCEPT c ON t.DRUG_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DRUG_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Drug';;
 
 -- Description: Check that concepts in 'DOSE_ERA.DRUG_CONCEPT_ID' are standard and valid.
@@ -149,7 +153,7 @@ WHERE c.domain_id <> 'Drug';;
         );
         SELECT t.*
 FROM omop.DOSE_ERA t
-LEFT JOIN vocab.CONCEPT c ON t.DRUG_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DRUG_CONCEPT_ID = c.concept_id
 WHERE t.DRUG_CONCEPT_ID IS NOT NULL
   AND t.DRUG_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -197,7 +201,7 @@ SELECT * FROM omop.DOSE_ERA WHERE UNIT_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DOSE_ERA c
-LEFT JOIN vocab.CONCEPT p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DOSE_ERA.UNIT_CONCEPT_ID' belong to the 'Unit' domain.
@@ -208,7 +212,7 @@ WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DOSE_ERA t
-JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Unit';;
 
 -- Description: Check that concepts in 'DOSE_ERA.UNIT_CONCEPT_ID' are standard and valid.
@@ -219,7 +223,7 @@ WHERE c.domain_id <> 'Unit';;
         );
         SELECT t.*
 FROM omop.DOSE_ERA t
-LEFT JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE t.UNIT_CONCEPT_ID IS NOT NULL
   AND t.UNIT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

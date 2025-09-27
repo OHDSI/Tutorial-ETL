@@ -26,6 +26,13 @@ MODEL (
     route_source_value TEXT,
     dose_unit_source_value TEXT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+    omop.provider,
+    omop.visit_detail,
+    omop.visit_occurrence,
+  ),
   audits (
     person_completeness_drug_exposure,
     drug_exposure_drug_concept_id_is_required,

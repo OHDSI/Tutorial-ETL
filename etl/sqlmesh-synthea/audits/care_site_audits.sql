@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.care_site,
+--   depends_on (
+--     vocab.concept,
+--     omop.location,
+--   ),
 --   audits (
 --     care_site_care_site_id_is_required,
 --     care_site_care_site_id_is_primary_key,
@@ -50,7 +54,7 @@ WHERE c.LOCATION_ID IS NOT NULL AND p.LOCATION_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.CARE_SITE c
-LEFT JOIN vocab.CONCEPT p ON c.PLACE_OF_SERVICE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.PLACE_OF_SERVICE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.PLACE_OF_SERVICE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'CARE_SITE.PLACE_OF_SERVICE_CONCEPT_ID' are standard and valid.
@@ -61,7 +65,7 @@ WHERE c.PLACE_OF_SERVICE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.CARE_SITE t
-LEFT JOIN vocab.CONCEPT c ON t.PLACE_OF_SERVICE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.PLACE_OF_SERVICE_CONCEPT_ID = c.concept_id
 WHERE t.PLACE_OF_SERVICE_CONCEPT_ID IS NOT NULL
   AND t.PLACE_OF_SERVICE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

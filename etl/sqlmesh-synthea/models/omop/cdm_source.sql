@@ -14,6 +14,9 @@ MODEL (
     vocabulary_version TEXT,
     cdm_version_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+  ),
   audits (
     cdm_source_cdm_holder_is_required,
     cdm_source_cdm_release_date_is_required,

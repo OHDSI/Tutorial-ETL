@@ -9,6 +9,10 @@ MODEL (
     care_site_source_value TEXT,
     place_of_service_source_value TEXT
   ),
+  depends_on (
+    vocab.concept,
+    omop.location,
+  ),
   audits (
     care_site_care_site_id_is_required,
     care_site_care_site_id_is_primary_key,

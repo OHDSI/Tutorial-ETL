@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
---   name vocab.DOMAIN,
+--   name vocab.domain,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     domain_domain_concept_id_is_required,
 --     domain_domain_concept_id_is_foreign_key,
@@ -16,7 +19,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.DOMAIN WHERE DOMAIN_CONCEPT_ID IS NULL;
+SELECT * FROM vocab.domain WHERE DOMAIN_CONCEPT_ID IS NULL;
 
 -- Description: Check for orphaned foreign keys in 'DOMAIN.DOMAIN_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
         AUDIT (
@@ -25,8 +28,8 @@ SELECT * FROM vocab.DOMAIN WHERE DOMAIN_CONCEPT_ID IS NULL;
           blocking FALSE
         );
         SELECT c.*
-FROM vocab.DOMAIN c
-LEFT JOIN vocab.CONCEPT p ON c.DOMAIN_CONCEPT_ID = p.CONCEPT_ID
+FROM vocab.domain c
+LEFT JOIN vocab.concept p ON c.DOMAIN_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DOMAIN_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'DOMAIN.DOMAIN_ID'.
@@ -35,7 +38,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.DOMAIN WHERE DOMAIN_ID IS NULL;
+SELECT * FROM vocab.domain WHERE DOMAIN_ID IS NULL;
 
 -- Description: Check for duplicate values in primary key field 'DOMAIN.DOMAIN_ID'.
         AUDIT (
@@ -55,5 +58,5 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.DOMAIN WHERE DOMAIN_NAME IS NULL;
+SELECT * FROM vocab.domain WHERE DOMAIN_NAME IS NULL;
 

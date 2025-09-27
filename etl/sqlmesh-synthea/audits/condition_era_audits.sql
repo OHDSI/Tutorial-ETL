@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.condition_era,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--   ),
 --   audits (
 --     person_completeness_condition_era,
 --     condition_era_condition_concept_id_is_required,
@@ -47,7 +51,7 @@ SELECT * FROM omop.CONDITION_ERA WHERE CONDITION_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.CONDITION_ERA c
-LEFT JOIN vocab.CONCEPT p ON c.CONDITION_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CONDITION_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CONDITION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'CONDITION_ERA.CONDITION_CONCEPT_ID' belong to the 'Condition' domain.
@@ -58,7 +62,7 @@ WHERE c.CONDITION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.CONDITION_ERA t
-JOIN vocab.CONCEPT c ON t.CONDITION_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.CONDITION_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Condition';;
 
 -- Description: Check that concepts in 'CONDITION_ERA.CONDITION_CONCEPT_ID' are standard and valid.
@@ -69,7 +73,7 @@ WHERE c.domain_id <> 'Condition';;
         );
         SELECT t.*
 FROM omop.CONDITION_ERA t
-LEFT JOIN vocab.CONCEPT c ON t.CONDITION_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.CONDITION_CONCEPT_ID = c.concept_id
 WHERE t.CONDITION_CONCEPT_ID IS NOT NULL
   AND t.CONDITION_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

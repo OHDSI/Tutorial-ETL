@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.episode,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--   ),
 --   audits (
 --     episode_episode_concept_id_is_required,
 --     episode_episode_concept_id_is_foreign_key,
@@ -44,7 +48,7 @@ SELECT * FROM omop.EPISODE WHERE EPISODE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.EPISODE c
-LEFT JOIN vocab.CONCEPT p ON c.EPISODE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.EPISODE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.EPISODE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'EPISODE.EPISODE_CONCEPT_ID' belong to the 'Episode' domain.
@@ -55,7 +59,7 @@ WHERE c.EPISODE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.EPISODE t
-JOIN vocab.CONCEPT c ON t.EPISODE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.EPISODE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Episode';;
 
 -- Description: Check that concepts in 'EPISODE.EPISODE_CONCEPT_ID' are standard and valid.
@@ -66,7 +70,7 @@ WHERE c.domain_id <> 'Episode';;
         );
         SELECT t.*
 FROM omop.EPISODE t
-LEFT JOIN vocab.CONCEPT c ON t.EPISODE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.EPISODE_CONCEPT_ID = c.concept_id
 WHERE t.EPISODE_CONCEPT_ID IS NOT NULL
   AND t.EPISODE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -137,7 +141,7 @@ SELECT * FROM omop.EPISODE WHERE EPISODE_OBJECT_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.EPISODE c
-LEFT JOIN vocab.CONCEPT p ON c.EPISODE_OBJECT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.EPISODE_OBJECT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.EPISODE_OBJECT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'EPISODE.EPISODE_SOURCE_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
@@ -148,7 +152,7 @@ WHERE c.EPISODE_OBJECT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.EPISODE c
-LEFT JOIN vocab.CONCEPT p ON c.EPISODE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.EPISODE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.EPISODE_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'EPISODE.EPISODE_START_DATE'.
@@ -213,7 +217,7 @@ SELECT * FROM omop.EPISODE WHERE EPISODE_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.EPISODE c
-LEFT JOIN vocab.CONCEPT p ON c.EPISODE_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.EPISODE_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.EPISODE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'EPISODE.EPISODE_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -224,7 +228,7 @@ WHERE c.EPISODE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.EPISODE t
-JOIN vocab.CONCEPT c ON t.EPISODE_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.EPISODE_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'EPISODE.EPISODE_TYPE_CONCEPT_ID' are standard and valid.
@@ -235,7 +239,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.EPISODE t
-LEFT JOIN vocab.CONCEPT c ON t.EPISODE_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.EPISODE_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.EPISODE_TYPE_CONCEPT_ID IS NOT NULL
   AND t.EPISODE_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

@@ -20,6 +20,10 @@ MODEL (
     stop_reason_source_value TEXT,
     stop_reason_source_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+  ),
   audits (
     person_completeness_payer_plan_period,
     payer_plan_period_payer_concept_id_is_foreign_key,

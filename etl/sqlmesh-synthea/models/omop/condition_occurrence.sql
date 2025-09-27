@@ -19,6 +19,14 @@ MODEL (
     condition_status_source_value TEXT,
     condition_status_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+    vocab.concept_ancestor,
+    omop.person,
+    omop.provider,
+    omop.visit_detail,
+    omop.visit_occurrence,
+  ),
   audits (
     person_completeness_condition_occurrence,
     condition_occurrence_condition_concept_id_is_required,

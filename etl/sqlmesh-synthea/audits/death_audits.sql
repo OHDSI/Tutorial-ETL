@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.death,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--   ),
 --   audits (
 --     person_completeness_death,
 --     death_cause_concept_id_is_foreign_key,
@@ -38,7 +42,7 @@ WHERE e.person_id IS NULL;;
         );
         SELECT c.*
 FROM omop.DEATH c
-LEFT JOIN vocab.CONCEPT p ON c.CAUSE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CAUSE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CAUSE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DEATH.CAUSE_CONCEPT_ID' are standard and valid.
@@ -49,7 +53,7 @@ WHERE c.CAUSE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DEATH t
-LEFT JOIN vocab.CONCEPT c ON t.CAUSE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.CAUSE_CONCEPT_ID = c.concept_id
 WHERE t.CAUSE_CONCEPT_ID IS NOT NULL
   AND t.CAUSE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -70,7 +74,7 @@ SELECT * FROM omop.DEATH WHERE CAUSE_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.DEATH c
-LEFT JOIN vocab.CONCEPT p ON c.CAUSE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CAUSE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CAUSE_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'DEATH.DEATH_DATE'.
@@ -111,7 +115,7 @@ WHERE t.DEATH_DATETIME < p.birth_datetime;;
         );
         SELECT c.*
 FROM omop.DEATH c
-LEFT JOIN vocab.CONCEPT p ON c.DEATH_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DEATH_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DEATH_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DEATH.DEATH_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -122,7 +126,7 @@ WHERE c.DEATH_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DEATH t
-JOIN vocab.CONCEPT c ON t.DEATH_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DEATH_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'DEATH.DEATH_TYPE_CONCEPT_ID' are standard and valid.
@@ -133,7 +137,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.DEATH t
-LEFT JOIN vocab.CONCEPT c ON t.DEATH_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DEATH_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.DEATH_TYPE_CONCEPT_ID IS NOT NULL
   AND t.DEATH_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

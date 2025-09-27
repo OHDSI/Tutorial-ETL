@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.observation_period,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--   ),
 --   audits (
 --     observation_period_exists,
 --     person_completeness_observation_period,
@@ -122,7 +126,7 @@ SELECT * FROM omop.OBSERVATION_PERIOD WHERE PERIOD_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.OBSERVATION_PERIOD c
-LEFT JOIN vocab.CONCEPT p ON c.PERIOD_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.PERIOD_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.PERIOD_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'OBSERVATION_PERIOD.PERIOD_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -133,7 +137,7 @@ WHERE c.PERIOD_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.OBSERVATION_PERIOD t
-JOIN vocab.CONCEPT c ON t.PERIOD_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.PERIOD_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'OBSERVATION_PERIOD.PERIOD_TYPE_CONCEPT_ID' are standard and valid.
@@ -144,7 +148,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.OBSERVATION_PERIOD t
-LEFT JOIN vocab.CONCEPT c ON t.PERIOD_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.PERIOD_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.PERIOD_TYPE_CONCEPT_ID IS NOT NULL
   AND t.PERIOD_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.cost,
+--   depends_on (
+--     vocab.concept,
+--     vocab.domain,
+--   ),
 --   audits (
 --     cost_cost_domain_id_is_required,
 --     cost_cost_domain_id_is_foreign_key,
@@ -33,7 +37,7 @@ SELECT * FROM omop.COST WHERE COST_DOMAIN_ID IS NULL;
         );
         SELECT c.*
 FROM omop.COST c
-LEFT JOIN vocab.DOMAIN p ON c.COST_DOMAIN_ID = p.DOMAIN_ID
+LEFT JOIN vocab.domain p ON c.COST_DOMAIN_ID = p.DOMAIN_ID
 WHERE c.COST_DOMAIN_ID IS NOT NULL AND p.DOMAIN_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'COST.COST_EVENT_ID'.
@@ -80,7 +84,7 @@ SELECT * FROM omop.COST WHERE COST_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.COST c
-LEFT JOIN vocab.CONCEPT p ON c.COST_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.COST_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.COST_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'COST.COST_TYPE_CONCEPT_ID' are standard and valid.
@@ -91,7 +95,7 @@ WHERE c.COST_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.COST t
-LEFT JOIN vocab.CONCEPT c ON t.COST_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.COST_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.COST_TYPE_CONCEPT_ID IS NOT NULL
   AND t.COST_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -112,7 +116,7 @@ SELECT * FROM omop.COST WHERE COST_TYPE_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.COST c
-LEFT JOIN vocab.CONCEPT p ON c.CURRENCY_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CURRENCY_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CURRENCY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'COST.DRG_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
@@ -123,7 +127,7 @@ WHERE c.CURRENCY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.COST c
-LEFT JOIN vocab.CONCEPT p ON c.DRG_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DRG_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DRG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'COST.REVENUE_CODE_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
@@ -134,6 +138,6 @@ WHERE c.DRG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.COST c
-LEFT JOIN vocab.CONCEPT p ON c.REVENUE_CODE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.REVENUE_CODE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.REVENUE_CODE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 

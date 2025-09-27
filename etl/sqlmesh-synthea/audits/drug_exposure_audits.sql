@@ -1,6 +1,13 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.drug_exposure,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--     omop.provider,
+--     omop.visit_detail,
+--     omop.visit_occurrence,
+--   ),
 --   audits (
 --     person_completeness_drug_exposure,
 --     drug_exposure_drug_concept_id_is_required,
@@ -64,7 +71,7 @@ SELECT * FROM omop.DRUG_EXPOSURE WHERE DRUG_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DRUG_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.DRUG_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DRUG_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DRUG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DRUG_EXPOSURE.DRUG_CONCEPT_ID' belong to the 'Drug' domain.
@@ -75,7 +82,7 @@ WHERE c.DRUG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DRUG_EXPOSURE t
-JOIN vocab.CONCEPT c ON t.DRUG_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DRUG_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Drug';;
 
 -- Description: Check that concepts in 'DRUG_EXPOSURE.DRUG_CONCEPT_ID' are standard and valid.
@@ -86,7 +93,7 @@ WHERE c.domain_id <> 'Drug';;
         );
         SELECT t.*
 FROM omop.DRUG_EXPOSURE t
-LEFT JOIN vocab.CONCEPT c ON t.DRUG_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DRUG_CONCEPT_ID = c.concept_id
 WHERE t.DRUG_CONCEPT_ID IS NOT NULL
   AND t.DRUG_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -203,7 +210,7 @@ WHERE t.DRUG_EXPOSURE_START_DATETIME < p.birth_datetime;;
         );
         SELECT c.*
 FROM omop.DRUG_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.DRUG_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DRUG_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DRUG_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'DRUG_EXPOSURE.DRUG_TYPE_CONCEPT_ID'.
@@ -222,7 +229,7 @@ SELECT * FROM omop.DRUG_EXPOSURE WHERE DRUG_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DRUG_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.DRUG_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DRUG_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DRUG_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DRUG_EXPOSURE.DRUG_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -233,7 +240,7 @@ WHERE c.DRUG_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DRUG_EXPOSURE t
-JOIN vocab.CONCEPT c ON t.DRUG_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DRUG_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'DRUG_EXPOSURE.DRUG_TYPE_CONCEPT_ID' are standard and valid.
@@ -244,7 +251,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.DRUG_EXPOSURE t
-LEFT JOIN vocab.CONCEPT c ON t.DRUG_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DRUG_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.DRUG_TYPE_CONCEPT_ID IS NOT NULL
   AND t.DRUG_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -295,7 +302,7 @@ WHERE c.PROVIDER_ID IS NOT NULL AND p.PROVIDER_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.DRUG_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.ROUTE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.ROUTE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.ROUTE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DRUG_EXPOSURE.ROUTE_CONCEPT_ID' belong to the 'Route' domain.
@@ -306,7 +313,7 @@ WHERE c.ROUTE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DRUG_EXPOSURE t
-JOIN vocab.CONCEPT c ON t.ROUTE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.ROUTE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Route';;
 
 -- Description: Check that concepts in 'DRUG_EXPOSURE.ROUTE_CONCEPT_ID' are standard and valid.
@@ -317,7 +324,7 @@ WHERE c.domain_id <> 'Route';;
         );
         SELECT t.*
 FROM omop.DRUG_EXPOSURE t
-LEFT JOIN vocab.CONCEPT c ON t.ROUTE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.ROUTE_CONCEPT_ID = c.concept_id
 WHERE t.ROUTE_CONCEPT_ID IS NOT NULL
   AND t.ROUTE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

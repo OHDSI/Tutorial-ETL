@@ -20,6 +20,12 @@ MODEL (
     discharged_to_source_value TEXT,
     preceding_visit_occurrence_id BIGINT
   ),
+  depends_on (
+    omop.care_site,
+    vocab.concept,
+    omop.person,
+    omop.provider,
+  ),
   audits (
     person_completeness_visit_occurrence,
     visit_occurrence_admitted_from_concept_id_is_foreign_key,

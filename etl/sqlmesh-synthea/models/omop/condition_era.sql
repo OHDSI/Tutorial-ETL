@@ -9,6 +9,10 @@ MODEL (
     condition_era_end_date DATE,
     condition_occurrence_count BIGINT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+  ),
   audits (
     person_completeness_condition_era,
     condition_era_condition_concept_id_is_required,

@@ -10,6 +10,10 @@ MODEL (
     cause_source_value TEXT,
     cause_source_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+  ),
   audits (
     person_completeness_death,
     death_cause_concept_id_is_foreign_key,

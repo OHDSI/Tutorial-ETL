@@ -22,6 +22,13 @@ MODEL (
     unit_source_value TEXT,
     unit_source_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+    omop.provider,
+    omop.visit_detail,
+    omop.visit_occurrence,
+  ),
   audits (
     person_completeness_device_exposure,
     device_exposure_device_concept_id_is_required,

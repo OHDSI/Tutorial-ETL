@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.cohort_definition,
+--   depends_on (
+--     omop.cohort,
+--     vocab.concept,
+--   ),
 --   audits (
 --     cohort_definition_cohort_definition_id_is_required,
 --     cohort_definition_cohort_definition_id_is_foreign_key,
@@ -57,7 +61,7 @@ SELECT * FROM omop.COHORT_DEFINITION WHERE DEFINITION_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.COHORT_DEFINITION c
-LEFT JOIN vocab.CONCEPT p ON c.DEFINITION_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DEFINITION_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DEFINITION_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'COHORT_DEFINITION.DEFINITION_TYPE_CONCEPT_ID' are standard and valid.
@@ -68,7 +72,7 @@ WHERE c.DEFINITION_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.COHORT_DEFINITION t
-LEFT JOIN vocab.CONCEPT c ON t.DEFINITION_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DEFINITION_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.DEFINITION_TYPE_CONCEPT_ID IS NOT NULL
   AND t.DEFINITION_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -89,7 +93,7 @@ SELECT * FROM omop.COHORT_DEFINITION WHERE SUBJECT_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.COHORT_DEFINITION c
-LEFT JOIN vocab.CONCEPT p ON c.SUBJECT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.SUBJECT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.SUBJECT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'COHORT_DEFINITION.SUBJECT_CONCEPT_ID' are standard and valid.
@@ -100,7 +104,7 @@ WHERE c.SUBJECT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.COHORT_DEFINITION t
-LEFT JOIN vocab.CONCEPT c ON t.SUBJECT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.SUBJECT_CONCEPT_ID = c.concept_id
 WHERE t.SUBJECT_CONCEPT_ID IS NOT NULL
   AND t.SUBJECT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

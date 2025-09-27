@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
---   name vocab.CONCEPT_relationship,
+--   name omop.concept_relationship,
+--   depends_on (
+--     vocab.concept,
+--     omop.relationship,
+--   ),
 --   audits (
 --     concept_relationship_concept_id_1_is_required,
 --     concept_relationship_concept_id_1_is_foreign_key,
@@ -30,7 +34,7 @@ SELECT * FROM vocab.CONCEPT_RELATIONSHIP WHERE CONCEPT_ID_1 IS NULL;
         );
         SELECT c.*
 FROM vocab.CONCEPT_RELATIONSHIP c
-LEFT JOIN vocab.CONCEPT p ON c.CONCEPT_ID_1 = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CONCEPT_ID_1 = p.CONCEPT_ID
 WHERE c.CONCEPT_ID_1 IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'CONCEPT_RELATIONSHIP.CONCEPT_ID_2'.
@@ -49,7 +53,7 @@ SELECT * FROM vocab.CONCEPT_RELATIONSHIP WHERE CONCEPT_ID_2 IS NULL;
         );
         SELECT c.*
 FROM vocab.CONCEPT_RELATIONSHIP c
-LEFT JOIN vocab.CONCEPT p ON c.CONCEPT_ID_2 = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CONCEPT_ID_2 = p.CONCEPT_ID
 WHERE c.CONCEPT_ID_2 IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'CONCEPT_RELATIONSHIP.RELATIONSHIP_ID'.

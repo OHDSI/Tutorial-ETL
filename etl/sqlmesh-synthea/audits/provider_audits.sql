@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.provider,
+--   depends_on (
+--     omop.care_site,
+--     vocab.concept,
+--   ),
 --   audits (
 --     provider_care_site_id_is_foreign_key,
 --     provider_gender_concept_id_is_foreign_key,
@@ -36,7 +40,7 @@ WHERE c.CARE_SITE_ID IS NOT NULL AND p.CARE_SITE_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.PROVIDER c
-LEFT JOIN vocab.CONCEPT p ON c.GENDER_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.GENDER_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.GENDER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PROVIDER.GENDER_CONCEPT_ID' belong to the 'Gender' domain.
@@ -47,7 +51,7 @@ WHERE c.GENDER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PROVIDER t
-JOIN vocab.CONCEPT c ON t.GENDER_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.GENDER_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Gender';;
 
 -- Description: Check that concepts in 'PROVIDER.GENDER_CONCEPT_ID' are standard and valid.
@@ -58,7 +62,7 @@ WHERE c.domain_id <> 'Gender';;
         );
         SELECT t.*
 FROM omop.PROVIDER t
-LEFT JOIN vocab.CONCEPT c ON t.GENDER_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.GENDER_CONCEPT_ID = c.concept_id
 WHERE t.GENDER_CONCEPT_ID IS NOT NULL
   AND t.GENDER_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -79,7 +83,7 @@ SELECT * FROM omop.PROVIDER WHERE GENDER_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.PROVIDER c
-LEFT JOIN vocab.CONCEPT p ON c.GENDER_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.GENDER_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.GENDER_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'PROVIDER.PROVIDER_ID'.
@@ -110,7 +114,7 @@ HAVING COUNT(*) > 1;;
         );
         SELECT c.*
 FROM omop.PROVIDER c
-LEFT JOIN vocab.CONCEPT p ON c.SPECIALTY_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.SPECIALTY_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.SPECIALTY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PROVIDER.SPECIALTY_CONCEPT_ID' are standard and valid.
@@ -121,7 +125,7 @@ WHERE c.SPECIALTY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PROVIDER t
-LEFT JOIN vocab.CONCEPT c ON t.SPECIALTY_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.SPECIALTY_CONCEPT_ID = c.concept_id
 WHERE t.SPECIALTY_CONCEPT_ID IS NOT NULL
   AND t.SPECIALTY_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -142,6 +146,6 @@ SELECT * FROM omop.PROVIDER WHERE SPECIALTY_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.PROVIDER c
-LEFT JOIN vocab.CONCEPT p ON c.SPECIALTY_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.SPECIALTY_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.SPECIALTY_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 

@@ -22,6 +22,13 @@ MODEL (
     parent_visit_detail_id INT,
     visit_occurrence_id BIGINT
   ),
+  depends_on (
+    omop.care_site,
+    vocab.concept,
+    omop.person,
+    omop.provider,
+    omop.visit_occurrence,
+  ),
   audits (
     person_completeness_visit_detail,
     visit_detail_admitted_from_concept_id_is_foreign_key,

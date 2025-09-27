@@ -1,6 +1,13 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.observation,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--     omop.provider,
+--     omop.visit_detail,
+--     omop.visit_occurrence,
+--   ),
 --   audits (
 --     person_completeness_observation,
 --     observation_obs_event_field_concept_id_is_foreign_key,
@@ -72,7 +79,7 @@ WHERE e.person_id IS NULL;;
         );
         SELECT c.*
 FROM omop.OBSERVATION c
-LEFT JOIN vocab.CONCEPT p ON c.OBS_EVENT_FIELD_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.OBS_EVENT_FIELD_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.OBS_EVENT_FIELD_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'OBSERVATION.OBS_EVENT_FIELD_CONCEPT_ID' are standard and valid.
@@ -83,7 +90,7 @@ WHERE c.OBS_EVENT_FIELD_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.OBSERVATION t
-LEFT JOIN vocab.CONCEPT c ON t.OBS_EVENT_FIELD_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.OBS_EVENT_FIELD_CONCEPT_ID = c.concept_id
 WHERE t.OBS_EVENT_FIELD_CONCEPT_ID IS NOT NULL
   AND t.OBS_EVENT_FIELD_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -104,7 +111,7 @@ SELECT * FROM omop.OBSERVATION WHERE OBSERVATION_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.OBSERVATION c
-LEFT JOIN vocab.CONCEPT p ON c.OBSERVATION_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.OBSERVATION_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.OBSERVATION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'OBSERVATION.OBSERVATION_CONCEPT_ID' are standard and valid.
@@ -115,7 +122,7 @@ WHERE c.OBSERVATION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.OBSERVATION t
-LEFT JOIN vocab.CONCEPT c ON t.OBSERVATION_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.OBSERVATION_CONCEPT_ID = c.concept_id
 WHERE t.OBSERVATION_CONCEPT_ID IS NOT NULL
   AND t.OBSERVATION_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -186,7 +193,7 @@ HAVING COUNT(*) > 1;;
         );
         SELECT c.*
 FROM omop.OBSERVATION c
-LEFT JOIN vocab.CONCEPT p ON c.OBSERVATION_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.OBSERVATION_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.OBSERVATION_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'OBSERVATION.OBSERVATION_TYPE_CONCEPT_ID'.
@@ -205,7 +212,7 @@ SELECT * FROM omop.OBSERVATION WHERE OBSERVATION_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.OBSERVATION c
-LEFT JOIN vocab.CONCEPT p ON c.OBSERVATION_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.OBSERVATION_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.OBSERVATION_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'OBSERVATION.OBSERVATION_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -216,7 +223,7 @@ WHERE c.OBSERVATION_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.OBSERVATION t
-JOIN vocab.CONCEPT c ON t.OBSERVATION_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.OBSERVATION_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'OBSERVATION.OBSERVATION_TYPE_CONCEPT_ID' are standard and valid.
@@ -227,7 +234,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.OBSERVATION t
-LEFT JOIN vocab.CONCEPT c ON t.OBSERVATION_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.OBSERVATION_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.OBSERVATION_TYPE_CONCEPT_ID IS NOT NULL
   AND t.OBSERVATION_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -278,7 +285,7 @@ WHERE c.PROVIDER_ID IS NOT NULL AND p.PROVIDER_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.OBSERVATION c
-LEFT JOIN vocab.CONCEPT p ON c.QUALIFIER_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.QUALIFIER_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.QUALIFIER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'OBSERVATION.QUALIFIER_CONCEPT_ID' are standard and valid.
@@ -289,7 +296,7 @@ WHERE c.QUALIFIER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.OBSERVATION t
-LEFT JOIN vocab.CONCEPT c ON t.QUALIFIER_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.QUALIFIER_CONCEPT_ID = c.concept_id
 WHERE t.QUALIFIER_CONCEPT_ID IS NOT NULL
   AND t.QUALIFIER_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -302,7 +309,7 @@ WHERE t.QUALIFIER_CONCEPT_ID IS NOT NULL
         );
         SELECT c.*
 FROM omop.OBSERVATION c
-LEFT JOIN vocab.CONCEPT p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'OBSERVATION.UNIT_CONCEPT_ID' belong to the 'Unit' domain.
@@ -313,7 +320,7 @@ WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.OBSERVATION t
-JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Unit';;
 
 -- Description: Check that concepts in 'OBSERVATION.UNIT_CONCEPT_ID' are standard and valid.
@@ -324,7 +331,7 @@ WHERE c.domain_id <> 'Unit';;
         );
         SELECT t.*
 FROM omop.OBSERVATION t
-LEFT JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE t.UNIT_CONCEPT_ID IS NOT NULL
   AND t.UNIT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -345,7 +352,7 @@ SELECT * FROM omop.OBSERVATION WHERE UNIT_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.OBSERVATION c
-LEFT JOIN vocab.CONCEPT p ON c.VALUE_AS_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.VALUE_AS_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.VALUE_AS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'OBSERVATION.VISIT_DETAIL_ID' pointing to 'VISIT_DETAIL.VISIT_DETAIL_ID'.

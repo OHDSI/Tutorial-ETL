@@ -21,6 +21,12 @@ MODEL (
     ethnicity_source_value TEXT,
     ethnicity_source_concept_id INT
   ),
+  depends_on (
+    omop.care_site,
+    vocab.concept,
+    omop.location,
+    omop.provider,
+  ),
   audits (
     person_exists,
     person_care_site_id_is_foreign_key,

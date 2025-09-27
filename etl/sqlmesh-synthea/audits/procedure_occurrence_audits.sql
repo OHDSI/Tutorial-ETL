@@ -1,6 +1,14 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.procedure_occurrence,
+--   depends_on (
+--     vocab.concept,
+--     vocab.concept_ancestor,
+--     omop.person,
+--     omop.provider,
+--     omop.visit_detail,
+--     omop.visit_occurrence,
+--   ),
 --   audits (
 --     person_completeness_procedure_occurrence,
 --     procedure_occurrence_modifier_concept_id_is_foreign_key,
@@ -140,7 +148,7 @@ WHERE e.person_id IS NULL;;
         );
         SELECT c.*
 FROM omop.PROCEDURE_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.MODIFIER_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.MODIFIER_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.MODIFIER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PROCEDURE_OCCURRENCE.MODIFIER_CONCEPT_ID' are standard and valid.
@@ -151,7 +159,7 @@ WHERE c.MODIFIER_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PROCEDURE_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.MODIFIER_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.MODIFIER_CONCEPT_ID = c.concept_id
 WHERE t.MODIFIER_CONCEPT_ID IS NOT NULL
   AND t.MODIFIER_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -199,7 +207,7 @@ SELECT * FROM omop.PROCEDURE_OCCURRENCE WHERE PROCEDURE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.PROCEDURE_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.PROCEDURE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.PROCEDURE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.PROCEDURE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PROCEDURE_OCCURRENCE.PROCEDURE_CONCEPT_ID' belong to the 'Procedure' domain.
@@ -210,7 +218,7 @@ WHERE c.PROCEDURE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PROCEDURE_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.PROCEDURE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.PROCEDURE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Procedure';;
 
 -- Description: Check that concepts in 'PROCEDURE_OCCURRENCE.PROCEDURE_CONCEPT_ID' are standard and valid.
@@ -221,7 +229,7 @@ WHERE c.domain_id <> 'Procedure';;
         );
         SELECT t.*
 FROM omop.PROCEDURE_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.PROCEDURE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.PROCEDURE_CONCEPT_ID = c.concept_id
 WHERE t.PROCEDURE_CONCEPT_ID IS NOT NULL
   AND t.PROCEDURE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -330,7 +338,7 @@ HAVING COUNT(*) > 1;;
         );
         SELECT c.*
 FROM omop.PROCEDURE_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.PROCEDURE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.PROCEDURE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.PROCEDURE_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'PROCEDURE_OCCURRENCE.PROCEDURE_TYPE_CONCEPT_ID'.
@@ -349,7 +357,7 @@ SELECT * FROM omop.PROCEDURE_OCCURRENCE WHERE PROCEDURE_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.PROCEDURE_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.PROCEDURE_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.PROCEDURE_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.PROCEDURE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'PROCEDURE_OCCURRENCE.PROCEDURE_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -360,7 +368,7 @@ WHERE c.PROCEDURE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.PROCEDURE_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.PROCEDURE_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.PROCEDURE_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'PROCEDURE_OCCURRENCE.PROCEDURE_TYPE_CONCEPT_ID' are standard and valid.
@@ -371,7 +379,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.PROCEDURE_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.PROCEDURE_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.PROCEDURE_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.PROCEDURE_TYPE_CONCEPT_ID IS NOT NULL
   AND t.PROCEDURE_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -1411,7 +1419,7 @@ WHERE t.PROCEDURE_CONCEPT_ID = 4330583
 FROM omop.PROCEDURE_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.PROCEDURE_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4041261
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4041261
 )
   AND p.gender_concept_id <> 8532;;
 
@@ -1425,7 +1433,7 @@ WHERE t.PROCEDURE_CONCEPT_ID IN (
 FROM omop.PROCEDURE_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.PROCEDURE_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4250917
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4250917
 )
   AND p.gender_concept_id <> 8507;;
 
@@ -1439,7 +1447,7 @@ WHERE t.PROCEDURE_CONCEPT_ID IN (
 FROM omop.PROCEDURE_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.PROCEDURE_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4077750
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4077750
 )
   AND p.gender_concept_id <> 8507;;
 
@@ -1453,7 +1461,7 @@ WHERE t.PROCEDURE_CONCEPT_ID IN (
 FROM omop.PROCEDURE_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.PROCEDURE_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4043199
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4043199
 )
   AND p.gender_concept_id <> 8507;;
 
@@ -1467,7 +1475,7 @@ WHERE t.PROCEDURE_CONCEPT_ID IN (
 FROM omop.PROCEDURE_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.PROCEDURE_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4040577
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4040577
 )
   AND p.gender_concept_id <> 8507;;
 

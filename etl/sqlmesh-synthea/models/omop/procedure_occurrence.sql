@@ -19,6 +19,14 @@ MODEL (
     procedure_source_concept_id INT,
     modifier_source_value TEXT
   ),
+  depends_on (
+    vocab.concept,
+    vocab.concept_ancestor,
+    omop.person,
+    omop.provider,
+    omop.visit_detail,
+    omop.visit_occurrence,
+  ),
   audits (
     person_completeness_procedure_occurrence,
     procedure_occurrence_modifier_concept_id_is_foreign_key,

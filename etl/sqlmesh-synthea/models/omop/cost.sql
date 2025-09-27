@@ -28,6 +28,10 @@ MODEL (
     drg_concept_id DOUBLE,
     drg_source_value TEXT
   ),
+  depends_on (
+    vocab.concept,
+    vocab.domain,
+  ),
   audits (
     cost_cost_domain_id_is_required,
     cost_cost_domain_id_is_foreign_key,

@@ -8,6 +8,10 @@ MODEL (
     observation_period_end_date DATE,
     period_type_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+  ),
   audits (
     observation_period_exists,
     person_completeness_observation_period,

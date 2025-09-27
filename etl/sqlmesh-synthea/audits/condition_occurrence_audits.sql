@@ -1,6 +1,14 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.condition_occurrence,
+--   depends_on (
+--     vocab.concept,
+--     vocab.concept_ancestor,
+--     omop.person,
+--     omop.provider,
+--     omop.visit_detail,
+--     omop.visit_occurrence,
+--   ),
 --   audits (
 --     person_completeness_condition_occurrence,
 --     condition_occurrence_condition_concept_id_is_required,
@@ -408,7 +416,7 @@ SELECT * FROM omop.CONDITION_OCCURRENCE WHERE CONDITION_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.CONDITION_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.CONDITION_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CONDITION_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CONDITION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'CONDITION_OCCURRENCE.CONDITION_CONCEPT_ID' belong to the 'Condition' domain.
@@ -419,7 +427,7 @@ WHERE c.CONDITION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.CONDITION_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.CONDITION_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.CONDITION_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Condition';;
 
 -- Description: Check that concepts in 'CONDITION_OCCURRENCE.CONDITION_CONCEPT_ID' are standard and valid.
@@ -430,7 +438,7 @@ WHERE c.domain_id <> 'Condition';;
         );
         SELECT t.*
 FROM omop.CONDITION_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.CONDITION_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.CONDITION_CONCEPT_ID = c.concept_id
 WHERE t.CONDITION_CONCEPT_ID IS NOT NULL
   AND t.CONDITION_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -493,7 +501,7 @@ HAVING COUNT(*) > 1;;
         );
         SELECT c.*
 FROM omop.CONDITION_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.CONDITION_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CONDITION_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CONDITION_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'CONDITION_OCCURRENCE.CONDITION_START_DATE'.
@@ -550,7 +558,7 @@ WHERE t.CONDITION_START_DATETIME < p.birth_datetime;;
         );
         SELECT c.*
 FROM omop.CONDITION_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.CONDITION_STATUS_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CONDITION_STATUS_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CONDITION_STATUS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'CONDITION_OCCURRENCE.CONDITION_STATUS_CONCEPT_ID' belong to the 'Condition Status' domain.
@@ -561,7 +569,7 @@ WHERE c.CONDITION_STATUS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.CONDITION_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.CONDITION_STATUS_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.CONDITION_STATUS_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Condition Status';;
 
 -- Description: Check that concepts in 'CONDITION_OCCURRENCE.CONDITION_STATUS_CONCEPT_ID' are standard and valid.
@@ -572,7 +580,7 @@ WHERE c.domain_id <> 'Condition Status';;
         );
         SELECT t.*
 FROM omop.CONDITION_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.CONDITION_STATUS_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.CONDITION_STATUS_CONCEPT_ID = c.concept_id
 WHERE t.CONDITION_STATUS_CONCEPT_ID IS NOT NULL
   AND t.CONDITION_STATUS_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -601,7 +609,7 @@ SELECT * FROM omop.CONDITION_OCCURRENCE WHERE CONDITION_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.CONDITION_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.CONDITION_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CONDITION_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CONDITION_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'CONDITION_OCCURRENCE.CONDITION_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -612,7 +620,7 @@ WHERE c.CONDITION_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.CONDITION_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.CONDITION_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.CONDITION_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'CONDITION_OCCURRENCE.CONDITION_TYPE_CONCEPT_ID' are standard and valid.
@@ -623,7 +631,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.CONDITION_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.CONDITION_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.CONDITION_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.CONDITION_TYPE_CONCEPT_ID IS NOT NULL
   AND t.CONDITION_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -5006,7 +5014,7 @@ WHERE t.CONDITION_CONCEPT_ID = 45772671
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4090861
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4090861
 )
   AND p.gender_concept_id <> 8507;;
 
@@ -5020,7 +5028,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4025213
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4025213
 )
   AND p.gender_concept_id <> 8507;;
 
@@ -5034,7 +5042,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4095793
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4095793
 )
   AND p.gender_concept_id <> 8532;;
 
@@ -5048,7 +5056,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 443343
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 443343
 )
   AND p.gender_concept_id <> 8532;;
 
@@ -5062,7 +5070,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4024004
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4024004
 )
   AND p.gender_concept_id <> 8532;;
 
@@ -5076,7 +5084,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4172857
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4172857
 )
   AND p.gender_concept_id <> 8532;;
 
@@ -5090,7 +5098,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 444094
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 444094
 )
   AND p.gender_concept_id <> 8532;;
 
@@ -5104,7 +5112,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 197810
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 197810
 )
   AND p.gender_concept_id <> 8532;;
 
@@ -5118,7 +5126,7 @@ WHERE t.CONDITION_CONCEPT_ID IN (
 FROM omop.CONDITION_OCCURRENCE t
 JOIN omop.person p ON t.person_id = p.person_id
 WHERE t.CONDITION_CONCEPT_ID IN (
-    SELECT descendant_concept_id FROM vocab.CONCEPT_ancestor WHERE ancestor_concept_id = 4158481
+    SELECT descendant_concept_id FROM vocab.concept_ancestor WHERE ancestor_concept_id = 4158481
 )
   AND p.gender_concept_id <> 8532;;
 

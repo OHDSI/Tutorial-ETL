@@ -1,6 +1,10 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.specimen,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--   ),
 --   audits (
 --     person_completeness_specimen,
 --     specimen_anatomic_site_concept_id_is_foreign_key,
@@ -48,7 +52,7 @@ WHERE e.person_id IS NULL;;
         );
         SELECT c.*
 FROM omop.SPECIMEN c
-LEFT JOIN vocab.CONCEPT p ON c.ANATOMIC_SITE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.ANATOMIC_SITE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.ANATOMIC_SITE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'SPECIMEN.ANATOMIC_SITE_CONCEPT_ID' are standard and valid.
@@ -59,7 +63,7 @@ WHERE c.ANATOMIC_SITE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.SPECIMEN t
-LEFT JOIN vocab.CONCEPT c ON t.ANATOMIC_SITE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.ANATOMIC_SITE_CONCEPT_ID = c.concept_id
 WHERE t.ANATOMIC_SITE_CONCEPT_ID IS NOT NULL
   AND t.ANATOMIC_SITE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -72,7 +76,7 @@ WHERE t.ANATOMIC_SITE_CONCEPT_ID IS NOT NULL
         );
         SELECT c.*
 FROM omop.SPECIMEN c
-LEFT JOIN vocab.CONCEPT p ON c.DISEASE_STATUS_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DISEASE_STATUS_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DISEASE_STATUS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'SPECIMEN.DISEASE_STATUS_CONCEPT_ID' are standard and valid.
@@ -83,7 +87,7 @@ WHERE c.DISEASE_STATUS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.SPECIMEN t
-LEFT JOIN vocab.CONCEPT c ON t.DISEASE_STATUS_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DISEASE_STATUS_CONCEPT_ID = c.concept_id
 WHERE t.DISEASE_STATUS_CONCEPT_ID IS NOT NULL
   AND t.DISEASE_STATUS_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -123,7 +127,7 @@ SELECT * FROM omop.SPECIMEN WHERE SPECIMEN_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.SPECIMEN c
-LEFT JOIN vocab.CONCEPT p ON c.SPECIMEN_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.SPECIMEN_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.SPECIMEN_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'SPECIMEN.SPECIMEN_CONCEPT_ID' are standard and valid.
@@ -134,7 +138,7 @@ WHERE c.SPECIMEN_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.SPECIMEN t
-LEFT JOIN vocab.CONCEPT c ON t.SPECIMEN_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.SPECIMEN_CONCEPT_ID = c.concept_id
 WHERE t.SPECIMEN_CONCEPT_ID IS NOT NULL
   AND t.SPECIMEN_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -213,7 +217,7 @@ SELECT * FROM omop.SPECIMEN WHERE SPECIMEN_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.SPECIMEN c
-LEFT JOIN vocab.CONCEPT p ON c.SPECIMEN_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.SPECIMEN_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.SPECIMEN_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'SPECIMEN.SPECIMEN_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -224,7 +228,7 @@ WHERE c.SPECIMEN_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.SPECIMEN t
-JOIN vocab.CONCEPT c ON t.SPECIMEN_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.SPECIMEN_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'SPECIMEN.SPECIMEN_TYPE_CONCEPT_ID' are standard and valid.
@@ -235,7 +239,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.SPECIMEN t
-LEFT JOIN vocab.CONCEPT c ON t.SPECIMEN_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.SPECIMEN_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.SPECIMEN_TYPE_CONCEPT_ID IS NOT NULL
   AND t.SPECIMEN_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -256,7 +260,7 @@ SELECT * FROM omop.SPECIMEN WHERE SPECIMEN_TYPE_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.SPECIMEN c
-LEFT JOIN vocab.CONCEPT p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'SPECIMEN.UNIT_CONCEPT_ID' are standard and valid.
@@ -267,7 +271,7 @@ WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.SPECIMEN t
-LEFT JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE t.UNIT_CONCEPT_ID IS NOT NULL
   AND t.UNIT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

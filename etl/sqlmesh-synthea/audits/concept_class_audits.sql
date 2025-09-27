@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
---   name omop.concept_class,
+--   name vocab.concept_class,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     concept_class_concept_class_concept_id_is_required,
 --     concept_class_concept_class_concept_id_is_foreign_key,
@@ -16,7 +19,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM omop.CONCEPT_CLASS WHERE CONCEPT_CLASS_CONCEPT_ID IS NULL;
+SELECT * FROM vocab.concept_class WHERE CONCEPT_CLASS_CONCEPT_ID IS NULL;
 
 -- Description: Check for orphaned foreign keys in 'CONCEPT_CLASS.CONCEPT_CLASS_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
         AUDIT (
@@ -25,8 +28,8 @@ SELECT * FROM omop.CONCEPT_CLASS WHERE CONCEPT_CLASS_CONCEPT_ID IS NULL;
           blocking FALSE
         );
         SELECT c.*
-FROM omop.CONCEPT_CLASS c
-LEFT JOIN omop.CONCEPT p ON c.CONCEPT_CLASS_CONCEPT_ID = p.CONCEPT_ID
+FROM vocab.concept_class c
+LEFT JOIN vocab.concept p ON c.CONCEPT_CLASS_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CONCEPT_CLASS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'CONCEPT_CLASS.CONCEPT_CLASS_ID'.
@@ -35,7 +38,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM omop.CONCEPT_CLASS WHERE CONCEPT_CLASS_ID IS NULL;
+SELECT * FROM vocab.concept_class WHERE CONCEPT_CLASS_ID IS NULL;
 
 -- Description: Check for duplicate values in primary key field 'CONCEPT_CLASS.CONCEPT_CLASS_ID'.
         AUDIT (
@@ -44,7 +47,7 @@ SELECT * FROM omop.CONCEPT_CLASS WHERE CONCEPT_CLASS_ID IS NULL;
           blocking FALSE
         );
         SELECT CONCEPT_CLASS_ID, COUNT(*)
-FROM omop.CONCEPT_CLASS
+FROM vocab.CONCEPT_CLASS
 WHERE CONCEPT_CLASS_ID IS NOT NULL
 GROUP BY CONCEPT_CLASS_ID
 HAVING COUNT(*) > 1;;
@@ -55,5 +58,5 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM omop.CONCEPT_CLASS WHERE CONCEPT_CLASS_NAME IS NULL;
+SELECT * FROM vocab.concept_class WHERE CONCEPT_CLASS_NAME IS NULL;
 

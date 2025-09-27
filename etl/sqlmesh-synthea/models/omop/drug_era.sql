@@ -10,6 +10,10 @@ MODEL (
     drug_exposure_count BIGINT,
     gap_days BIGINT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+  ),
   audits (
     person_completeness_drug_era,
     drug_era_drug_concept_id_is_required,

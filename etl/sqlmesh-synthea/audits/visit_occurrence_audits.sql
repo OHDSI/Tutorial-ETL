@@ -1,6 +1,12 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.visit_occurrence,
+--   depends_on (
+--     omop.care_site,
+--     vocab.concept,
+--     omop.person,
+--     omop.provider,
+--   ),
 --   audits (
 --     person_completeness_visit_occurrence,
 --     visit_occurrence_admitted_from_concept_id_is_foreign_key,
@@ -62,7 +68,7 @@ WHERE e.person_id IS NULL;;
         );
         SELECT c.*
 FROM omop.VISIT_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.ADMITTED_FROM_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.ADMITTED_FROM_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.ADMITTED_FROM_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.ADMITTED_FROM_CONCEPT_ID' belong to the 'Visit' domain.
@@ -73,7 +79,7 @@ WHERE c.ADMITTED_FROM_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.ADMITTED_FROM_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.ADMITTED_FROM_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Visit';;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.ADMITTED_FROM_CONCEPT_ID' are standard and valid.
@@ -84,7 +90,7 @@ WHERE c.domain_id <> 'Visit';;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.ADMITTED_FROM_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.ADMITTED_FROM_CONCEPT_ID = c.concept_id
 WHERE t.ADMITTED_FROM_CONCEPT_ID IS NOT NULL
   AND t.ADMITTED_FROM_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -116,7 +122,7 @@ WHERE c.CARE_SITE_ID IS NOT NULL AND p.CARE_SITE_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.VISIT_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.DISCHARGED_TO_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DISCHARGED_TO_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DISCHARGED_TO_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.DISCHARGED_TO_CONCEPT_ID' belong to the 'Visit' domain.
@@ -127,7 +133,7 @@ WHERE c.DISCHARGED_TO_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.DISCHARGED_TO_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DISCHARGED_TO_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Visit';;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.DISCHARGED_TO_CONCEPT_ID' are standard and valid.
@@ -138,7 +144,7 @@ WHERE c.domain_id <> 'Visit';;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.DISCHARGED_TO_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DISCHARGED_TO_CONCEPT_ID = c.concept_id
 WHERE t.DISCHARGED_TO_CONCEPT_ID IS NOT NULL
   AND t.DISCHARGED_TO_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -208,7 +214,7 @@ SELECT * FROM omop.VISIT_OCCURRENCE WHERE VISIT_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.VISIT_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.VISIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.VISIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.VISIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.VISIT_CONCEPT_ID' belong to the 'Visit' domain.
@@ -219,7 +225,7 @@ WHERE c.VISIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.VISIT_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.VISIT_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Visit';;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.VISIT_CONCEPT_ID' are standard and valid.
@@ -230,7 +236,7 @@ WHERE c.domain_id <> 'Visit';;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.VISIT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.VISIT_CONCEPT_ID = c.concept_id
 WHERE t.VISIT_CONCEPT_ID IS NOT NULL
   AND t.VISIT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -301,7 +307,7 @@ HAVING COUNT(*) > 1;;
         );
         SELECT c.*
 FROM omop.VISIT_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.VISIT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.VISIT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.VISIT_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'VISIT_OCCURRENCE.VISIT_START_DATE'.
@@ -366,7 +372,7 @@ SELECT * FROM omop.VISIT_OCCURRENCE WHERE VISIT_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.VISIT_OCCURRENCE c
-LEFT JOIN vocab.CONCEPT p ON c.VISIT_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.VISIT_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.VISIT_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.VISIT_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -377,7 +383,7 @@ WHERE c.VISIT_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-JOIN vocab.CONCEPT c ON t.VISIT_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.VISIT_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'VISIT_OCCURRENCE.VISIT_TYPE_CONCEPT_ID' are standard and valid.
@@ -388,7 +394,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.VISIT_OCCURRENCE t
-LEFT JOIN vocab.CONCEPT c ON t.VISIT_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.VISIT_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.VISIT_TYPE_CONCEPT_ID IS NOT NULL
   AND t.VISIT_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

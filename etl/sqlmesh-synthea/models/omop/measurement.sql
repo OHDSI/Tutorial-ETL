@@ -26,6 +26,13 @@ MODEL (
     measurement_event_id BIGINT,
     meas_event_field_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+    omop.provider,
+    omop.visit_detail,
+    omop.visit_occurrence,
+  ),
   audits (
     person_completeness_measurement,
     measurement_meas_event_field_concept_id_is_foreign_key,

@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.fact_relationship,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     fact_relationship_domain_concept_id_1_is_required,
 --     fact_relationship_domain_concept_id_1_is_foreign_key,
@@ -32,7 +35,7 @@ SELECT * FROM omop.FACT_RELATIONSHIP WHERE DOMAIN_CONCEPT_ID_1 IS NULL;
         );
         SELECT c.*
 FROM omop.FACT_RELATIONSHIP c
-LEFT JOIN vocab.CONCEPT p ON c.DOMAIN_CONCEPT_ID_1 = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DOMAIN_CONCEPT_ID_1 = p.CONCEPT_ID
 WHERE c.DOMAIN_CONCEPT_ID_1 IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for concept ID 0 in standard concept field 'FACT_RELATIONSHIP.DOMAIN_CONCEPT_ID_1'.
@@ -59,7 +62,7 @@ SELECT * FROM omop.FACT_RELATIONSHIP WHERE DOMAIN_CONCEPT_ID_2 IS NULL;
         );
         SELECT c.*
 FROM omop.FACT_RELATIONSHIP c
-LEFT JOIN vocab.CONCEPT p ON c.DOMAIN_CONCEPT_ID_2 = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DOMAIN_CONCEPT_ID_2 = p.CONCEPT_ID
 WHERE c.DOMAIN_CONCEPT_ID_2 IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for concept ID 0 in standard concept field 'FACT_RELATIONSHIP.DOMAIN_CONCEPT_ID_2'.
@@ -102,7 +105,7 @@ SELECT * FROM omop.FACT_RELATIONSHIP WHERE RELATIONSHIP_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.FACT_RELATIONSHIP c
-LEFT JOIN vocab.CONCEPT p ON c.RELATIONSHIP_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.RELATIONSHIP_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.RELATIONSHIP_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for concept ID 0 in standard concept field 'FACT_RELATIONSHIP.RELATIONSHIP_CONCEPT_ID'.

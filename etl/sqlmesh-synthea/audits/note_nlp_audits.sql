@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.note_nlp,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     note_nlp_lexical_variant_is_required,
 --     note_nlp_nlp_date_is_required,
@@ -47,7 +50,7 @@ SELECT * FROM omop.NOTE_NLP WHERE NOTE_ID IS NULL;
         );
         SELECT c.*
 FROM omop.NOTE_NLP c
-LEFT JOIN vocab.CONCEPT p ON c.NOTE_NLP_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.NOTE_NLP_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.NOTE_NLP_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'NOTE_NLP.NOTE_NLP_CONCEPT_ID' are standard and valid.
@@ -58,7 +61,7 @@ WHERE c.NOTE_NLP_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.NOTE_NLP t
-LEFT JOIN vocab.CONCEPT c ON t.NOTE_NLP_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.NOTE_NLP_CONCEPT_ID = c.concept_id
 WHERE t.NOTE_NLP_CONCEPT_ID IS NOT NULL
   AND t.NOTE_NLP_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -91,7 +94,7 @@ HAVING COUNT(*) > 1;;
         );
         SELECT c.*
 FROM omop.NOTE_NLP c
-LEFT JOIN vocab.CONCEPT p ON c.NOTE_NLP_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.NOTE_NLP_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.NOTE_NLP_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'NOTE_NLP.SECTION_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
@@ -102,7 +105,7 @@ WHERE c.NOTE_NLP_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.NOTE_NLP c
-LEFT JOIN vocab.CONCEPT p ON c.SECTION_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.SECTION_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.SECTION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'NOTE_NLP.SECTION_CONCEPT_ID' are standard and valid.
@@ -113,7 +116,7 @@ WHERE c.SECTION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.NOTE_NLP t
-LEFT JOIN vocab.CONCEPT c ON t.SECTION_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.SECTION_CONCEPT_ID = c.concept_id
 WHERE t.SECTION_CONCEPT_ID IS NOT NULL
   AND t.SECTION_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

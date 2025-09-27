@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.drug_strength,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     drug_strength_amount_unit_concept_id_is_foreign_key,
 --     drug_strength_denominator_unit_concept_id_is_foreign_key,
@@ -24,7 +27,7 @@
         );
         SELECT c.*
 FROM omop.DRUG_STRENGTH c
-LEFT JOIN vocab.CONCEPT p ON c.AMOUNT_UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.AMOUNT_UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.AMOUNT_UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'DRUG_STRENGTH.DENOMINATOR_UNIT_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
@@ -35,7 +38,7 @@ WHERE c.AMOUNT_UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.DRUG_STRENGTH c
-LEFT JOIN vocab.CONCEPT p ON c.DENOMINATOR_UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DENOMINATOR_UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DENOMINATOR_UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'DRUG_STRENGTH.DRUG_CONCEPT_ID'.
@@ -54,7 +57,7 @@ SELECT * FROM omop.DRUG_STRENGTH WHERE DRUG_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DRUG_STRENGTH c
-LEFT JOIN vocab.CONCEPT p ON c.DRUG_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DRUG_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DRUG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DRUG_STRENGTH.DRUG_CONCEPT_ID' belong to the 'Drug' domain.
@@ -65,7 +68,7 @@ WHERE c.DRUG_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DRUG_STRENGTH t
-JOIN vocab.CONCEPT c ON t.DRUG_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DRUG_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Drug';;
 
 -- Description: Check for NULLs in required field 'DRUG_STRENGTH.INGREDIENT_CONCEPT_ID'.
@@ -84,7 +87,7 @@ SELECT * FROM omop.DRUG_STRENGTH WHERE INGREDIENT_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DRUG_STRENGTH c
-LEFT JOIN vocab.CONCEPT p ON c.INGREDIENT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.INGREDIENT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.INGREDIENT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'DRUG_STRENGTH.NUMERATOR_UNIT_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
@@ -95,7 +98,7 @@ WHERE c.INGREDIENT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.DRUG_STRENGTH c
-LEFT JOIN vocab.CONCEPT p ON c.NUMERATOR_UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.NUMERATOR_UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.NUMERATOR_UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'DRUG_STRENGTH.VALID_END_DATE'.

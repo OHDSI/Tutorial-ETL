@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.cdm_source,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     cdm_source_cdm_holder_is_required,
 --     cdm_source_cdm_release_date_is_required,
@@ -64,7 +67,7 @@ SELECT * FROM omop.CDM_SOURCE WHERE CDM_VERSION_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.CDM_SOURCE c
-LEFT JOIN vocab.CONCEPT p ON c.CDM_VERSION_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.CDM_VERSION_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.CDM_VERSION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'CDM_SOURCE.CDM_VERSION_CONCEPT_ID' belong to the 'Metadata' domain.
@@ -75,7 +78,7 @@ WHERE c.CDM_VERSION_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.CDM_SOURCE t
-JOIN vocab.CONCEPT c ON t.CDM_VERSION_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.CDM_VERSION_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Metadata';;
 
 -- Description: Check that concepts in 'CDM_SOURCE.CDM_VERSION_CONCEPT_ID' are standard and valid.
@@ -86,7 +89,7 @@ WHERE c.domain_id <> 'Metadata';;
         );
         SELECT t.*
 FROM omop.CDM_SOURCE t
-LEFT JOIN vocab.CONCEPT c ON t.CDM_VERSION_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.CDM_VERSION_CONCEPT_ID = c.concept_id
 WHERE t.CDM_VERSION_CONCEPT_ID IS NOT NULL
   AND t.CDM_VERSION_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

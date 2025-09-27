@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.location,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     location_country_concept_id_is_foreign_key,
 --     location_country_concept_id_fk_domain,
@@ -19,7 +22,7 @@
         );
         SELECT c.*
 FROM omop.LOCATION c
-LEFT JOIN vocab.CONCEPT p ON c.COUNTRY_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.COUNTRY_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.COUNTRY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'LOCATION.COUNTRY_CONCEPT_ID' belong to the 'Geography' domain.
@@ -30,7 +33,7 @@ WHERE c.COUNTRY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.LOCATION t
-JOIN vocab.CONCEPT c ON t.COUNTRY_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.COUNTRY_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Geography';;
 
 -- Description: Check that concepts in 'LOCATION.COUNTRY_CONCEPT_ID' are standard and valid.
@@ -41,7 +44,7 @@ WHERE c.domain_id <> 'Geography';;
         );
         SELECT t.*
 FROM omop.LOCATION t
-LEFT JOIN vocab.CONCEPT c ON t.COUNTRY_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.COUNTRY_CONCEPT_ID = c.concept_id
 WHERE t.COUNTRY_CONCEPT_ID IS NOT NULL
   AND t.COUNTRY_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;

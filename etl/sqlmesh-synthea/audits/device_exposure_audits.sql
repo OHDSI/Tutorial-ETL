@@ -1,6 +1,13 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.device_exposure,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--     omop.provider,
+--     omop.visit_detail,
+--     omop.visit_occurrence,
+--   ),
 --   audits (
 --     person_completeness_device_exposure,
 --     device_exposure_device_concept_id_is_required,
@@ -63,7 +70,7 @@ SELECT * FROM omop.DEVICE_EXPOSURE WHERE DEVICE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DEVICE_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.DEVICE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DEVICE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DEVICE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DEVICE_EXPOSURE.DEVICE_CONCEPT_ID' belong to the 'Device' domain.
@@ -74,7 +81,7 @@ WHERE c.DEVICE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DEVICE_EXPOSURE t
-JOIN vocab.CONCEPT c ON t.DEVICE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DEVICE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Device';;
 
 -- Description: Check that concepts in 'DEVICE_EXPOSURE.DEVICE_CONCEPT_ID' are standard and valid.
@@ -85,7 +92,7 @@ WHERE c.domain_id <> 'Device';;
         );
         SELECT t.*
 FROM omop.DEVICE_EXPOSURE t
-LEFT JOIN vocab.CONCEPT c ON t.DEVICE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DEVICE_CONCEPT_ID = c.concept_id
 WHERE t.DEVICE_CONCEPT_ID IS NOT NULL
   AND t.DEVICE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -194,7 +201,7 @@ WHERE t.DEVICE_EXPOSURE_START_DATETIME < p.birth_datetime;;
         );
         SELECT c.*
 FROM omop.DEVICE_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.DEVICE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DEVICE_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DEVICE_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'DEVICE_EXPOSURE.DEVICE_TYPE_CONCEPT_ID'.
@@ -213,7 +220,7 @@ SELECT * FROM omop.DEVICE_EXPOSURE WHERE DEVICE_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.DEVICE_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.DEVICE_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.DEVICE_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.DEVICE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DEVICE_EXPOSURE.DEVICE_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -224,7 +231,7 @@ WHERE c.DEVICE_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DEVICE_EXPOSURE t
-JOIN vocab.CONCEPT c ON t.DEVICE_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.DEVICE_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'DEVICE_EXPOSURE.DEVICE_TYPE_CONCEPT_ID' are standard and valid.
@@ -235,7 +242,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.DEVICE_EXPOSURE t
-LEFT JOIN vocab.CONCEPT c ON t.DEVICE_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.DEVICE_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.DEVICE_TYPE_CONCEPT_ID IS NOT NULL
   AND t.DEVICE_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -286,7 +293,7 @@ WHERE c.PROVIDER_ID IS NOT NULL AND p.PROVIDER_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.DEVICE_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'DEVICE_EXPOSURE.UNIT_CONCEPT_ID' belong to the 'Unit' domain.
@@ -297,7 +304,7 @@ WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.DEVICE_EXPOSURE t
-JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Unit';;
 
 -- Description: Check that concepts in 'DEVICE_EXPOSURE.UNIT_CONCEPT_ID' are standard and valid.
@@ -308,7 +315,7 @@ WHERE c.domain_id <> 'Unit';;
         );
         SELECT t.*
 FROM omop.DEVICE_EXPOSURE t
-LEFT JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE t.UNIT_CONCEPT_ID IS NOT NULL
   AND t.UNIT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -329,7 +336,7 @@ SELECT * FROM omop.DEVICE_EXPOSURE WHERE UNIT_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.DEVICE_EXPOSURE c
-LEFT JOIN vocab.CONCEPT p ON c.UNIT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.UNIT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.UNIT_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'DEVICE_EXPOSURE.VISIT_DETAIL_ID' pointing to 'VISIT_DETAIL.VISIT_DETAIL_ID'.

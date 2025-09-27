@@ -16,6 +16,10 @@ MODEL (
     gender_source_value TEXT,
     gender_source_concept_id INT
   ),
+  depends_on (
+    omop.care_site,
+    vocab.concept,
+  ),
   audits (
     provider_care_site_id_is_foreign_key,
     provider_gender_concept_id_is_foreign_key,

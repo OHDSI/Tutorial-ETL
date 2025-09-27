@@ -24,6 +24,13 @@ MODEL (
     observation_event_id BIGINT,
     obs_event_field_concept_id INT
   ),
+  depends_on (
+    vocab.concept,
+    omop.person,
+    omop.provider,
+    omop.visit_detail,
+    omop.visit_occurrence,
+  ),
   audits (
     person_completeness_observation,
     observation_obs_event_field_concept_id_is_foreign_key,

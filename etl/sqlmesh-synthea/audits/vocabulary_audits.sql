@@ -1,6 +1,9 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
---   name vocab.VOCABULARY,
+--   name vocab.vocabulary,
+--   depends_on (
+--     vocab.concept,
+--   ),
 --   audits (
 --     vocabulary_vocabulary_concept_id_is_required,
 --     vocabulary_vocabulary_concept_id_is_foreign_key,
@@ -16,7 +19,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.VOCABULARY WHERE VOCABULARY_CONCEPT_ID IS NULL;
+SELECT * FROM vocab.vocabulary WHERE VOCABULARY_CONCEPT_ID IS NULL;
 
 -- Description: Check for orphaned foreign keys in 'VOCABULARY.VOCABULARY_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
         AUDIT (
@@ -25,8 +28,8 @@ SELECT * FROM vocab.VOCABULARY WHERE VOCABULARY_CONCEPT_ID IS NULL;
           blocking FALSE
         );
         SELECT c.*
-FROM vocab.VOCABULARY c
-LEFT JOIN vocab.CONCEPT p ON c.VOCABULARY_CONCEPT_ID = p.CONCEPT_ID
+FROM vocab.vocabulary c
+LEFT JOIN vocab.concept p ON c.VOCABULARY_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.VOCABULARY_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'VOCABULARY.VOCABULARY_ID'.
@@ -35,7 +38,7 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.VOCABULARY WHERE VOCABULARY_ID IS NULL;
+SELECT * FROM vocab.vocabulary WHERE VOCABULARY_ID IS NULL;
 
 -- Description: Check for duplicate values in primary key field 'VOCABULARY.VOCABULARY_ID'.
         AUDIT (
@@ -55,5 +58,5 @@ AUDIT (
   dialect duckdb,
   blocking FALSE
 );
-SELECT * FROM vocab.VOCABULARY WHERE VOCABULARY_NAME IS NULL;
+SELECT * FROM vocab.vocabulary WHERE VOCABULARY_NAME IS NULL;
 

@@ -15,6 +15,11 @@ MODEL (
     valid_end_date DATE,
     invalid_reason TEXT
   ),
+  depends_on (
+    vocab.concept_class,
+    vocab.domain,
+    vocab.vocabulary,
+  ),
   audits (
     concept_concept_class_id_is_required,
     concept_concept_class_id_is_foreign_key,

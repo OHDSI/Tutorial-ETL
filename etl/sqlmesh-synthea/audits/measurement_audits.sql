@@ -1,6 +1,13 @@
 -- ── COPY AND PASTE INTO YOUR MODEL DEFINITION ───────────
 -- MODEL (
 --   name omop.measurement,
+--   depends_on (
+--     vocab.concept,
+--     omop.person,
+--     omop.provider,
+--     omop.visit_detail,
+--     omop.visit_occurrence,
+--   ),
 --   audits (
 --     person_completeness_measurement,
 --     measurement_meas_event_field_concept_id_is_foreign_key,
@@ -237,7 +244,7 @@ WHERE e.person_id IS NULL;;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.MEAS_EVENT_FIELD_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.MEAS_EVENT_FIELD_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.MEAS_EVENT_FIELD_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'MEASUREMENT.MEAS_EVENT_FIELD_CONCEPT_ID' are standard and valid.
@@ -248,7 +255,7 @@ WHERE c.MEAS_EVENT_FIELD_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-LEFT JOIN vocab.CONCEPT c ON t.MEAS_EVENT_FIELD_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.MEAS_EVENT_FIELD_CONCEPT_ID = c.concept_id
 WHERE t.MEAS_EVENT_FIELD_CONCEPT_ID IS NOT NULL
   AND t.MEAS_EVENT_FIELD_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -269,7 +276,7 @@ SELECT * FROM omop.MEASUREMENT WHERE MEASUREMENT_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.MEASUREMENT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.MEASUREMENT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.MEASUREMENT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'MEASUREMENT.MEASUREMENT_CONCEPT_ID' belong to the 'Measurement' domain.
@@ -280,7 +287,7 @@ WHERE c.MEASUREMENT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-JOIN vocab.CONCEPT c ON t.MEASUREMENT_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.MEASUREMENT_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Measurement';;
 
 -- Description: Check that concepts in 'MEASUREMENT.MEASUREMENT_CONCEPT_ID' are standard and valid.
@@ -291,7 +298,7 @@ WHERE c.domain_id <> 'Measurement';;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-LEFT JOIN vocab.CONCEPT c ON t.MEASUREMENT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.MEASUREMENT_CONCEPT_ID = c.concept_id
 WHERE t.MEASUREMENT_CONCEPT_ID IS NOT NULL
   AND t.MEASUREMENT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -362,7 +369,7 @@ HAVING COUNT(*) > 1;;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.MEASUREMENT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.MEASUREMENT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.MEASUREMENT_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for NULLs in required field 'MEASUREMENT.MEASUREMENT_TYPE_CONCEPT_ID'.
@@ -381,7 +388,7 @@ SELECT * FROM omop.MEASUREMENT WHERE MEASUREMENT_TYPE_CONCEPT_ID IS NULL;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.MEASUREMENT_TYPE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.MEASUREMENT_TYPE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.MEASUREMENT_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'MEASUREMENT.MEASUREMENT_TYPE_CONCEPT_ID' belong to the 'Type Concept' domain.
@@ -392,7 +399,7 @@ WHERE c.MEASUREMENT_TYPE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-JOIN vocab.CONCEPT c ON t.MEASUREMENT_TYPE_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.MEASUREMENT_TYPE_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Type Concept';;
 
 -- Description: Check that concepts in 'MEASUREMENT.MEASUREMENT_TYPE_CONCEPT_ID' are standard and valid.
@@ -403,7 +410,7 @@ WHERE c.domain_id <> 'Type Concept';;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-LEFT JOIN vocab.CONCEPT c ON t.MEASUREMENT_TYPE_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.MEASUREMENT_TYPE_CONCEPT_ID = c.concept_id
 WHERE t.MEASUREMENT_TYPE_CONCEPT_ID IS NOT NULL
   AND t.MEASUREMENT_TYPE_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -424,7 +431,7 @@ SELECT * FROM omop.MEASUREMENT WHERE MEASUREMENT_TYPE_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.OPERATOR_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.OPERATOR_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.OPERATOR_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'MEASUREMENT.OPERATOR_CONCEPT_ID' belong to the 'Meas Value Operator' domain.
@@ -435,7 +442,7 @@ WHERE c.OPERATOR_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-JOIN vocab.CONCEPT c ON t.OPERATOR_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.OPERATOR_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Meas Value Operator';;
 
 -- Description: Check that concepts in 'MEASUREMENT.OPERATOR_CONCEPT_ID' are standard and valid.
@@ -446,7 +453,7 @@ WHERE c.domain_id <> 'Meas Value Operator';;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-LEFT JOIN vocab.CONCEPT c ON t.OPERATOR_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.OPERATOR_CONCEPT_ID = c.concept_id
 WHERE t.OPERATOR_CONCEPT_ID IS NOT NULL
   AND t.OPERATOR_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -489,7 +496,7 @@ WHERE c.PROVIDER_ID IS NOT NULL AND p.PROVIDER_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.UNIT_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check that concepts in 'MEASUREMENT.UNIT_CONCEPT_ID' belong to the 'Unit' domain.
@@ -500,7 +507,7 @@ WHERE c.UNIT_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE c.domain_id <> 'Unit';;
 
 -- Description: Check that concepts in 'MEASUREMENT.UNIT_CONCEPT_ID' are standard and valid.
@@ -511,7 +518,7 @@ WHERE c.domain_id <> 'Unit';;
         );
         SELECT t.*
 FROM omop.MEASUREMENT t
-LEFT JOIN vocab.CONCEPT c ON t.UNIT_CONCEPT_ID = c.concept_id
+LEFT JOIN vocab.concept c ON t.UNIT_CONCEPT_ID = c.concept_id
 WHERE t.UNIT_CONCEPT_ID IS NOT NULL
   AND t.UNIT_CONCEPT_ID <> 0
   AND (c.concept_id IS NULL OR c.standard_concept <> 'S' OR c.invalid_reason IS NOT NULL);;
@@ -532,7 +539,7 @@ SELECT * FROM omop.MEASUREMENT WHERE UNIT_CONCEPT_ID = 0;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.UNIT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.UNIT_SOURCE_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.UNIT_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'MEASUREMENT.VALUE_AS_CONCEPT_ID' pointing to 'CONCEPT.CONCEPT_ID'.
@@ -543,7 +550,7 @@ WHERE c.UNIT_SOURCE_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
         );
         SELECT c.*
 FROM omop.MEASUREMENT c
-LEFT JOIN vocab.CONCEPT p ON c.VALUE_AS_CONCEPT_ID = p.CONCEPT_ID
+LEFT JOIN vocab.concept p ON c.VALUE_AS_CONCEPT_ID = p.CONCEPT_ID
 WHERE c.VALUE_AS_CONCEPT_ID IS NOT NULL AND p.CONCEPT_ID IS NULL;;
 
 -- Description: Check for orphaned foreign keys in 'MEASUREMENT.VISIT_DETAIL_ID' pointing to 'VISIT_DETAIL.VISIT_DETAIL_ID'.

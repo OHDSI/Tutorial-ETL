@@ -16,6 +16,9 @@ MODEL (
     latitude DOUBLE,
     longitude DOUBLE
   ),
+  depends_on (
+    vocab.concept,
+  ),
   audits (
     location_country_concept_id_is_foreign_key,
     location_country_concept_id_fk_domain,
