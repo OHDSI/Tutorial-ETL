@@ -1,1 +1,4 @@
 *.duckdb
+.venv
+*.log
+.cache

@@ -1,0 +1,36 @@
+MODEL (
+  name synthea.patients,
+  kind SEED (
+    path '$root/../../data/syntheaRaw/patients.csv'
+  ),
+  columns (
+    Id TEXT,
+    BIRTHDATE DATE,
+    DEATHDATE DATE,
+    SSN TEXT,
+    DRIVERS TEXT,
+    PASSPORT TEXT,
+    PREFIX TEXT,
+    FIRST TEXT,
+    MIDDLE TEXT,
+    LAST TEXT,
+    SUFFIX TEXT,
+    MAIDEN TEXT,
+    MARITAL TEXT,
+    RACE TEXT,
+    ETHNICITY TEXT,
+    GENDER TEXT,
+    BIRTHPLACE TEXT,
+    ADDRESS TEXT,
+    CITY TEXT,
+    STATE TEXT,
+    COUNTY TEXT,
+    FIPS TEXT,
+    ZIP TEXT,
+    LAT DOUBLE,
+    LON DOUBLE,
+    HEALTHCARE_EXPENSES DOUBLE,
+    HEALTHCARE_COVERAGE DOUBLE,
+    INCOME DOUBLE
+  )
+)

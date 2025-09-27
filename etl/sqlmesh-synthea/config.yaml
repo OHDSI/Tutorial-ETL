@@ -1,0 +1,22 @@
+gateways:
+  localduck:
+    connection:
+      type: duckdb
+      database: sqlmesh-synthea.duckdb
+
+default_gateway: localduck
+
+model_defaults:
+  dialect: duckdb
+
+format:
+  max_text_width: 140
+  normalize_functions: upper
+  leading_comma: false
+  indent: 4
+  pad: 2
+
+linter:
+  enabled: true
+  rules: "ALL"
+  ignored_rules: ["noselectstar", "nomissingaudits"]
