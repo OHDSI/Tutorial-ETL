@@ -1,93 +1,161 @@
 # SQLMesh Synthea OMOP Tutorial
 
-This tutorial shows how to load the Synthea synthetic patient dataset into the OMOP CDM v5.4 using [SQLMesh](https://sqlmesh.com/). It is intentionally minimal and mirrors the straightforward SQL patterns found in the original `ETL-Synthea` workbooks while providing reproducible pipelines, environment isolation with `uv`, and lightweight data quality checks.
+This tutorial shows how to load the Synthea synthetic patient dataset into the OMOP CDM v5.4 using [SQLMesh](https://sqlmesh.com/). It is intentionally minimal and mirrors the straightforward SQL patterns found in the original `ETL-Synthea`, but without the R scripts.
+
+## Reasons for using SQLMesh
+
+- **Simplicity**: SQLMesh uses plain SQL files to define models, making it easy to read and maintain.
+- **SQL Semantic Understanding:** Unlike dbt that just template text, SQLMesh parses and understands the SQL code itself. This allows it to catch bugs before a query is run on the database and to create detailed column-level lineage, tracking exactly how data flows and transforms.
+- **Virtual Data Environments:** It allows developers to safely work in isolated development environments without interfering with the production data, even while using the same physical database.
+- **Data Contracts & Audits:** SQLMesh can enforce data quality rules (audits) to ensure the transformations are complete and accurate before the data is promoted for use. If a transformation is incomplete, it blocks the flawed data from entering production.
+- **SQL Transpilation:** It can automatically translate SQL syntax between different database systems (e.g., from Microsoft SQL Server to DuckDB), which is invaluable for migrations and collaboration.
+- **Incremental Models:** For large datasets, SQLMesh can be configured to process only new or changed data, dramatically reducing run times from hours to minutes.
+- **Open Source & Free:** SQLMesh is fully open source and free to use, with no licensing fees.
 
 ## Prerequisites
 
-- macOS or Linux shell with `uv` (v0.5+) and `duckdb` CLI (optional, SQLMesh will install the Python package).
-- Local copy of the Synthea source data under `data/syntheaRaw/` and OMOP vocabulary CSVs under `data/vocabulary/` (already included in this repository).
-- Python 3.11 (managed automatically by `uv`).
+- [Python](https://www.python.org/downloads/)
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for managing virtual environments and dependencies 
+- [`duckdb`](https://duckdb.org/docs/installation/) for the database
+- Local copy of the Synthea source data under `../../data/syntheaRaw/` and OMOP vocabulary CSVs under `../../data/vocabulary/` (already included in this repository).
+
+## Project Layout
+
+```bash
+etl/sqlmesh-synthea/
+├── audits/                 # Data quality checks
+├── models/
+│   ├── seeds/              # SQLMesh SEED models pointing to raw Synthea & vocabulary CSVs
+│   ├── staging/            # Raw Synthea extracts normalized for downstream joins
+│   └── omop/               # OMOP CDM tables built from the staging layer
+├── seeds/                  # Seed data files
+├── config.yaml             # SQLMesh project configuration
+├── pyproject.toml          # Dependency declarations managed by uv
+└── uv.lock                 # Reproducible dependency lockfile
+```
 
 ## Quick Start
 
 1. Change into the tutorial directory:
+
    ```bash
    cd etl/sqlmesh-synthea
    ```
+
 2. Create a virtual environment with `uv` (works on macOS, Linux, and Windows):
+
    ```bash
    uv venv
    ```
+
 3. Activate the environment:
    - macOS / Linux (bash, zsh): `source .venv/bin/activate`
    - Windows PowerShell: `.venv\Scripts\Activate.ps1`
    - Windows Command Prompt: `.venv\Scripts\activate.bat`
 4. Install project dependencies inside the active environment:
+
    ```bash
    uv pip install -e .
    ```
-5. Plan and run the SQLMesh project:
- ```bash
-  sqlmesh plan
-  sqlmesh run
-  ```
 
-   > The first `sqlmesh plan` streams the vocabulary CSV seeds (concept, concept_ancestor, etc.). This can take a minute, but subsequent runs reuse the DuckDB tables.
+5. Check SQLMesh connection:
 
-The default DuckDB database lives at `artifacts/sqlmesh-synthea.duckdb`. Launch the SQLMesh UI with `sqlmesh ui` if you want a visual DAG and run history.
+   ```bash
+   sqlmesh info
+   ```
 
-## Project Layout
+6. Apply model plan to a dev environment:
 
-```
-etl/sqlmesh-synthea/
-├── audits/                 # Lightweight data quality checks (e.g., person id not null)
-├── macros/                 # Misc reusable SQL helpers (e.g., hashing utilities)
-├── models/
-│   ├── seeds/              # SQLMesh SEED models pointing to raw Synthea & vocabulary CSVs
-│   ├── staging/            # Raw Synthea extracts normalized for downstream joins
-│   └── omop/               # OMOP CDM tables built from the staging layer
-├── notebooks/              # (Optional) space for walkthrough notebooks
-├── sqlmesh.yaml            # SQLMesh project configuration
-├── pyproject.toml          # Dependency declarations managed by uv
-└── uv.lock                 # Reproducible dependency lockfile
-```
+   ```bash
+   sqlmesh plan dev
+   ```
 
-Key modelling choices:
-- **Deterministic IDs** – `stg.patient_ids` and `stg.visit_dimension` assign stable numeric identifiers so all downstream OMOP tables stay in sync.
-- **Vocabulary joins** – Only the required vocabularies (SNOMED, ICD10CM, RxNorm, CVX, LOINC, UCUM) are loaded via `stg.source_to_standard_map` to keep SQL readable while still producing standard concept IDs.
-- **Simplified mappings** – Encounter class and demographic concepts are mapped with compact CASE logic inspired by `ETL-Synthea` to keep the tutorial approachable.
-- **DuckDB-first execution** – The default gateway runs entirely on DuckDB so the whole tutorial is self-contained and reproducible.
+   > The first `sqlmesh plan` streams the vocabulary CSV seeds (concept, concept_ancestor, etc.). This can take a minute, but subsequent runs reuse the DuckDB tables. There will be some Pandas warnings that can be ignored in this tutorial context.
 
-Populated OMOP tables:
-`person`, `location`, `care_site`, `provider`, `visit_occurrence`, `visit_detail`, `condition_occurrence`, `condition_era`, `drug_exposure`, `drug_era`, `device_exposure`, `measurement`, `observation`, `observation_period`, `procedure_occurrence`, `death`, `payer_plan_period`, `cost`, `cdm_source`.
+7. Explore the materialized data via a database client or DuckDB CLI:
 
-## Running Audits
+   ```bash
+   duckdb sqlmesh-synthea.duckdb
+   ```
 
-Audits run automatically during `sqlmesh run`, but you can execute them ad-hoc:
+   Example queries:
+
+   ```sql
+   SELECT * FROM omop__dev.person;
+   SELECT COUNT(*) FROM omop__dev.person;
+   SELECT COUNT(*) FROM omop__dev.condition_occurrence WHERE condition_concept_id = 437663; -- fever
+   ```
+
+   > Notice the schema name `omop__dev` indicating the `dev` environment. You can create multiple environments and switch between them with the `--env` flag in SQLMesh commands. The `prod` environment will have no suffix, just `omop` as the schema name.
+
+8. If data in dev environment looks good, promote the plan to dev:
+
+   ```bash
+   sqlmesh plan
+   ```
+
+### Exploring data lineage and selecting models
+
+SQLMesh parse our SQL scripts and automatically create column-level data lineage of dependency. If you want a visual data lineage, launch the SQLMesh UI with `sqlmesh ui` or try [SQLMesh VS Code extension](https://sqlmesh.readthedocs.io/en/stable/guides/vscode/), though it can be a little clunky to set up.
+
+![Simple lineage of person table](lineage-person.png)
+**Simple lineage of `person` table**
+
+![More complicated lineage of drug_era table](lineage-drug-era.png)
+**More complicated lineage of `drug_era` table**
+
+You don’t always need to run the full DAG. Use `--select-model` to focus a plan on specific models and their dependencies to speed up development.
+
+- Downstream from a staging node: `sqlmesh plan --select-model "stg.patients+"`
+  - This selects the staging model and any changed downstream models, letting you iterate quickly on person logic and its consumers.
+- Upstream into a target: `sqlmesh plan --select-model "+omop.person"`
+  - The leading `+` brings in changed upstream parents so you can verify inputs that feed `omop.person`.
+- Combine wildcards and `+` for broader slices (for example, `+omop.*+` or `stg.*patient*+`).
+
+More selector patterns and examples: [SQLMesh Model Selection Guide](https://sqlmesh.readthedocs.io/en/stable/guides/model_selection/)
+
+### Audits (Data Quality Checks)
+
+This tutorial bakes the DQD audits into the SQLMesh pipeline that automatically run during `sqlmesh run` or can be invoked ad‑hoc with:
 
 ```bash
-sqlmesh audit omop.person --gateway duckdb_local
-sqlmesh audit omop.visit_occurrence --gateway duckdb_local
+sqlmesh audit
 ```
 
-Add new audits by creating files in `audits/` and referencing them inside the target model's `MODEL (...)` block.
+How they’re wired:
 
-## Working with the Outputs
+- Each audit is defined in `audits/*.sql` (for example, `audits/person_audits.sql`).
+- Models reference one or more audit names in their `MODEL (...)` block. For example, `models/omop/person.sql` includes nullability, foreign key, and concept validity checks for OMOP person fields.
 
-1. Connect to the DuckDB file for ad-hoc exploration:
-   ```bash
-   duckdb artifacts/sqlmesh-synthea.duckdb
-   ```
-2. Inspect OMOP tables:
-   ```sql
-   SELECT * FROM omop.person LIMIT 5;
-   SELECT COUNT(*) FROM omop.visit_occurrence;
-   ```
-3. Compare against the R-based tutorial in `etl/etl-synthea` to highlight differences in approach.
+Example (abridged from `omop.person`):
 
-## Next Steps
+```sql
+MODEL (
+   name omop.person,
+   ...,
+   audits (
+      person_exists,
+      person_person_id_is_primary_key,
+      person_gender_concept_id_is_required,
+      person_race_concept_id_is_required,
+      ...
+   )
+)
+```
 
-- Extend the audit suite with record count and concept quality checks for the new domains.
-- Package example notebooks in `notebooks/` for workshop delivery.
-- Add CI automation (e.g., GitHub Actions) to run `sqlmesh plan --no-confirm` when definitions change.
-- Explore incremental materializations for large Synthea extracts once comfortable with the core flow.
+Where do these audits come from? They were generated from the Data Quality Dashboard (DQD) rules and published in the companion tutorial. See “Part 6 — Audits” for details and regeneration steps:
+[Companion tutorial — Part 6: Audits](https://github.com/sidataplus/demo-etl-sqlmesh-omop-synthea?tab=readme-ov-file#part-6-audits)
+
+Add your own audits:
+
+1. Create a new audit in `audits/your_model_audits.sql` using the `AUDIT (name ..., blocking ...)` syntax from the SQLMesh docs.
+2. Reference the new audit name inside the target model’s `MODEL (...) audits (...)` list.
+3. Run `sqlmesh plan` and `sqlmesh run` (or `sqlmesh audit`) to execute them.
+
+Audit reference: [SQLMesh Audits](https://sqlmesh.readthedocs.io/en/stable/concepts/audits/)
+
+## Further reading
+
+- Full, step‑by‑step tutorial:
+   [sidataplus/demo-etl-sqlmesh-omop-synthea](https://github.com/sidataplus/demo-etl-sqlmesh-omop-synthea)
+- SQLMesh documentation: [sqlmesh.readthedocs.io](https://sqlmesh.readthedocs.io/en/stable/)

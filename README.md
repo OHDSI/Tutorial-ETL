@@ -27,3 +27,9 @@ install.packages("duckdb")
 2. Data are included in the repository at `data/syntheaRaw/` and `data/vocabulary/`. If you want to use your own Synthea exports or vocabulary files, replace the contents of these folders.
 3. Run the ETL script from the project root: `Rscript etl/etl-synthea/run.R`. The [script](etl/etl-synthea/run.R) is well commented step-by-step.
 4. Inspect the resulting DuckDB file created at `data/syntheaCDM.duckdb`.
+
+## Optional Demo: SQLMesh Synthea
+
+A Python alternative to the R-based workflow lives in `etl/sqlmesh-synthea`. It uses SQLMesh with DuckDB to transform the same Synthea extracts into OMOP v5.4 via simple, readable SQL models.
+
+Given SQLMesh provides more advanced features like data lineage, environment isolation, data quality checks, and an optional UI, please refer to the [README](etl/sqlmesh-synthea/README.md) in [etl/sqlmesh-synthea](etl/sqlmesh-synthea) folder for instructions.
