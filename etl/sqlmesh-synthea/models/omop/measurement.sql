@@ -25,6 +25,28 @@ MODEL (
     unit_source_concept_id INT,
     measurement_event_id BIGINT,
     meas_event_field_concept_id INT
+  ),
+  audits (
+    person_completeness_measurement,
+    measurement_meas_event_field_concept_id_is_foreign_key,
+    measurement_meas_event_field_concept_id_is_standard_valid_concept,
+    measurement_measurement_concept_id_is_required,
+    measurement_measurement_concept_id_is_foreign_key,
+    measurement_measurement_concept_id_fk_domain,
+    measurement_measurement_concept_id_is_standard_valid_concept,
+    measurement_measurement_concept_id_standard_concept_record_completeness,
+    measurement_measurement_date_is_required,
+    measurement_measurement_date_after_birth,
+    measurement_measurement_datetime_after_birth,
+    measurement_measurement_id_is_required,
+    measurement_measurement_id_is_primary_key,
+    measurement_measurement_source_concept_id_is_foreign_key,
+    measurement_measurement_type_concept_id_is_required,
+    measurement_measurement_type_concept_id_is_foreign_key,
+    measurement_measurement_type_concept_id_fk_domain,
+    measurement_measurement_type_concept_id_is_standard_valid_concept,
+    measurement_measurement_type_concept_id_standard_concept_record_completeness,
+    measurement_operator_concept_id_is_foreign_key,
   )
 );
 

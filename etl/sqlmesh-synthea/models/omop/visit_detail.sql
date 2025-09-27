@@ -21,6 +21,28 @@ MODEL (
     discharged_to_source_value TEXT,
     parent_visit_detail_id INT,
     visit_occurrence_id BIGINT
+  ),
+  audits (
+    person_completeness_visit_detail,
+    visit_detail_admitted_from_concept_id_is_foreign_key,
+    visit_detail_admitted_from_concept_id_fk_domain,
+    visit_detail_admitted_from_concept_id_is_standard_valid_concept,
+    visit_detail_admitted_from_concept_id_standard_concept_record_completeness,
+    visit_detail_care_site_id_is_foreign_key,
+    visit_detail_discharged_to_concept_id_is_foreign_key,
+    visit_detail_discharged_to_concept_id_fk_domain,
+    visit_detail_discharged_to_concept_id_is_standard_valid_concept,
+    visit_detail_discharged_to_concept_id_standard_concept_record_completeness,
+    visit_detail_parent_visit_detail_id_is_foreign_key,
+    visit_detail_person_id_is_required,
+    visit_detail_person_id_is_foreign_key,
+    visit_detail_preceding_visit_detail_id_is_foreign_key,
+    visit_detail_provider_id_is_foreign_key,
+    visit_detail_visit_detail_concept_id_is_required,
+    visit_detail_visit_detail_concept_id_is_foreign_key,
+    visit_detail_visit_detail_concept_id_fk_domain,
+    visit_detail_visit_detail_concept_id_is_standard_valid_concept,
+    visit_detail_visit_detail_concept_id_standard_concept_record_completeness,
   )
 );
 

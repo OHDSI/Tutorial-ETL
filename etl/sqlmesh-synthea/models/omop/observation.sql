@@ -23,6 +23,28 @@ MODEL (
     value_source_value TEXT,
     observation_event_id BIGINT,
     obs_event_field_concept_id INT
+  ),
+  audits (
+    person_completeness_observation,
+    observation_obs_event_field_concept_id_is_foreign_key,
+    observation_obs_event_field_concept_id_is_standard_valid_concept,
+    observation_observation_concept_id_is_required,
+    observation_observation_concept_id_is_foreign_key,
+    observation_observation_concept_id_is_standard_valid_concept,
+    observation_observation_concept_id_standard_concept_record_completeness,
+    observation_observation_date_is_required,
+    observation_observation_date_after_birth,
+    observation_observation_datetime_after_birth,
+    observation_observation_id_is_required,
+    observation_observation_id_is_primary_key,
+    observation_observation_source_concept_id_is_foreign_key,
+    observation_observation_type_concept_id_is_required,
+    observation_observation_type_concept_id_is_foreign_key,
+    observation_observation_type_concept_id_fk_domain,
+    observation_observation_type_concept_id_is_standard_valid_concept,
+    observation_observation_type_concept_id_standard_concept_record_completeness,
+    observation_person_id_is_required,
+    observation_person_id_is_foreign_key,
   )
 );
 

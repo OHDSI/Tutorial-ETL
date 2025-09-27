@@ -27,6 +27,20 @@ MODEL (
     revenue_code_source_value TEXT,
     drg_concept_id DOUBLE,
     drg_source_value TEXT
+  ),
+  audits (
+    cost_cost_domain_id_is_required,
+    cost_cost_domain_id_is_foreign_key,
+    cost_cost_event_id_is_required,
+    cost_cost_id_is_required,
+    cost_cost_id_is_primary_key,
+    cost_cost_type_concept_id_is_required,
+    cost_cost_type_concept_id_is_foreign_key,
+    cost_cost_type_concept_id_is_standard_valid_concept,
+    cost_cost_type_concept_id_standard_concept_record_completeness,
+    cost_currency_concept_id_is_foreign_key,
+    cost_drg_concept_id_is_foreign_key,
+    cost_revenue_code_concept_id_is_foreign_key,
   )
 );
 

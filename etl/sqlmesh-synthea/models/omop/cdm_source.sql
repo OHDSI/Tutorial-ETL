@@ -13,6 +13,19 @@ MODEL (
     cdm_version TEXT,
     vocabulary_version TEXT,
     cdm_version_concept_id INT
+  ),
+  audits (
+    cdm_source_cdm_holder_is_required,
+    cdm_source_cdm_release_date_is_required,
+    cdm_source_cdm_source_abbreviation_is_required,
+    cdm_source_cdm_source_name_is_required,
+    cdm_source_cdm_version_concept_id_is_required,
+    cdm_source_cdm_version_concept_id_is_foreign_key,
+    cdm_source_cdm_version_concept_id_fk_domain,
+    cdm_source_cdm_version_concept_id_is_standard_valid_concept,
+    cdm_source_source_release_date_is_required,
+    cdm_source_source_release_date_start_before_end,
+    cdm_source_vocabulary_version_is_required,
   )
 );
 

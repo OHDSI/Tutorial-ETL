@@ -25,6 +25,28 @@ MODEL (
     drug_source_concept_id INT,
     route_source_value TEXT,
     dose_unit_source_value TEXT
+  ),
+  audits (
+    person_completeness_drug_exposure,
+    drug_exposure_drug_concept_id_is_required,
+    drug_exposure_drug_concept_id_is_foreign_key,
+    drug_exposure_drug_concept_id_fk_domain,
+    drug_exposure_drug_concept_id_is_standard_valid_concept,
+    drug_exposure_drug_concept_id_standard_concept_record_completeness,
+    drug_exposure_drug_exposure_end_date_is_required,
+    drug_exposure_drug_exposure_end_date_after_birth,
+    drug_exposure_drug_exposure_end_datetime_after_birth,
+    drug_exposure_drug_exposure_id_is_required,
+    drug_exposure_drug_exposure_id_is_primary_key,
+    drug_exposure_drug_exposure_start_date_is_required,
+    drug_exposure_drug_exposure_start_date_start_before_end,
+    drug_exposure_drug_exposure_start_date_after_birth,
+    drug_exposure_drug_exposure_start_datetime_start_before_end,
+    drug_exposure_drug_exposure_start_datetime_after_birth,
+    drug_exposure_drug_source_concept_id_is_foreign_key,
+    drug_exposure_drug_type_concept_id_is_required,
+    drug_exposure_drug_type_concept_id_is_foreign_key,
+    drug_exposure_drug_type_concept_id_fk_domain,
   )
 );
 

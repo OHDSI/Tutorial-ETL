@@ -8,6 +8,23 @@ MODEL (
     condition_era_start_date DATE,
     condition_era_end_date DATE,
     condition_occurrence_count BIGINT
+  ),
+  audits (
+    person_completeness_condition_era,
+    condition_era_condition_concept_id_is_required,
+    condition_era_condition_concept_id_is_foreign_key,
+    condition_era_condition_concept_id_fk_domain,
+    condition_era_condition_concept_id_is_standard_valid_concept,
+    condition_era_condition_concept_id_standard_concept_record_completeness,
+    condition_era_condition_era_end_date_is_required,
+    condition_era_condition_era_end_date_after_birth,
+    condition_era_condition_era_id_is_required,
+    condition_era_condition_era_id_is_primary_key,
+    condition_era_condition_era_start_date_is_required,
+    condition_era_condition_era_start_date_start_before_end,
+    condition_era_condition_era_start_date_after_birth,
+    condition_era_person_id_is_required,
+    condition_era_person_id_is_foreign_key,
   )
 );
 

@@ -9,6 +9,22 @@ MODEL (
     cause_concept_id INT,
     cause_source_value TEXT,
     cause_source_concept_id INT
+  ),
+  audits (
+    person_completeness_death,
+    death_cause_concept_id_is_foreign_key,
+    death_cause_concept_id_is_standard_valid_concept,
+    death_cause_concept_id_standard_concept_record_completeness,
+    death_cause_source_concept_id_is_foreign_key,
+    death_death_date_is_required,
+    death_death_date_after_birth,
+    death_death_datetime_after_birth,
+    death_death_type_concept_id_is_foreign_key,
+    death_death_type_concept_id_fk_domain,
+    death_death_type_concept_id_is_standard_valid_concept,
+    death_death_type_concept_id_standard_concept_record_completeness,
+    death_person_id_is_required,
+    death_person_id_is_foreign_key
   )
 );
 

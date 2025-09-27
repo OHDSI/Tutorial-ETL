@@ -9,6 +9,23 @@ MODEL (
     drug_era_end_date DATE,
     drug_exposure_count BIGINT,
     gap_days BIGINT
+  ),
+  audits (
+    person_completeness_drug_era,
+    drug_era_drug_concept_id_is_required,
+    drug_era_drug_concept_id_is_foreign_key,
+    drug_era_drug_concept_id_fk_domain,
+    drug_era_drug_concept_id_is_standard_valid_concept,
+    drug_era_drug_concept_id_standard_concept_record_completeness,
+    drug_era_drug_era_end_date_is_required,
+    drug_era_drug_era_end_date_after_birth,
+    drug_era_drug_era_id_is_required,
+    drug_era_drug_era_id_is_primary_key,
+    drug_era_drug_era_start_date_is_required,
+    drug_era_drug_era_start_date_start_before_end,
+    drug_era_drug_era_start_date_after_birth,
+    drug_era_person_id_is_required,
+    drug_era_person_id_is_foreign_key,
   )
 );
 

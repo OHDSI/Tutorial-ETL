@@ -14,11 +14,33 @@ MODEL (
     care_site_id INT,
     visit_source_value TEXT,
     visit_source_concept_id INT,
-    admitting_source_concept_id INT,
-    admitting_source_value TEXT,
-    discharge_to_concept_id INT,
-    discharge_to_source_value TEXT,
+    admitted_from_concept_id INT,
+    admitted_from_source_value TEXT,
+    discharged_to_concept_id INT,
+    discharged_to_source_value TEXT,
     preceding_visit_occurrence_id BIGINT
+  ),
+  audits (
+    person_completeness_visit_occurrence,
+    visit_occurrence_admitted_from_concept_id_is_foreign_key,
+    visit_occurrence_admitted_from_concept_id_fk_domain,
+    visit_occurrence_admitted_from_concept_id_is_standard_valid_concept,
+    visit_occurrence_admitted_from_concept_id_standard_concept_record_completeness,
+    visit_occurrence_care_site_id_is_foreign_key,
+    visit_occurrence_discharged_to_concept_id_is_foreign_key,
+    visit_occurrence_discharged_to_concept_id_fk_domain,
+    visit_occurrence_discharged_to_concept_id_is_standard_valid_concept,
+    visit_occurrence_discharged_to_concept_id_standard_concept_record_completeness,
+    visit_occurrence_person_id_is_required,
+    visit_occurrence_person_id_is_foreign_key,
+    visit_occurrence_preceding_visit_occurrence_id_is_foreign_key,
+    visit_occurrence_provider_id_is_foreign_key,
+    visit_occurrence_visit_concept_id_is_required,
+    visit_occurrence_visit_concept_id_is_foreign_key,
+    visit_occurrence_visit_concept_id_fk_domain,
+    visit_occurrence_visit_concept_id_is_standard_valid_concept,
+    visit_occurrence_visit_concept_id_standard_concept_record_completeness,
+    visit_occurrence_visit_end_date_is_required,
   )
 );
 
@@ -56,10 +78,10 @@ SELECT
   CAST(NULL AS INTEGER) AS care_site_id,
   CAST(representative_encounter_id AS TEXT) AS visit_source_value,
   0 AS visit_source_concept_id,
-  CAST(NULL AS INTEGER) AS admitting_source_concept_id,
-  CAST(NULL AS TEXT) AS admitting_source_value,
-  CAST(NULL AS INTEGER) AS discharge_to_concept_id,
-  CAST(NULL AS TEXT) AS discharge_to_source_value,
+  CAST(NULL AS INTEGER) AS admitted_from_concept_id,
+  CAST(NULL AS TEXT) AS admitted_from_source_value,
+  CAST(NULL AS INTEGER) AS discharged_to_concept_id,
+  CAST(NULL AS TEXT) AS discharged_to_source_value,
   LAG(visit_occurrence_id) OVER (
     PARTITION BY person_id
     ORDER BY encounter_start_datetime, visit_occurrence_id

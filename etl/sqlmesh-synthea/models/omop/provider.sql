@@ -15,6 +15,20 @@ MODEL (
     specialty_source_concept_id INT,
     gender_source_value TEXT,
     gender_source_concept_id INT
+  ),
+  audits (
+    provider_care_site_id_is_foreign_key,
+    provider_gender_concept_id_is_foreign_key,
+    provider_gender_concept_id_fk_domain,
+    provider_gender_concept_id_is_standard_valid_concept,
+    provider_gender_concept_id_standard_concept_record_completeness,
+    provider_gender_source_concept_id_is_foreign_key,
+    provider_provider_id_is_required,
+    provider_provider_id_is_primary_key,
+    provider_specialty_concept_id_is_foreign_key,
+    provider_specialty_concept_id_is_standard_valid_concept,
+    provider_specialty_concept_id_standard_concept_record_completeness,
+    provider_specialty_source_concept_id_is_foreign_key,
   )
 );
 

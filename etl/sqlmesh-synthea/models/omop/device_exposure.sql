@@ -21,6 +21,28 @@ MODEL (
     unit_concept_id INT,
     unit_source_value TEXT,
     unit_source_concept_id INT
+  ),
+  audits (
+    person_completeness_device_exposure,
+    device_exposure_device_concept_id_is_required,
+    device_exposure_device_concept_id_is_foreign_key,
+    device_exposure_device_concept_id_fk_domain,
+    device_exposure_device_concept_id_is_standard_valid_concept,
+    device_exposure_device_concept_id_standard_concept_record_completeness,
+    device_exposure_device_exposure_end_date_after_birth,
+    device_exposure_device_exposure_end_datetime_after_birth,
+    device_exposure_device_exposure_id_is_required,
+    device_exposure_device_exposure_id_is_primary_key,
+    device_exposure_device_exposure_start_date_is_required,
+    device_exposure_device_exposure_start_date_start_before_end,
+    device_exposure_device_exposure_start_date_after_birth,
+    device_exposure_device_exposure_start_datetime_start_before_end,
+    device_exposure_device_exposure_start_datetime_after_birth,
+    device_exposure_device_source_concept_id_is_foreign_key,
+    device_exposure_device_type_concept_id_is_required,
+    device_exposure_device_type_concept_id_is_foreign_key,
+    device_exposure_device_type_concept_id_fk_domain,
+    device_exposure_device_type_concept_id_is_standard_valid_concept,
   )
 );
 

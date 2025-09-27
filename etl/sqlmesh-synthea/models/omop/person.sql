@@ -20,6 +20,33 @@ MODEL (
     race_source_concept_id INT,
     ethnicity_source_value TEXT,
     ethnicity_source_concept_id INT
+  ),
+  audits (
+    person_exists,
+    person_care_site_id_is_foreign_key,
+    person_ethnicity_concept_id_is_required,
+    person_ethnicity_concept_id_is_foreign_key,
+    person_ethnicity_concept_id_fk_domain,
+    person_ethnicity_concept_id_is_standard_valid_concept,
+    person_ethnicity_concept_id_standard_concept_record_completeness,
+    person_ethnicity_source_concept_id_is_foreign_key,
+    person_gender_concept_id_is_required,
+    person_gender_concept_id_is_foreign_key,
+    person_gender_concept_id_fk_domain,
+    person_gender_concept_id_is_standard_valid_concept,
+    person_gender_concept_id_standard_concept_record_completeness,
+    person_gender_source_concept_id_is_foreign_key,
+    person_location_id_is_foreign_key,
+    person_person_id_is_required,
+    person_person_id_is_primary_key,
+    person_provider_id_is_foreign_key,
+    person_race_concept_id_is_required,
+    person_race_concept_id_is_foreign_key,
+    person_race_concept_id_fk_domain,
+    person_race_concept_id_is_standard_valid_concept,
+    person_race_concept_id_standard_concept_record_completeness,
+    person_race_source_concept_id_is_foreign_key,
+    person_year_of_birth_is_required,
   )
 );
 

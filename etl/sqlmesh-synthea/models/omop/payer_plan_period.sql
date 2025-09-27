@@ -19,6 +19,26 @@ MODEL (
     stop_reason_concept_id INT,
     stop_reason_source_value TEXT,
     stop_reason_source_concept_id INT
+  ),
+  audits (
+    person_completeness_payer_plan_period,
+    payer_plan_period_payer_concept_id_is_foreign_key,
+    payer_plan_period_payer_plan_period_end_date_is_required,
+    payer_plan_period_payer_plan_period_end_date_after_birth,
+    payer_plan_period_payer_plan_period_id_is_required,
+    payer_plan_period_payer_plan_period_id_is_primary_key,
+    payer_plan_period_payer_plan_period_start_date_is_required,
+    payer_plan_period_payer_plan_period_start_date_start_before_end,
+    payer_plan_period_payer_plan_period_start_date_after_birth,
+    payer_plan_period_payer_source_concept_id_is_foreign_key,
+    payer_plan_period_person_id_is_required,
+    payer_plan_period_person_id_is_foreign_key,
+    payer_plan_period_plan_concept_id_is_foreign_key,
+    payer_plan_period_plan_source_concept_id_is_foreign_key,
+    payer_plan_period_sponsor_concept_id_is_foreign_key,
+    payer_plan_period_sponsor_source_concept_id_is_foreign_key,
+    payer_plan_period_stop_reason_concept_id_is_foreign_key,
+    payer_plan_period_stop_reason_source_concept_id_is_foreign_key
   )
 );
 

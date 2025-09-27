@@ -18,6 +18,28 @@ MODEL (
     procedure_source_value TEXT,
     procedure_source_concept_id INT,
     modifier_source_value TEXT
+  ),
+  audits (
+    person_completeness_procedure_occurrence,
+    procedure_occurrence_modifier_concept_id_is_foreign_key,
+    procedure_occurrence_modifier_concept_id_is_standard_valid_concept,
+    procedure_occurrence_modifier_concept_id_standard_concept_record_completeness,
+    procedure_occurrence_person_id_is_required,
+    procedure_occurrence_person_id_is_foreign_key,
+    procedure_occurrence_procedure_concept_id_is_required,
+    procedure_occurrence_procedure_concept_id_is_foreign_key,
+    procedure_occurrence_procedure_concept_id_fk_domain,
+    procedure_occurrence_procedure_concept_id_is_standard_valid_concept,
+    procedure_occurrence_procedure_concept_id_standard_concept_record_completeness,
+    procedure_occurrence_procedure_date_is_required,
+    procedure_occurrence_procedure_date_start_before_end,
+    procedure_occurrence_procedure_date_after_birth,
+    procedure_occurrence_procedure_datetime_start_before_end,
+    procedure_occurrence_procedure_datetime_after_birth,
+    procedure_occurrence_procedure_end_date_after_birth,
+    procedure_occurrence_procedure_end_datetime_after_birth,
+    procedure_occurrence_procedure_occurrence_id_is_required,
+    procedure_occurrence_procedure_occurrence_id_is_primary_key,
   )
 );
 

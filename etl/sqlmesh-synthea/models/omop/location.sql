@@ -11,8 +11,18 @@ MODEL (
     zip TEXT,
     county TEXT,
     location_source_value TEXT,
+    country_concept_id INT,
+    country_source_value TEXT,
     latitude DOUBLE,
     longitude DOUBLE
+  ),
+  audits (
+    location_country_concept_id_is_foreign_key,
+    location_country_concept_id_fk_domain,
+    location_country_concept_id_is_standard_valid_concept,
+    location_country_concept_id_standard_concept_record_completeness,
+    location_location_id_is_required,
+    location_location_id_is_primary_key,
   )
 );
 
@@ -25,6 +35,8 @@ SELECT DISTINCT
   zip,
   county,
   zip AS location_source_value,
+  4330442 AS country_concept_id,  -- Concept ID for 'US'
+  'US' AS country_source_value,
   TRY_CAST(latitude AS DOUBLE) AS latitude,
   TRY_CAST(longitude AS DOUBLE) AS longitude
 FROM stg.patient_locations;
