@@ -177,7 +177,8 @@ This dbt-synthea demo closely follows the [sqlmesh-synthea](../sqlmesh-synthea/)
 
 SQLMesh was created after dbt and addresses some of its limitations. Key differences include:
 
-- **SQL understanding vs. templating:** dbt templates SQL text, while SQLMesh parses SQL to understand columns and dependencies, enabling earlier error detection and column‑level lineage.
+- **SQL understanding vs. templating:** dbt templates SQL with Jinja tags, while SQLMesh parses SQL to understand columns and dependencies, enabling earlier error detection and column‑level lineage.
+- **Model metadata:** SQLMesh uses a `MODEL (...)` block to define model properties (name, description, schema/data types, audits, etc.) in the same script as the SQL definition file, while dbt separate the comprehensive metadata from the SQL file as another YAML file ([example](models/omop/schema.yml)). The latter can lead to discrepancies between the SQL and its documentation if not kept in sync. (dbt has introduced [in‑SQL config block](https://docs.getdbt.com/reference/model-configs) but it is not as comprehensive as SQLMesh's `MODEL (...)` block.)
 - **Environments:** dbt uses targets/schemas; SQLMesh offers virtual data environments with easy promotion and backfills.
 - **Data quality:** dbt tests are supported (this repo keeps them minimal). SQLMesh adds first‑class audits that can block promotions when rules fail.
 - **Cross‑dialect SQL:** dbt relies on adapters/macros; SQLMesh includes SQL transpilation for portability between engines.
