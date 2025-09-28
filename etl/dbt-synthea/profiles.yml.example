@@ -1,0 +1,7 @@
+dbt_synthea:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: dbt_synthea.duckdb
+      threads: 4

@@ -33,3 +33,9 @@ install.packages("duckdb")
 A Python alternative to the R-based workflow lives in `etl/sqlmesh-synthea`. It uses SQLMesh with DuckDB to transform the same Synthea extracts into OMOP v5.4 via simple, readable SQL models.
 
 Given SQLMesh provides more advanced features like data lineage, environment isolation, data quality checks, and an optional UI, please refer to the [README](etl/sqlmesh-synthea/README.md) in [etl/sqlmesh-synthea](etl/sqlmesh-synthea) folder for instructions.
+
+## Optional Demo: dbt Synthea
+
+dbt is another popular open-source tool for SQL-based data transformations. It is a more mature and widely adopted tool than SQLMesh with a large ecosystem and community, but it lacks [some desirable features implemented in SQLMesh](etl/dbt-synthea/README.md#dbt-vs-sqlmesh). 
+
+The dbt version of the Synthea to OMOP transformation lives in `etl/dbt-synthea` and is documented in its [README](etl/dbt-synthea/README.md).

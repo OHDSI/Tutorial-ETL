@@ -15,7 +15,7 @@ This tutorial shows how to load the Synthea synthetic patient dataset into the O
 ## Prerequisites
 
 - [Python](https://www.python.org/downloads/)
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for managing virtual environments and dependencies 
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for managing virtual environments and dependencies
 - [`duckdb`](https://duckdb.org/docs/installation/) for the database
 - Local copy of the Synthea source data under `../../data/syntheaRaw/` and OMOP vocabulary CSVs under `../../data/vocabulary/` (already included in this repository).
 
@@ -52,6 +52,7 @@ etl/sqlmesh-synthea/
    - macOS / Linux (bash, zsh): `source .venv/bin/activate`
    - Windows PowerShell: `.venv\Scripts\Activate.ps1`
    - Windows Command Prompt: `.venv\Scripts\activate.bat`
+
 4. Install project dependencies inside the active environment:
 
    ```bash
@@ -81,7 +82,7 @@ etl/sqlmesh-synthea/
    Example queries:
 
    ```sql
-   SELECT * FROM omop__dev.person;
+   SELECT * FROM omop__dev.person LIMIT 5;
    SELECT COUNT(*) FROM omop__dev.person;
    SELECT COUNT(*) FROM omop__dev.condition_occurrence WHERE condition_concept_id = 437663; -- fever
    ```
@@ -99,7 +100,7 @@ etl/sqlmesh-synthea/
 SQLMesh parse our SQL scripts and automatically create column-level data lineage of dependency. If you want a visual data lineage, launch the SQLMesh UI with `sqlmesh ui` or try [SQLMesh VS Code extension](https://sqlmesh.readthedocs.io/en/stable/guides/vscode/), though it can be a little clunky to set up.
 
 ![Simple lineage of person table](lineage-person.png)
-**Simple lineage of `person` table**
+**Simple lineage of `person` table. (The actual lineage is interactive and zoomable.)**
 
 ![More complicated lineage of drug_era table](lineage-drug-era.png)
 **More complicated lineage of `drug_era` table**
@@ -154,8 +155,65 @@ Add your own audits:
 
 Audit reference: [SQLMesh Audits](https://sqlmesh.readthedocs.io/en/stable/concepts/audits/)
 
+## Other Operations
+
+### Run transformations
+
+After you’ve planned changes, you can execute the pipeline (for example, incremental schedules) with:
+
+```bash
+sqlmesh run
+```
+
+Optionally scope runs by environment or time window:
+
+```bash
+sqlmesh run --env dev
+sqlmesh run --start '2020-01-01' --end '2020-01-31'
+```
+
+### Table diff (compare environments or tables)
+
+Validate changes by diffing schemas and row values between environments or specific tables.
+
+- Diff a model across environments (for example, prod vs dev):
+
+```bash
+sqlmesh table_diff prod:dev omop.person
+```
+
+Add samples to the output:
+
+```bash
+sqlmesh table_diff prod:dev omop.person --show-sample
+```
+
+If the model doesn’t define a unique, not‑null grain, specify join keys explicitly (for example, the person primary key):
+
+```bash
+sqlmesh table_diff prod:dev omop.person -o person_id
+```
+
+- Diff multiple models using selection:
+
+```bash
+sqlmesh table_diff prod:dev -m "+omop.person"   # include upstream parents
+sqlmesh table_diff prod:dev -m "omop.*"        # all OMOP models
+```
+
+- Diff tables/views directly (DuckDB schemas: `omop` vs `omop__dev`):
+
+```bash
+sqlmesh table_diff omop.person:omop__dev.person -o person_id --show-sample
+```
+
+Notes:
+
+- Ensure both sides exist (plan/apply to each environment first).
+- For accurate joins, define `grain` in the model or pass `-o` once per join column.
+- Guide: <https://sqlmesh.readthedocs.io/en/stable/guides/tablediff/>
+
 ## Further reading
 
-- Full, step‑by‑step tutorial:
-   [sidataplus/demo-etl-sqlmesh-omop-synthea](https://github.com/sidataplus/demo-etl-sqlmesh-omop-synthea)
+- Full, step‑by‑step tutorial: [sidataplus/demo-etl-sqlmesh-omop-synthea](https://github.com/sidataplus/demo-etl-sqlmesh-omop-synthea)
 - SQLMesh documentation: [sqlmesh.readthedocs.io](https://sqlmesh.readthedocs.io/en/stable/)

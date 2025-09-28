@@ -1,0 +1,36 @@
+name: dbt_synthea
+version: 1.0.0
+config-version: 2
+
+profile: dbt_synthea
+
+model-paths:
+  - models
+macro-paths:
+  - macros
+seed-paths:
+  - seeds
+
+models:
+  dbt_synthea:
+    +materialized: table
+    staging:
+      +schema: stg
+      +materialized: table
+      +tags: ['core']
+    omop:
+      +schema: omop
+      +materialized: table
+      +tags: ['core']
+
+seeds:
+  dbt_synthea:
+    synthea:
+      +schema: synthea
+      +column_types:
+        CODE: TEXT
+        REASONCODE: TEXT
+    vocab:
+      +schema: vocab
+    reference:
+      +schema: reference

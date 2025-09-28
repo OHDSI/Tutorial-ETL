@@ -2,3 +2,4 @@
 .venv
 *.log
 .cache
+etl/dbt-synthea/target/
