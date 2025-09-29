@@ -1,0 +1,2 @@
+CDM_SOURCE_NAME,CDM_SOURCE_ABBREVIATION,CDM_HOLDER,SOURCE_DESCRIPTION,SOURCE_DOCUMENTATION_REFERENCE,CDM_ETL_REFERENCE,SOURCE_RELEASE_DATE,CDM_RELEASE_DATE,CDM_VERSION,CDM_VERSION_CONCEPT_ID,VOCABULARY_VERSION
+NJ,NJ,OHDSI,"Synthea version:  3.3.0   SyntheaTM is a Synthetic Patient Population Simulator. The goal is to output synthetic, realistic (but not real), patient data and associated health records in a variety of formats.",https://synthetichealth.github.io/synthea/,https://github.com/OHDSI/ETL-Synthea,2025-09-24,2025-09-24,5.4,756265,v5.0 27-AUG-25

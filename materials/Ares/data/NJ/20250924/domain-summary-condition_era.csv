@@ -1,0 +1,181 @@
+CONCEPT_ID,CONCEPT_NAME,NUM_PERSONS,PERCENT_PERSONS,RECORDS_PER_PERSON,P25_VALUE,MEDIAN_VALUE,P75_VALUE,PERCENT_PERSONS_NTILE,RECORDS_PER_PERSON_NTILE
+4281516,Gingivitis,93,0.8532,4.1,14,14,14,1,1
+40481087,Viral sinusitis,89,0.8165,2.4,11,16,20,1,1
+133228,Dental caries,68,0.6238,1.6,370,2198,5313,1,1
+4112343,Acute viral pharyngitis,66,0.6055,1.6,9,11,12,1,1
+260139,Acute bronchitis,61,0.5596,1.5,10,14,17,1,1
+4217975,Normal pregnancy,43,0.3945,3.5,28,210,217,1,1
+320128,Essential hypertension,40,0.3670,1.0,1,1,1,1,2
+37018196,Prediabetes,35,0.3211,1.0,1,1,1,1,2
+439777,Anemia,35,0.3211,1.0,1,1,210,1,2
+4144035,Acute infective cystitis,27,0.2477,1.0,1,1,3,1,2
+443419,Laceration - injury,26,0.2385,1.2,17,20,24,1,1
+28060,Streptococcal sore throat,25,0.2294,1.2,10,10,13,1,1
+4122116,Tooth eruption disorder,25,0.2294,1.2,1099,4599,7959,1,1
+257012,Chronic sinusitis,24,0.2202,1.0,1,1,1,1,2
+372328,Otitis media,23,0.2110,1.5,51,96,200,1,1
+436096,Chronic pain,23,0.2110,1.0,1,1,1,1,2
+81151,Sprain of ankle,22,0.2018,1.0,23,30,35,1,3
+4132891,Chronic low back pain,19,0.1743,1.0,1,1,1,1,3
+75053,Fracture of bone,19,0.1743,1.1,54,74,91,2,2
+4214746,Severe anxiety (panic),18,0.1651,1.4,28,119,742,2,1
+4234597,Misuses drugs,18,0.1651,1.1,56,371,742,2,2
+436940,Metabolic syndrome X,17,0.1560,1.0,1,1,1,2,3
+4078393,Miscarriage in first trimester,15,0.1376,1.9,10,16,19,2,1
+4001336,Concussion injury of brain,15,0.1376,1.1,49,69,75,2,2
+4218389,Whiplash injury to neck,14,0.1284,1.0,43,44,63,2,3
+24818,Injury of neck,14,0.1284,1.0,43,44,63,2,3
+78272,Sprain of wrist,13,0.1193,1.0,20,27,37,2,3
+437663,Fever,13,0.1193,1.0,16,19,28,2,3
+435081,Abnormal findings diagnostic imaging heart+coronary circulat,12,0.1101,1.0,1,1,1,2,3
+37160948,Accretion on tooth,12,0.1101,1.1,2198,4396,9275,2,2
+45769905,Microalbuminuria due to type 2 diabetes mellitus,12,0.1101,1.0,1,1,1,2,3
+37311061,COVID-19,12,0.1101,1.0,16,19,28,2,3
+4185932,Ischemic heart disease,12,0.1101,1.0,1,1,1,2,3
+138790,Chronic periodontitis,12,0.1101,1.1,371,4081,6888,2,2
+443614,Chronic kidney disease stage 1,12,0.1101,1.1,1,1,1,2,2
+40318618,Complete miscarriage,12,0.1101,1.3,10,15,17,2,1
+192279,Disorder of kidney due to diabetes mellitus,12,0.1101,1.0,1,1,1,3,3
+443601,Chronic kidney disease stage 2,12,0.1101,1.1,1,1,1,3,2
+138176,Acute gingivitis,11,0.1009,1.1,0,2198,6314,3,2
+432867,Hyperlipidemia,11,0.1009,1.0,1,1,1,3,3
+134398,Periodontal disease,11,0.1009,1.0,917,4081,8470,3,3
+201603,Disorder of teeth AND/OR supporting structures,11,0.1009,1.1,574,1120,9877,3,2
+378001,Concussion with no loss of consciousness,10,0.0917,1.1,39,69,82,3,2
+4296204,Epidermal burn of skin,10,0.0917,1.0,30,33,44,3,3
+254761,Cough,10,0.0917,1.0,13,19,28,3,3
+43530622,Chronic neck pain,9,0.0826,1.0,1,1,1,3,3
+45757235,Dental caries on smooth surface penetrating into pulp,9,0.0826,1.0,0,742,2961,3,3
+45757499,Proteinuria due to type 2 diabetes mellitus,9,0.0826,1.0,1,1,1,3,4
+443597,Chronic kidney disease stage 3,8,0.0734,1.0,1,1,2128,3,4
+4109685,Laceration of foot,8,0.0734,1.0,14,15,19,3,4
+201826,Type 2 diabetes mellitus,8,0.0734,1.0,1,1,1,3,4
+137613,Eclampsia in pregnancy,8,0.0734,1.2,14,14,21,3,1
+4283893,Sinusitis,8,0.0734,1.1,64,89,125,3,2
+4156265,Facial laceration,8,0.0734,1.0,15,21,24,3,4
+439393,Pre-eclampsia,8,0.0734,1.1,42,49,56,4,2
+444132,Injury of knee,8,0.0734,1.0,52,80,86,4,4
+4155034,Laceration of forearm,7,0.0642,1.0,18,22,24,4,4
+4289517,Loss of taste,7,0.0642,1.0,16,24,29,4,4
+45757234,Dental caries on smooth surface penetrating into dentin,7,0.0642,1.0,1484,2814,6622,4,4
+4285898,Polyp of colon,7,0.0642,1.0,1,427,480,4,4
+4294548,Acute bacterial sinusitis,7,0.0642,1.0,31,123,140,4,4
+4120314,Hypertriglyceridemia,7,0.0642,1.0,1,1,1,4,4
+4113008,Laceration of hand,6,0.0550,1.0,17,17,24,4,4
+4262136,Blighted ovum,6,0.0550,1.3,8,14,19,4,1
+443612,Chronic kidney disease stage 4,6,0.0550,1.0,1,1,1554,4,4
+4237458,Fracture of clavicle,6,0.0550,1.0,65,87,101,4,4
+77074,Pain of joint,5,0.0459,1.0,17,19,34,4,4
+4059173,Fracture of ankle,5,0.0459,1.0,49,54,61,4,4
+40405599,Fibromyalgia,5,0.0459,1.0,1,1,1,4,4
+442752,Muscle pain,5,0.0459,1.0,17,19,34,4,5
+40479768,Injury of anterior cruciate ligament,5,0.0459,1.0,81,86,99,4,5
+137016,Retained dental root,5,0.0459,1.0,1036,1414,2506,4,5
+43530652,Chronic intractable migraine without aura,5,0.0459,1.0,1,1,1,5,5
+4224646,Miscarriage in second trimester,4,0.0367,1.0,11,11,14,5,5
+4134304,Fracture subluxation of wrist,4,0.0367,1.0,74,87,91,5,5
+4147326,Sore throat,4,0.0367,1.0,13,16,16,5,5
+45768754,Generalized chronic periodontitis,4,0.0367,1.0,3114,3710,3717,5,5
+199076,Tubal pregnancy,4,0.0367,1.0,26,27,28,5,5
+258780,Emphysematous bronchitis,4,0.0367,1.0,1,1,1,5,5
+4079750,Osteoarthritis of knee,4,0.0367,1.0,1,1,1,5,5
+4056621,Recurrent urinary tract infection,4,0.0367,1.0,1,1,1,5,5
+37395737,Localized moderate chronic periodontitis,3,0.0275,1.0,609,4410,13958,5,5
+4214376,Hyperglycemia,3,0.0275,1.0,1,1,1,5,5
+4079749,Osteoarthritis of hip,3,0.0275,1.0,1,1,1,5,5
+132797,Sepsis,3,0.0275,1.0,1,1,1,5,5
+45757232,Dental caries on pit and fissure surface penetrating into dentin,3,0.0275,1.0,371,1757,3507,5,5
+255848,Pneumonia,3,0.0275,1.0,13,13,17,5,5
+4123726,Impacted tooth,3,0.0275,1.0,0,196,10521,5,6
+4329847,Myocardial infarction,3,0.0275,1.0,0,0,1,5,6
+375671,Concussion with loss of consciousness,3,0.0275,1.0,34,50,83,5,6
+4055754,Impacted molars,3,0.0275,1.0,1,1,1,6,6
+4270024,Acute non-ST segment elevation myocardial infarction,3,0.0275,1.0,1,1,1,6,6
+4158346,Respiratory distress,3,0.0275,1.0,13,13,17,6,6
+437390,Hypoxemia,3,0.0275,1.0,13,13,17,6,6
+37397422,Asymptomatic periapical periodontitis,3,0.0275,1.0,3878,7294,17717,6,6
+43530656,Nonproliferative retinopathy due to type 2 diabetes mellitus,2,0.0184,1.0,1,1,1,6,6
+4296205,Partial thickness burn,2,0.0184,1.0,49,49,77,6,6
+4051466,Childhood asthma,2,0.0184,1.0,1,1,5620,6,6
+4035415,Tear of meniscus of knee,2,0.0184,1.0,35,35,63,6,6
+198199,Pyelonephritis,2,0.0184,1.0,0,0,2,6,6
+4152936,Laceration of thigh,2,0.0184,1.0,17,17,21,6,6
+37016354,Neuropathy due to type 2 diabetes mellitus,2,0.0184,1.0,1,1,1,6,6
+4143203,Fetus with chromosomal abnormality,2,0.0184,1.0,11,11,14,6,6
+4132546,Traumatic brain injury,2,0.0184,1.0,1,1,1,6,6
+314754,Wheezing,2,0.0184,1.0,13,13,13,6,6
+4112853,Malignant tumor of breast,2,0.0184,1.0,1,1,1,6,7
+4278672,Fracture of forearm,2,0.0184,1.0,54,54,68,6,7
+312437,Dyspnea,2,0.0184,1.0,13,13,13,6,7
+40486433,Perennial allergic rhinitis,2,0.0184,1.0,1,1,5330,7,7
+4084167,Acute allergic reaction,2,0.0184,1.0,0,0,0,7,7
+193782,End-stage renal disease,2,0.0184,1.0,1,1,266,7,7
+435524,Sleep disorder,2,0.0184,1.0,1,1,1,7,7
+36674642,Sepsis caused by virus,2,0.0184,1.0,13,13,17,7,7
+45768755,Localized chronic periodontitis,2,0.0184,1.0,112,112,2226,7,7
+4309006,Kidney transplant failure and rejection,2,0.0184,1.0,28,28,42,7,7
+4226121,Retinopathy due to type 2 diabetes mellitus,2,0.0184,1.0,1,1,1,7,7
+4309027,Idiopathic atrophic hypothyroidism,2,0.0184,1.0,1,1,1,7,7
+31967,Nausea,2,0.0184,1.0,16,16,28,7,7
+4142905,Fracture of rib,2,0.0184,1.0,83,83,85,7,7
+4029498,Seizure disorder,2,0.0184,1.0,1,1,1,7,7
+75036,"Localized, primary osteoarthritis of the hand",2,0.0184,1.0,1,1,1,7,7
+378253,Headache,2,0.0184,1.0,13,13,23,7,7
+197500,Primary malignant neoplasm of colon,2,0.0184,1.0,438,438,715,7,7
+4096715,Vomiting symptom,2,0.0184,1.0,16,16,28,7,8
+254282,Primary malignant neoplasm of soft palate,1,0.0092,1.0,4494,4494,4494,7,8
+44782746,Acute deep venous thrombosis,1,0.0092,1.0,4,4,4,7,8
+37017023,Recurrent rectal polyp,1,0.0092,1.0,503,503,503,8,8
+4048171,Perennial allergic rhinitis with seasonal variation,1,0.0092,1.0,5981,5981,5981,8,8
+4002498,Overlapping malignant neoplasm of tonsil,1,0.0092,1.0,0,0,0,8,8
+4182983,Gingival enlargement,1,0.0092,1.0,4697,4697,4697,8,8
+80502,Osteoporosis,1,0.0092,1.0,1,1,1,8,8
+605427,Perforation of root canal wall due to endodontic procedure,1,0.0092,1.0,4473,4473,4473,8,8
+435850,Cyst of jaw,1,0.0092,2.0,1323,1323,19299,8,1
+313459,Sleep apnea,1,0.0092,1.0,1,1,1,8,8
+4230399,Closed fracture of hip,1,0.0092,1.0,47,47,47,8,8
+40397007,Supplemental tooth,1,0.0092,1.0,12628,12628,12628,8,8
+4295624,Squamous cell carcinoma of skin of ear,1,0.0092,1.0,7357,7357,7357,8,8
+133794,Chronic gingivitis,1,0.0092,1.0,1484,1484,1484,8,8
+435569,Disorder of jaw,1,0.0092,1.0,210,210,210,8,8
+319049,Acute respiratory failure,1,0.0092,1.0,13,13,13,8,8
+381316,Cerebrovascular accident,1,0.0092,1.0,0,0,0,8,8
+438783,Erosion of teeth,1,0.0092,1.0,12900,12900,12900,8,8
+4218106,Alcoholism,1,0.0092,1.0,1,1,1,8,9
+4180790,Malignant tumor of colon,1,0.0092,1.0,1,1,1,8,9
+435567,Atrophy of edentulous maxillary alveolar ridge,1,0.0092,2.0,2597,2597,4823,9,1
+442588,Obstructive sleep apnea syndrome,1,0.0092,1.0,1,1,1,9,9
+4209011,Pulmonic valve stenosis,1,0.0092,1.0,1,1,1,9,9
+373166,Benign neoplasm of mandible,1,0.0092,1.0,0,0,0,9,9
+438694,Primary malignant neoplasm of hard palate,1,0.0092,1.0,749,749,749,9,9
+4146173,Injury of tendon of the rotator cuff of shoulder,1,0.0092,1.0,70,70,70,9,9
+256633,Primary malignant neoplasm of base of tongue,1,0.0092,1.0,1169,1169,1169,9,9
+46269925,Partial edentulism class 1 due to caries,1,0.0092,1.0,1407,1407,1407,9,9
+134438,Contact dermatitis,1,0.0092,1.0,386,386,386,9,9
+436043,Overlapping malignant neoplasm of tongue,1,0.0092,1.0,4753,4753,4753,9,9
+436446,Cracked tooth,1,0.0092,1.0,11872,11872,11872,9,9
+4025325,Periapical abscess,1,0.0092,2.0,1533,1533,2373,9,1
+37018293,Inflammatory disorder of jaw region,1,0.0092,1.0,1484,1484,1484,9,9
+432833,Primary malignant neoplasm of oropharynx,1,0.0092,1.0,20496,20496,20496,9,9
+31509,Primary malignant neoplasm of tonsil,1,0.0092,1.0,6363,6363,6363,9,9
+261325,Pulmonary emphysema,1,0.0092,1.0,1,1,1,9,9
+40479422,Injury of medial collateral ligament of knee,1,0.0092,1.0,80,80,80,9,9
+74396,Temporomandibular joint disorder,1,0.0092,1.0,7420,7420,7420,9,9
+380378,Epilepsy,1,0.0092,1.0,1,1,1,10,10
+440086,Child attention deficit disorder,1,0.0092,1.0,3941,3941,3941,10,10
+45768439,Acute pulmonary embolism,1,0.0092,1.0,3,3,3,10,10
+4120613,Acquired coagulation disorder,1,0.0092,1.0,8,8,8,10,10
+201388,Congenital uterine anomaly,1,0.0092,1.0,19,19,19,10,10
+46269931,Partial edentulism due to trauma,1,0.0092,1.0,133,133,133,10,10
+43530950,Complication occurring during pregnancy,1,0.0092,1.0,11,11,11,10,10
+40481091,Partial edentulism,1,0.0092,1.0,4089,4089,4089,10,10
+4341247,Protracted diarrhea,1,0.0092,1.0,1,1,1,10,10
+136496,Cellulitis and abscess of face,1,0.0092,1.0,17402,17402,17402,10,10
+4216978,Traumatic dislocation of temporomandibular joint,1,0.0092,1.0,48,48,48,10,10
+4129902,Neoplasm of prostate,1,0.0092,1.0,1,1,1,10,10
+441331,Exfoliation of teeth due to systemic disease,1,0.0092,1.0,3871,3871,3871,10,10
+200970,Carcinoma in situ of prostate,1,0.0092,1.0,1,1,1,10,10
+4245614,Bleeding from anus,1,0.0092,1.0,1,1,1,10,10
+73231,Pain of temporomandibular joint,1,0.0092,1.0,805,805,805,10,10
+201332,Alveolitis of jaw,1,0.0092,1.0,3311,3311,3311,10,10
+45772090,Dental caries on pit and fissure surface penetrating into pulp,1,0.0092,1.0,4396,4396,4396,10,10

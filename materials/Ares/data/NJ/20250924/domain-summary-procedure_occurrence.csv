@@ -1,0 +1,134 @@
+CONCEPT_ID,CONCEPT_NAME,NUM_PERSONS,PERCENT_PERSONS,RECORDS_PER_PERSON,PERCENT_PERSONS_NTILE,RECORDS_PER_PERSON_NTILE
+4326177,Medication reconciliation,108,0.9908, 11.6,1,1
+762506,Assessment of substance use,91,0.8349, 13.3,1,1
+46272472,Assessment of anxiety,90,0.8257, 11.3,1,2
+46272459,Assessment of health and social care needs,88,0.8073, 20.5,1,1
+4240345,Physical examination,43,0.3945,  5.6,1,2
+4151779,Initial patient assessment,41,0.3762,  1.1,1,4
+4060626,Ultrasound scan for fetal viability,41,0.3762,  3.5,1,2
+4153050,Development of individualized plan of care,41,0.3762,  1.1,1,4
+40481948,Detection of chromosomal aneuploidy in prenatal amniotic fluid specimen using FISH screening technique,40,0.3670,  2.3,1,3
+4075363,Auscultation of the fetal heart,40,0.3670, 20.7,1,1
+4168236,Evaluation of uterine fundal height,40,0.3670, 20.7,1,1
+4234541,"Cytopathology procedure, preparation of smear, genital source",39,0.3578,  2.9,1,3
+4150653,Fetal anatomy study,39,0.3578,  2.3,1,3
+4298386,Anticipatory guidance,36,0.3303,  3.1,1,2
+4021319,Pre-discharge assessment,35,0.3211,  1.0,2,5
+4268628,History AND physical examination,35,0.3211,  1.0,2,5
+4249893,Colonoscopy,30,0.2752,  2.7,2,3
+4221994,History taking,29,0.2661,  1.2,2,4
+4085730,Antibiotic therapy,29,0.2661,  1.2,2,4
+4073052,Discussion about signs and symptoms,29,0.2661,  1.2,2,4
+4212473,Urine specimen collection,28,0.2569,  1.2,2,4
+4238738,Physical therapy procedure,26,0.2385,  3.0,2,2
+4187458,Review of systems,26,0.2385,  1.0,2,5
+4037675,Brief general examination,26,0.2385,  1.0,2,5
+4125906,Suture open wound,26,0.2385,  1.2,2,4
+4194763,"History and physical examination, limited",22,0.2018,  1.1,2,5
+4297090,Evaluation procedure,20,0.1835,  1.0,2,5
+4275113,Insertion of intrauterine contraceptive device,19,0.1743,  1.7,2,3
+4295880,Intramuscular injection,19,0.1743, 21.7,3,1
+4078199,Epidural anesthesia,17,0.1560,  1.3,3,4
+4015590,Counseling for termination of pregnancy,17,0.1560,  1.4,3,3
+37018340,Induced termination of pregnancy,17,0.1560,  1.4,3,3
+4163872,Plain X-ray of chest,16,0.1468,  1.8,3,3
+4059978,Implantation of subcutaneous contraceptive,16,0.1468,  1.9,3,3
+4150970,Medical induction of labor,15,0.1376,  1.3,3,4
+4296519,Triage: emergency center,13,0.1193,  1.0,3,5
+4311671,Episiotomy,12,0.1101,  1.1,3,5
+4170947,Bone immobilization,12,0.1101,  1.1,3,5
+4209346,Discussion about pregnancy,11,0.1009,  1.0,3,5
+4040783,Movement therapy,11,0.1009, 10.0,3,2
+4199276,Removal of subcutaneous contraceptive,11,0.1009,  1.5,3,3
+4142645,Angiography of coronary artery,10,0.0917,  1.2,3,4
+42537054,Post anesthesia care management,10,0.0917,  1.0,4,5
+4117038,Ligation of bilateral fallopian tubes,9,0.0826,  1.0,4,6
+4128031,Instrumental delivery,9,0.0826,  1.0,4,6
+4163951,Electrocardiographic procedure,8,0.0734,  2.9,4,3
+1072908,Plain X-ray of knee region,8,0.0734,  1.0,4,6
+4293740,Injection of tetanus antitoxin,7,0.0642,  1.0,4,6
+4146536,Renal dialysis,7,0.0642,319.7,4,1
+4194254,Care regimes assessment,7,0.0642,  1.3,4,4
+4127260,Augmentation of labor,7,0.0642,  1.1,4,5
+4015701,Cesarean section,7,0.0642,  1.0,4,6
+4166761,Rectal polypectomy,7,0.0642,  1.1,4,5
+4058899,Plain X-ray of clavicle,6,0.0550,  1.0,4,6
+4199458,Passive immunization,6,0.0550,  6.2,4,2
+44783196,Surgical manipulation of joint of knee,6,0.0550,  1.0,5,6
+4121310,Walking exercise test,5,0.0459,  1.0,5,6
+4005821,Pre-surgery testing,5,0.0459,  1.0,5,6
+4231751,Median sternotomy,5,0.0459,  1.0,5,6
+4160439,Administration of anesthesia,5,0.0459,  1.0,5,6
+4202832,Intubation,5,0.0459,  1.0,5,6
+4213288,Insertion of catheter into artery,5,0.0459,  1.0,5,6
+4279768,Pulmonary catheterization with Swan-Ganz catheter,5,0.0459,  1.0,5,7
+1072930,Plain X-ray of ankle region,5,0.0459,  1.0,5,7
+4216130,Percutaneous coronary intervention,5,0.0459,  1.4,5,4
+4230911,Echocardiography,5,0.0459,  1.0,5,7
+4090980,Stair-climbing test,5,0.0459,  1.0,5,7
+4150627,Removal of endotracheal tube,5,0.0459,  1.0,5,7
+4186930,Replacement of intrauterine contraceptive device,5,0.0459,  1.0,6,7
+4043071,Cognitive and behavioral therapy,4,0.0367,  8.0,6,2
+4162736,Oxygen administration by mask,4,0.0367, 11.5,6,2
+37016878,Plain X-ray of wrist region,4,0.0367,  1.0,6,7
+4272324,Cardiopulmonary bypass operation,3,0.0275,  1.0,6,7
+4180248,Rehabilitation therapy,3,0.0275, 49.3,6,1
+4010253,Nasal sinus endoscopy,3,0.0275,  1.0,6,7
+4322471,Transplant of kidney,3,0.0275,  1.0,6,7
+4050428,Vascular cannula removal,3,0.0275,  1.0,6,7
+4327582,Resuscitation using intravenous fluid,3,0.0275,  1.3,6,4
+4336464,Coronary artery bypass graft,3,0.0275,  1.0,6,7
+4177543,Pretransplant evaluation of kidney recipient,3,0.0275,  1.0,6,7
+4335825,Transthoracic echocardiography,3,0.0275,  1.0,6,8
+4196006,Placing subject in prone position,3,0.0275, 12.7,7,1
+4199411,Removal of aortic cross clamp,3,0.0275,  1.0,7,8
+46272470,Assessment of cardiac status using monitoring device,3,0.0275,  1.0,7,8
+4323715,Transfusion of packed red blood cells,3,0.0275,  3.0,7,3
+4108705,Intravenous blood transfusion of packed cells,3,0.0275,  1.0,7,8
+4220544,Induced cardioplegia,3,0.0275,  1.0,7,8
+4107731,Subcutaneous immunotherapy,3,0.0275, 43.7,7,1
+4177205,Cannulation,3,0.0275,  1.0,7,8
+4024612,Risk assessment,3,0.0275,  1.0,7,8
+43021511,Renal disorder medication review,3,0.0275,  5.0,7,2
+4035793,Pulmonary rehabilitation,3,0.0275, 17.3,7,1
+4200035,Placement of aortic cross clamp,3,0.0275,  1.0,7,8
+4012837,Diagnostic assessment,3,0.0275,  1.0,7,8
+4130829,Platelet transfusion,2,0.0184,  1.5,8,3
+4294513,Biopsy of colon,2,0.0184,  1.0,8,8
+4305852,Off-pump coronary artery bypass,2,0.0184,  1.0,8,8
+4181917,Electroencephalogram,2,0.0184,  3.5,8,2
+4254766,Digital examination of rectum,2,0.0184,  2.0,8,3
+4104747,"Physical examination, complete",2,0.0184, 11.0,8,2
+4127235,Methotrexate injection into tubal pregnancy,2,0.0184,  1.0,8,8
+4016390,Sleep apnea assessment,2,0.0184, 15.0,8,1
+40493226,Excision of fallopian tube and surgical removal of ectopic pregnancy,2,0.0184,  1.0,8,8
+4022171,Transfusion of fresh frozen plasma,2,0.0184,  1.0,8,9
+37016879,Plain X-ray of humerus,2,0.0184,  1.0,8,9
+4080110,Continuous subcutaneous infusion of insulin,2,0.0184,  1.0,8,9
+4323902,Lung volume reduction surgery,1,0.0092,  1.0,8,9
+4290232,Range of motion testing,1,0.0092,  1.0,9,9
+4072103,Discussion about options,1,0.0092,  1.0,9,9
+4060198,Orthodontic procedure,1,0.0092,  1.0,9,9
+4235738,Prostatectomy,1,0.0092,  1.0,9,9
+46272665,Coordination of care plan,1,0.0092,  1.0,9,9
+4273629,Chemotherapy,1,0.0092,  8.0,9,2
+40488354,Continuous positive airway pressure titration,1,0.0092,  1.0,9,9
+4045893,Oral examination,1,0.0092,  1.0,9,9
+4079945,Closed reduction of dislocation of temporomandibular joint,1,0.0092,  1.0,9,9
+4202451,Fluoroscopy guided percutaneous mechanical thrombectomy of portal vein with contrast,1,0.0092,  1.0,9,9
+4146053,Manual pelvic examination,1,0.0092, 20.0,9,1
+37164749,Excision of breast,1,0.0092,  1.0,9,10
+4337138,Transplant of lung,1,0.0092,  1.0,9,10
+1075140,Plain X-ray of mandible,1,0.0092,  1.0,10,10
+37016875,Plain X-ray of pelvis,1,0.0092,  1.0,10,10
+4063814,Comprehensive interview and evaluation,1,0.0092,  1.0,10,10
+4330583,Vasectomy,1,0.0092,  1.0,10,10
+4292705,"Posttreatment stabilization, orthodontic device",1,0.0092,  1.0,10,10
+4278515,Biopsy of prostate,1,0.0092,  1.0,10,10
+42535066,Ultrasonography of bilateral breasts,1,0.0092,  1.0,10,10
+4077697,Screening mammography,1,0.0092,  1.0,10,10
+4276519,Extraction of wisdom tooth,1,0.0092,  7.0,10,2
+4181781,Partial resection of colon,1,0.0092,  1.0,10,10
+4324693,Mammography,1,0.0092, 20.0,10,1
+4296597,Cardiovascular stress testing,1,0.0092,  1.0,10,10
+4047494,Biopsy of breast,1,0.0092,  1.0,10,10

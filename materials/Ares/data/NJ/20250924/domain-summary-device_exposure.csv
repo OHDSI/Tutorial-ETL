@@ -1,0 +1,15 @@
+CONCEPT_ID,CONCEPT_NAME,NUM_PERSONS,PERCENT_PERSONS,RECORDS_PER_PERSON,PERCENT_PERSONS_NTILE,RECORDS_PER_PERSON_NTILE
+4045112,Manual wheelchair,42,0.3853,1.1,1,3
+4224372,Glucometer,39,0.3578,1.0,1,4
+4015740,Home nebulizer,27,0.2477,1.0,2,4
+45767832,Wheelchair accessory,9,0.0826,1.0,2,5
+4222968,Oxygen concentrator,5,0.0459,1.8,3,2
+4129104,Portable oxygen cylinder,2,0.0184,1.5,3,3
+45768176,Patient lifting system,1,0.0092,1.0,4,6
+36714850,Home-use sleep apnea recording system,1,0.0092,1.0,4,7
+45768203,Respiratory humidifier,1,0.0092,5.0,5,1
+4159828,Appliance for sleep apnea,1,0.0092,3.0,6,2
+4251933,Crutch,1,0.0092,1.0,7,8
+45764401,Respiratory apnea monitoring system,1,0.0092,1.0,8,9
+45764420,Polysomnography analyzer,1,0.0092,1.0,9,10
+45765273,Home CPAP unit,1,0.0092,5.0,10,1

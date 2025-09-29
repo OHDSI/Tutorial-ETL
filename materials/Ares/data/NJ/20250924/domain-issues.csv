@@ -1,0 +1,10 @@
+cdm_table_name,count_failed
+condition_occurrence,1
+cost,1
+drug_exposure,4
+measurement,2
+observation,2
+observation_period,1
+payer_plan_period,2
+visit_detail,2
+visit_occurrence,2
