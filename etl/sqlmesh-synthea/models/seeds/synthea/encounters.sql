@@ -1,0 +1,23 @@
+MODEL (
+  name synthea.encounters,
+  kind SEED (
+    path '$root/../../data/syntheaRaw/encounters.csv'
+  ),
+  columns (
+    Id TEXT,
+    START TIMESTAMP,
+    STOP TIMESTAMP,
+    PATIENT TEXT,
+    ORGANIZATION TEXT,
+    PROVIDER TEXT,
+    PAYER TEXT,
+    ENCOUNTERCLASS TEXT,
+    CODE TEXT,
+    DESCRIPTION TEXT,
+    BASE_ENCOUNTER_COST DOUBLE,
+    TOTAL_CLAIM_COST DOUBLE,
+    PAYER_COVERAGE DOUBLE,
+    REASONCODE TEXT,
+    REASONDESCRIPTION TEXT
+  )
+)

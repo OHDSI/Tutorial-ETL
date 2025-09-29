@@ -1,0 +1,13 @@
+[project]
+name = "sqlmesh-synthea-tutorial"
+version = "0.1.0"
+description = "Tutorial ETL pipeline that loads Synthea into OMOP v5.4 using SQLMesh"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "OHDSI" }
+]
+dependencies = [
+    "sqlmesh[duckdb,pandas,web]>=0.200.0,<1.0",
+    "duckdb>=1.4.0"
+]

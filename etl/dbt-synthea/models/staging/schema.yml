@@ -1,0 +1,256 @@
+version: 2
+
+models:
+  # Core staging dimensions and IDs
+  - name: patients
+    description: Staging view of Synthea patients with normalized fields.
+    columns:
+      - name: patient_id
+        description: Source patient identifier from Synthea.
+        data_tests: [not_null]
+
+  - name: patient_ids
+    description: Deterministic mapping of source patient_id to OMOP person_id.
+    columns:
+      - name: patient_id
+        data_tests: [not_null]
+      - name: person_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: providers
+    description: Staging providers with generated provider_id and mapped concepts.
+    columns:
+      - name: provider_id
+        data_tests:
+          - not_null
+          - unique
+      - name: provider_source_value
+        data_tests: [not_null]
+
+  - name: organizations
+    description: Organizations from Synthea.
+    columns:
+      - name: organization_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: care_sites
+    description: Care sites derived from organizations with generated care_site_id.
+    columns:
+      - name: care_site_id
+        data_tests:
+          - not_null
+          - unique
+      - name: organization_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('organizations')
+              field: organization_id
+
+  - name: patient_locations
+    description: Distinct locations for patients with generated location_id.
+    columns:
+      - name: location_id
+        data_tests:
+          - not_null
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('patients')
+              field: patient_id
+
+  # Core clinical staging tables
+  - name: encounters
+    description: Normalized encounters from Synthea encounters CSV.
+    columns:
+      - name: encounter_id
+        data_tests:
+          - not_null
+          - unique
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('patients')
+              field: patient_id
+
+  - name: allergies
+    description: Allergies records from Synthea.
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('patients')
+              field: patient_id
+      - name: encounter_id
+        data_tests:
+          - relationships:
+              to: ref('encounters')
+              field: encounter_id
+
+  - name: conditions
+    description: Conditions from Synthea with normalized vocab labels.
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+      - name: encounter_id
+        data_tests:
+          - relationships: { to: ref('encounters'), field: encounter_id }
+
+  - name: observations
+    description: Clinical observations from Synthea (LOINC). Numeric parsed when possible.
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+      - name: encounter_id
+        data_tests:
+          - relationships: { to: ref('encounters'), field: encounter_id }
+
+  - name: procedures
+    description: Procedures from Synthea (SNOMED) with timestamps.
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+      - name: encounter_id
+        data_tests:
+          - relationships: { to: ref('encounters'), field: encounter_id }
+
+  - name: medications
+    description: Medications from Synthea (RxNorm) with basic dosing fields.
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+      - name: encounter_id
+        data_tests:
+          - relationships: { to: ref('encounters'), field: encounter_id }
+
+  - name: immunizations
+    description: Immunizations from Synthea (CVX).
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+      - name: encounter_id
+        data_tests:
+          - relationships: { to: ref('encounters'), field: encounter_id }
+
+  - name: devices
+    description: Device records from Synthea (SNOMED), including UDI.
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+      - name: encounter_id
+        data_tests:
+          - relationships: { to: ref('encounters'), field: encounter_id }
+
+  # Visits assembly
+  - name: all_visits
+    description: Constructed visits per Synthea logic (inpatient/ER/outpatient), with synthetic visit_occurrence_id.
+    columns:
+      - name: visit_occurrence_id
+        data_tests:
+          - not_null
+          - unique
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+
+  - name: assign_all_visit_ids
+    description: Assigns each encounter to the appropriate constructed visit with a priority rank.
+    columns:
+      - name: encounter_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('encounters'), field: encounter_id }
+      - name: visit_occurrence_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('all_visits'), field: visit_occurrence_id }
+      - name: visit_rank
+        data_tests:
+          - not_null
+
+  - name: final_visit_ids
+    description: One-to-one mapping of encounter to final visit_occurrence_id (visit_rank = 1).
+    columns:
+      - name: encounter_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships: { to: ref('encounters'), field: encounter_id }
+      - name: visit_occurrence_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('all_visits'), field: visit_occurrence_id }
+
+  - name: visit_dimension
+    description: Canonicalized visit details joined with concepts and provider mapping.
+    columns:
+      - name: visit_occurrence_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patient_ids'), field: person_id }
+
+  # Vocabulary lookups
+  - name: source_to_standard_map
+    description: Filtered source-to-standard vocabulary mappings used across staging.
+    columns:
+      - name: source_code
+        data_tests: [not_null]
+      - name: target_concept_id
+        data_tests: [not_null]
+
+  - name: source_to_source_map
+    description: Source-to-source vocabulary mappings used for source concept IDs.
+    columns:
+      - name: source_code
+        data_tests: [not_null]
+
+  - name: states_map
+    description: US state name to abbreviation mapping.
+    columns:
+      - name: state_name
+        data_tests: [not_null]
+      - name: state_abbreviation
+        data_tests: [not_null]
+
+  # Payer details
+  - name: payers
+    description: Synthea payers.
+    columns:
+      - name: payer_id
+        data_tests:
+          - not_null
+          - unique
+  - name: payer_transitions
+    description: Member coverage transitions per patient.
+    columns:
+      - name: patient_id
+        data_tests:
+          - not_null
+          - relationships: { to: ref('patients'), field: patient_id }
+      - name: payer_id
+        data_tests:
+          - relationships: { to: ref('payers'), field: payer_id }

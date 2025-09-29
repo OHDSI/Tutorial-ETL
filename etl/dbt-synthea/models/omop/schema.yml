@@ -1,0 +1,385 @@
+version: 2
+
+models:
+  # Core person and visits
+  - name: person
+    description: OMOP CDM v5.4 Person table derived from Synthea patients.
+    columns:
+      - name: person_id
+        description: Primary key for the Person table.
+        data_tests:
+          - not_null
+          - unique
+
+  - name: visit_occurrence
+    description: OMOP CDM v5.4 Visit Occurrence table.
+    columns:
+      - name: visit_occurrence_id
+        description: Primary key for Visit Occurrence.
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+
+  - name: visit_detail
+    description: OMOP CDM v5.4 Visit Detail table.
+    columns:
+      - name: visit_detail_id
+        description: Primary key for Visit Detail.
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: visit_occurrence_id
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+
+  # Clinical event domain tables
+  - name: condition_occurrence
+    description: OMOP CDM v5.4 Condition Occurrence table.
+    columns:
+      - name: condition_occurrence_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: visit_occurrence_id
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        data_tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: provider_id
+        data_tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+
+  - name: device_exposure
+    description: OMOP CDM v5.4 Device Exposure table.
+    columns:
+      - name: device_exposure_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: visit_occurrence_id
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        data_tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: provider_id
+        data_tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+
+  - name: drug_exposure
+    description: OMOP CDM v5.4 Drug Exposure table.
+    columns:
+      - name: drug_exposure_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: visit_occurrence_id
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        data_tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: provider_id
+        data_tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+
+  - name: procedure_occurrence
+    description: OMOP CDM v5.4 Procedure Occurrence table.
+    columns:
+      - name: procedure_occurrence_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: visit_occurrence_id
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        data_tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: provider_id
+        data_tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+
+  - name: measurement
+    description: OMOP CDM v5.4 Measurement table.
+    columns:
+      - name: measurement_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: visit_occurrence_id
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        data_tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: provider_id
+        data_tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+
+  - name: observation
+    description: OMOP CDM v5.4 Observation table.
+    columns:
+      - name: observation_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+      - name: visit_occurrence_id
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+      - name: visit_detail_id
+        data_tests:
+          - relationships:
+              to: ref('visit_detail')
+              field: visit_detail_id
+      - name: provider_id
+        data_tests:
+          - relationships:
+              to: ref('provider')
+              field: provider_id
+
+  - name: observation_period
+    description: OMOP CDM v5.4 Observation Period table.
+    columns:
+      - name: observation_period_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+
+  - name: payer_plan_period
+    description: OMOP CDM v5.4 Payer Plan Period table.
+    columns:
+      - name: payer_plan_period_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+
+  # Era tables
+  - name: condition_era
+    description: OMOP CDM v5.4 Condition Era table.
+    columns:
+      - name: condition_era_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+
+  - name: drug_era
+    description: OMOP CDM v5.4 Drug Era table.
+    columns:
+      - name: drug_era_id
+        data_tests:
+          - not_null
+          - unique
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+
+  - name: dose_era
+    description: OMOP CDM v5.4 Dose Era table (not populated in this tutorial).
+    columns:
+      - name: dose_era_id
+        data_tests:
+          - unique
+          - not_null
+
+  # Admin and reference tables in OMOP schema
+  - name: care_site
+    description: OMOP CDM v5.4 Care Site table.
+    columns:
+      - name: care_site_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: location
+    description: OMOP CDM v5.4 Location table.
+    columns:
+      - name: location_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: provider
+    description: OMOP CDM v5.4 Provider table.
+    columns:
+      - name: provider_id
+        data_tests:
+          - not_null
+          - unique
+      - name: care_site_id
+        data_tests:
+          - relationships:
+              to: ref('care_site')
+              field: care_site_id
+
+  - name: death
+    description: OMOP CDM v5.4 Death table; one row per deceased person.
+    columns:
+      - name: person_id
+        description: Primary key of Death in CDM (max one per person).
+        data_tests:
+          - not_null
+          - unique
+      - name: death_date
+        data_tests:
+          - not_null
+
+  - name: cost
+    description: OMOP CDM v5.4 Cost table (tutorial subset; costs linked to visit_occurrence).
+    columns:
+      - name: cost_id
+        data_tests:
+          - not_null
+          - unique
+      - name: cost_event_id
+        description: Links to visit_occurrence for this tutorial implementation.
+        data_tests:
+          - relationships:
+              to: ref('visit_occurrence')
+              field: visit_occurrence_id
+
+  # Stubbed (empty) tables in this tutorial
+  - name: note
+    description: OMOP CDM v5.4 Note table (not populated in this tutorial).
+    columns:
+      - name: note_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: note_nlp
+    description: OMOP CDM v5.4 Note NLP table (not populated in this tutorial).
+    columns:
+      - name: note_nlp_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: episode
+    description: OMOP CDM v5.4 Episode table (not populated in this tutorial).
+    columns:
+      - name: episode_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: episode_event
+    description: OMOP CDM v5.4 Episode Event table (not populated in this tutorial).
+
+  - name: fact_relationship
+    description: OMOP CDM v5.4 Fact Relationship table (not populated in this tutorial).
+
+  - name: metadata
+    description: OMOP CDM v5.4 Metadata table (not populated in this tutorial).
+    columns:
+      - name: metadata_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: cdm_source
+    description: OMOP CDM v5.4 CDM Source table (single summary row); no primary key is defined in CDM. Tests omitted intentionally.
