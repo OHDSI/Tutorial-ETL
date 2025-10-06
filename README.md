@@ -23,7 +23,7 @@ install.packages("duckdb")
 
 ### Steps
 
-1. Download this repository and navigate to the `Tutorial-ETL` folder by `git clone https://github.com/OHDSI/Tutorial-ETL.git` and `cd Tutorial-ETL`. If you don't have Git installed, you can also download the ZIP file from GitHub (look for the green button '< > Code' on this page) and extract it.
+1. Download this repository by `git clone https://github.com/OHDSI/Tutorial-ETL.git`. If you don't have Git installed, you can also download the ZIP file from GitHub (look for the green button '< > Code' on the top of this page) and extract it.
 2. Data are included in the repository at `data/syntheaRaw/` and `data/vocabulary/`. If you want to use your own Synthea exports or vocabulary files, replace the contents of these folders.
 3. Run the ETL script from the project root: `Rscript etl/etl-synthea/run.R`. The [script](etl/etl-synthea/run.R) is well commented step-by-step.
 4. Inspect the resulting DuckDB file created at `data/syntheaCDM.duckdb`.
