@@ -9,13 +9,15 @@ Here we will use [OHDSI/ETL-Synthea](https://github.com/OHDSI/ETL-Synthea) to de
 ### Prerequisites
 
 1. Install [R](https://cran.r-project.org/) (version 4.0 or higher recommended).
-2. Install OHDSI R packages: `ETLSyntheaBuilder`, `DatabaseConnector`, `SqlRender`, `duckdb`, and their dependencies. You might need to consult [OHDSI HADES installation instructions](https://ohdsi.github.io/Hades/rSetup.html). (Tip: if you are on a Mac with Homebrew, you may install Java with `brew install openjdk` and `Sys.setenv(JAVA_HOME = "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home")` in R.)
+2. Install OHDSI R packages: `ETLSyntheaBuilder`, `CommonDataModel`, `DatabaseConnector`, `SqlRender`, `duckdb`, and their dependencies. You might need to consult [OHDSI HADES installation instructions](https://ohdsi.github.io/Hades/rSetup.html). (Tip: if you are on a Mac with Homebrew, you may install Java with `brew install openjdk` and `Sys.setenv(JAVA_HOME = "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home")` in R.)
 
 ```r
-devtools::install_github("OHDSI/ETL-Synthea")
 install.packages("DatabaseConnector")
 install.packages("SqlRender")
 install.packages("duckdb")
+install.packages("devtools")
+devtools::install_github("OHDSI/CommonDataModel")
+devtools::install_github("OHDSI/ETL-Synthea")
 ```
 
 3. [Git](https://github.com/git-guides/install-git) (optional, for cloning the repository).

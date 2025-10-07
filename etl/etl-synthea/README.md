@@ -21,4 +21,4 @@ When installed, the package provides an `ETLSyntheaBuilder` R function that orch
 
 ## Remarks
 
-`DatabaseConnector` v7.0.0 breaks the schema handling for DuckDB in `ETLSyntheaBuilder`. As a workaround, we manually move the staged tables into the correct schema after loading them. See the `materializeSchemaQualifiedTables` function in [run.R](run.R) and [schemaFix.R](schemaFix.R) for details. Alternatively, downgrading to `DatabaseConnector` v6.4.0 should fix the issue as well.
+`ETLSyntheaBuilder` isn't quite fully compatible with DuckDB. As a workaround for now, we manually move the staged tables into the correct schema after loading them. See the `materializeSchemaQualifiedTables` function in [run.R](run.R) and [schemaFix.R](schemaFix.R) for details.
