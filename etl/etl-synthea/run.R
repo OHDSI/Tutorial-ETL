@@ -51,31 +51,31 @@ for (schemaName in c(cdmSchema, syntheaSchema)) {
 }
 DatabaseConnector::disconnect(conn)
 
-# Create empty OMOP CDM tables (CreateCDMTables – https://ohdsi.github.io/ETL-Synthea/reference/CreateCDMTables.html).
+# Create empty OMOP CDM tables.
 ETLSyntheaBuilder::CreateCDMTables(connectionDetails, cdmSchema, cdmVersion)
 
-# Create native Synthea staging tables (CreateSyntheaTables – https://ohdsi.github.io/ETL-Synthea/reference/CreateSyntheaTables.html).
+# Create native Synthea staging tables.
 ETLSyntheaBuilder::CreateSyntheaTables(connectionDetails, syntheaSchema, syntheaVersion)
 
-# Load Synthea CSV exports into staging (LoadSyntheaTables – https://ohdsi.github.io/ETL-Synthea/reference/LoadSyntheaTables.html).
+# Load Synthea CSV exports into staging.
 ETLSyntheaBuilder::LoadSyntheaTables(connectionDetails, syntheaSchema, syntheaDir)
 
 # DuckDB stages tables as "schema.table"; move them into the actual schema.
 materializeSchemaQualifiedTables(connectionDetails, syntheaSchema, syntheaSourceTables)
 
-# Import OMOP vocabulary files (LoadVocabFromCsv – https://ohdsi.github.io/ETL-Synthea/reference/LoadVocabFromCsv.html).
+# Import OMOP vocabulary files.
 ETLSyntheaBuilder::LoadVocabFromCsv(connectionDetails, cdmSchema, vocabDir, delimiter = ",")
 
 # Again, fix the schema for vocabulary tables.
 materializeSchemaQualifiedTables(connectionDetails, cdmSchema, cdmVocabularyTables)
 
-# Build vocabulary mappings and visit rollups (CreateMapAndRollupTables – https://ohdsi.github.io/ETL-Synthea/reference/CreateMapAndRollupTables.html).
+# Build vocabulary mappings and visit rollups.
 ETLSyntheaBuilder::CreateMapAndRollupTables(connectionDetails, cdmSchema, syntheaSchema, cdmVersion, syntheaVersion)
 
-# Add optional performance indexes (CreateExtraIndices – https://ohdsi.github.io/ETL-Synthea/reference/CreateExtraIndices.html).
+# Add optional performance indexes.
 ETLSyntheaBuilder::CreateExtraIndices(connectionDetails, cdmSchema, syntheaSchema, syntheaVersion)
 
-# Populate OMOP clinical event tables (LoadEventTables – https://ohdsi.github.io/ETL-Synthea/reference/LoadEventTables.html).
+# Populate OMOP clinical event tables.
 ETLSyntheaBuilder::LoadEventTables(connectionDetails, cdmSchema, syntheaSchema, cdmVersion, syntheaVersion)
 
 # Final pass to relocate any schema-qualified tables into their proper homes.

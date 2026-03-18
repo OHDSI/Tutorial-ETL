@@ -3,3 +3,4 @@
 *.log
 .cache
 etl/dbt-synthea/target/
+errorReportSql.txt
